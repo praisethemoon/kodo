@@ -1,0 +1,43 @@
+ let x: int = 3
+let x = 3
+
+class AIEntity {
+    function fact(x: int) -> int {
+        match x {
+            case 0 { return 1 }
+            case 1 { return 1 }
+            else {
+                return x*fact(x-1)
+            }        
+        }        
+    }
+    
+    function fact(x: int) -> int = match x {
+        case 0 => 0
+        case 1 => 1
+        else => x*fact(x-1)    
+    }
+
+    function abs(x: int) -> int = match x {
+        case x when x < 0 => -x
+        else => x
+    }    
+}
+
+extern type ptrFILE
+
+extern function fprintf(ptrFile, String)
+
+abstract class AIEntity {
+    function get(int) -> int
+}
+
+function get() -> int {
+    return 3
+}
+
+let x = new AIEntity() {
+    function init() {
+        return -1
+    } 
+}
