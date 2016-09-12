@@ -206,6 +206,7 @@ void RuleTemplate(struct TokenStruct *Token, struct ContextStruct *parent) {
 
 
 
+
 /* <Decls> ::= <Decl> <Decls> */
 void Rule_Decls(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
@@ -246,14 +247,6 @@ void Rule_Decl3(struct TokenStruct *Token, struct ContextStruct *Context) {
 
 
 
-/* <Decl> ::= <Set Decl> */
-void Rule_Decl4(struct TokenStruct *Token, struct ContextStruct *Context) {
-  RuleTemplate(Token,Context);
-  };
-
-
-
-
 /* <Decl> ::= extern type Id */
 void Rule_Decl_extern_type_Id(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
@@ -262,8 +255,24 @@ void Rule_Decl_extern_type_Id(struct TokenStruct *Token, struct ContextStruct *C
 
 
 
+/* <Decl> ::= private extern type Id */
+void Rule_Decl_private_extern_type_Id(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Decl> ::= extern private type Id */
+void Rule_Decl_extern_private_type_Id(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
 /* <Decl> ::= <Var Decl> */
-void Rule_Decl5(struct TokenStruct *Token, struct ContextStruct *Context) {
+void Rule_Decl4(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -271,7 +280,7 @@ void Rule_Decl5(struct TokenStruct *Token, struct ContextStruct *Context) {
 
 
 /* <Decl> ::= <Import> */
-void Rule_Decl6(struct TokenStruct *Token, struct ContextStruct *Context) {
+void Rule_Decl5(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -279,7 +288,7 @@ void Rule_Decl6(struct TokenStruct *Token, struct ContextStruct *Context) {
 
 
 /* <Decl> ::= <CDefFunc Decl> */
-void Rule_Decl7(struct TokenStruct *Token, struct ContextStruct *Context) {
+void Rule_Decl6(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -287,22 +296,14 @@ void Rule_Decl7(struct TokenStruct *Token, struct ContextStruct *Context) {
 
 
 /* <Decl> ::= <Using Stm> */
-void Rule_Decl8(struct TokenStruct *Token, struct ContextStruct *Context) {
+void Rule_Decl7(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <Decl> ::= <CDefStruct> */
-void Rule_Decl9(struct TokenStruct *Token, struct ContextStruct *Context) {
-  RuleTemplate(Token,Context);
-  };
-
-
-
-
-/* <Import> ::= import <File Path> */
+/* <Import> ::= import <File Path All> */
 void Rule_Import_import(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
@@ -342,6 +343,30 @@ void Rule_FilePath_Id(struct TokenStruct *Token, struct ContextStruct *Context) 
 
 
 
+/* <File Path All> ::= Id '.' <File Path All> */
+void Rule_FilePathAll_Id_Dot(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <File Path All> ::= Id '.*' */
+void Rule_FilePathAll_Id_DotTimes(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <File Path All> ::= Id */
+void Rule_FilePathAll_Id(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
 /* <File Path List> ::= <File Path> ',' <File Path List> */
 void Rule_FilePathList_Comma(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
@@ -358,55 +383,87 @@ void Rule_FilePathList(struct TokenStruct *Token, struct ContextStruct *Context)
 
 
 
-/* <Fn Header> ::= Id '(' <Params> ')' */
-void Rule_FnHeader_Id_LParen_RParen(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <Fn Header Proto> ::= Id '(' <Params> ')' */
+void Rule_FnHeaderProto_Id_LParen_RParen(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <Fn Header> ::= Id '(' <Params> ')' '->' <Type> */
-void Rule_FnHeader_Id_LParen_RParen_MinusGt(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <Fn Header Proto> ::= Id '(' <Params> ')' '->' <Type> */
+void Rule_FnHeaderProto_Id_LParen_RParen_MinusGt(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <Fn Header> ::= Id '(' <Types> ')' */
-void Rule_FnHeader_Id_LParen_RParen2(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <Fn Header Proto> ::= Id '(' <Types> ')' */
+void Rule_FnHeaderProto_Id_LParen_RParen2(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <Fn Header> ::= Id '(' <Types> ')' '->' <Type> */
-void Rule_FnHeader_Id_LParen_RParen_MinusGt2(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <Fn Header Proto> ::= Id '(' <Types> ')' '->' <Type> */
+void Rule_FnHeaderProto_Id_LParen_RParen_MinusGt2(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <Fn Header> ::= Id '(' ')' */
-void Rule_FnHeader_Id_LParen_RParen3(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <Fn Header Proto> ::= Id '(' ')' */
+void Rule_FnHeaderProto_Id_LParen_RParen3(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <Fn Header> ::= Id '(' ')' '->' <Type> */
-void Rule_FnHeader_Id_LParen_RParen_MinusGt3(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <Fn Header Proto> ::= Id '(' ')' '->' <Type> */
+void Rule_FnHeaderProto_Id_LParen_RParen_MinusGt3(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <Func Decl> ::= function <Fn Header> <Block> */
+/* <Fn Header Impl> ::= Id '(' <Params> ')' */
+void Rule_FnHeaderImpl_Id_LParen_RParen(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Fn Header Impl> ::= Id '(' <Params> ')' '->' <Type> */
+void Rule_FnHeaderImpl_Id_LParen_RParen_MinusGt(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Fn Header Impl> ::= Id '(' ')' */
+void Rule_FnHeaderImpl_Id_LParen_RParen2(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Fn Header Impl> ::= Id '(' ')' '->' <Type> */
+void Rule_FnHeaderImpl_Id_LParen_RParen_MinusGt2(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Func Decl> ::= function <Fn Header Impl> <Block> */
 void Rule_FuncDecl_function(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
@@ -414,7 +471,7 @@ void Rule_FuncDecl_function(struct TokenStruct *Token, struct ContextStruct *Con
 
 
 
-/* <Func Decl> ::= function <Fn Header> '=' <Expr> */
+/* <Func Decl> ::= function <Fn Header Impl> '=' <Expr> */
 void Rule_FuncDecl_function_Eq(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
@@ -422,7 +479,23 @@ void Rule_FuncDecl_function_Eq(struct TokenStruct *Token, struct ContextStruct *
 
 
 
-/* <CFunc Proto> ::= <private final static inherited> function <Fn Header> */
+/* <Func Decl> ::= private function <Fn Header Impl> <Block> */
+void Rule_FuncDecl_private_function(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Func Decl> ::= private function <Fn Header Impl> '=' <Expr> */
+void Rule_FuncDecl_private_function_Eq(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <CFunc Proto> ::= <private final static inherited> function <Fn Header Proto> */
 void Rule_CFuncProto_function(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
@@ -430,7 +503,7 @@ void Rule_CFuncProto_function(struct TokenStruct *Token, struct ContextStruct *C
 
 
 
-/* <CFunc Decl> ::= <private final static inherited> function <Fn Header> <Block> */
+/* <CFunc Decl> ::= <private final static inherited> function <Fn Header Impl> <Block> */
 void Rule_CFuncDecl_function(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
@@ -438,7 +511,7 @@ void Rule_CFuncDecl_function(struct TokenStruct *Token, struct ContextStruct *Co
 
 
 
-/* <CFunc Decl> ::= <private final static inherited> function <Fn Header> '=' <Expr> */
+/* <CFunc Decl> ::= <private final static inherited> function <Fn Header Impl> '=' <Expr> */
 void Rule_CFuncDecl_function_Eq(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
@@ -590,8 +663,24 @@ void Rule_privatefinalstaticinherited(struct TokenStruct *Token, struct ContextS
 
 
 
-/* <CDefFunc Decl> ::= extern function <Fn Header> */
+/* <CDefFunc Decl> ::= extern function <Fn Header Proto> */
 void Rule_CDefFuncDecl_extern_function(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <CDefFunc Decl> ::= private extern function <Fn Header Proto> */
+void Rule_CDefFuncDecl_private_extern_function(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <CDefFunc Decl> ::= extern private function <Fn Header Proto> */
+void Rule_CDefFuncDecl_extern_private_function(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -672,6 +761,22 @@ void Rule_ClassDecl(struct TokenStruct *Token, struct ContextStruct *Context) {
 
 /* <Class Decl> ::= <Abstract Class> */
 void Rule_ClassDecl2(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Class Decl> ::= private <Normal Class> */
+void Rule_ClassDecl_private(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Class Decl> ::= private <Abstract Class> */
+void Rule_ClassDecl_private2(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -814,7 +919,7 @@ void Rule_CDecl3(struct TokenStruct *Token, struct ContextStruct *Context) {
 
 
 
-/* <CDecl> ::= <Operator Stm> */
+/* <CDecl> ::= <Operator Impl> */
 void Rule_CDecl4(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
@@ -854,7 +959,7 @@ void Rule_ACDecl4(struct TokenStruct *Token, struct ContextStruct *Context) {
 
 
 
-/* <ACDecl> ::= <Operator Stm> */
+/* <ACDecl> ::= <Operator Impl> */
 void Rule_ACDecl5(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
@@ -862,16 +967,32 @@ void Rule_ACDecl5(struct TokenStruct *Token, struct ContextStruct *Context) {
 
 
 
-/* <Operator Stm> ::= operator <Operator> <Op Header> '=' <Expr> */
-void Rule_OperatorStm_operator_Eq(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <ACDecl> ::= <Operator Proto> */
+void Rule_ACDecl6(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <Operator Stm> ::= operator <Operator> <Op Header> <Block> */
-void Rule_OperatorStm_operator(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <Operator Impl> ::= operator <Operator> <Op Header Impl> '=' <Expr> */
+void Rule_OperatorImpl_operator_Eq(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Operator Impl> ::= operator <Operator> <Op Header Impl> <Block> */
+void Rule_OperatorImpl_operator(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Operator Proto> ::= operator <Operator> <Op Header Proto> */
+void Rule_OperatorProto_operator(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -1174,48 +1295,80 @@ void Rule_Operator_LBracket_RBracket(struct TokenStruct *Token, struct ContextSt
 
 
 
-/* <Op Header> ::= '(' <Params> ')' */
-void Rule_OpHeader_LParen_RParen(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <Op Header Proto> ::= '(' <Params> ')' */
+void Rule_OpHeaderProto_LParen_RParen(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <Op Header> ::= '(' <Params> ')' '->' <Type> */
-void Rule_OpHeader_LParen_RParen_MinusGt(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <Op Header Proto> ::= '(' <Params> ')' '->' <Type> */
+void Rule_OpHeaderProto_LParen_RParen_MinusGt(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <Op Header> ::= '(' <Types> ')' */
-void Rule_OpHeader_LParen_RParen2(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <Op Header Proto> ::= '(' <Types> ')' */
+void Rule_OpHeaderProto_LParen_RParen2(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <Op Header> ::= '(' <Types> ')' '->' <Type> */
-void Rule_OpHeader_LParen_RParen_MinusGt2(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <Op Header Proto> ::= '(' <Types> ')' '->' <Type> */
+void Rule_OpHeaderProto_LParen_RParen_MinusGt2(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <Op Header> ::= '(' ')' */
-void Rule_OpHeader_LParen_RParen3(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <Op Header Proto> ::= '(' ')' */
+void Rule_OpHeaderProto_LParen_RParen3(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <Op Header> ::= '(' ')' '->' <Type> */
-void Rule_OpHeader_LParen_RParen_MinusGt3(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <Op Header Proto> ::= '(' ')' '->' <Type> */
+void Rule_OpHeaderProto_LParen_RParen_MinusGt3(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Op Header Impl> ::= '(' <Params> ')' */
+void Rule_OpHeaderImpl_LParen_RParen(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Op Header Impl> ::= '(' <Params> ')' '->' <Type> */
+void Rule_OpHeaderImpl_LParen_RParen_MinusGt(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Op Header Impl> ::= '(' ')' */
+void Rule_OpHeaderImpl_LParen_RParen2(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Op Header Impl> ::= '(' ')' '->' <Type> */
+void Rule_OpHeaderImpl_LParen_RParen_MinusGt2(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -1232,6 +1385,30 @@ void Rule_VarDecl_let_final(struct TokenStruct *Token, struct ContextStruct *Con
 
 /* <Var Decl> ::= let <Var Header> */
 void Rule_VarDecl_let(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Var Decl> ::= let private <Var Header> */
+void Rule_VarDecl_let_private(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Var Decl> ::= let private final <Var Header> */
+void Rule_VarDecl_let_private_final(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Var Decl> ::= let final private <Var Header> */
+void Rule_VarDecl_let_final_private(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -1278,6 +1455,14 @@ void Rule_EnumDecl_enum_Id_LBrace_RBrace(struct TokenStruct *Token, struct Conte
 
 
 
+/* <Enum Decl> ::= private enum Id '{' <Enum Def> '}' */
+void Rule_EnumDecl_private_enum_Id_LBrace_RBrace(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
 /* <Enum Def> ::= Id ',' <Enum Def> */
 void Rule_EnumDef_Id_Comma(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
@@ -1288,14 +1473,6 @@ void Rule_EnumDef_Id_Comma(struct TokenStruct *Token, struct ContextStruct *Cont
 
 /* <Enum Def> ::= Id */
 void Rule_EnumDef_Id(struct TokenStruct *Token, struct ContextStruct *Context) {
-  RuleTemplate(Token,Context);
-  };
-
-
-
-
-/* <Set Decl> ::= set Id '{' <Enum Def> '}' */
-void Rule_SetDecl_set_Id_LBrace_RBrace(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -1376,22 +1553,6 @@ void Rule_FnType_fn_LParen_RParen2(struct TokenStruct *Token, struct ContextStru
 
 /* <Fn Type> ::= fn '(' <Types> ')' '->' <Type> */
 void Rule_FnType_fn_LParen_RParen_MinusGt2(struct TokenStruct *Token, struct ContextStruct *Context) {
-  RuleTemplate(Token,Context);
-  };
-
-
-
-
-/* <Type Constructor> ::= <Pkg> */
-void Rule_TypeConstructor(struct TokenStruct *Token, struct ContextStruct *Context) {
-  RuleTemplate(Token,Context);
-  };
-
-
-
-
-/* <Type Constructor> ::= <Pkg> '<' <Types> '>' */
-void Rule_TypeConstructor_Lt_Gt(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -1758,6 +1919,22 @@ void Rule_StmList2(struct TokenStruct *Token, struct ContextStruct *Context) {
 
 
 
+/* <CSE> ::= <Expr> */
+void Rule_CSE(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <CSE> ::= <CSE> ',' <Expr> */
+void Rule_CSE_Comma(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
 /* <Expr> ::= <Var Decl> in <Expr> */
 void Rule_Expr_in(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
@@ -1766,24 +1943,8 @@ void Rule_Expr_in(struct TokenStruct *Token, struct ContextStruct *Context) {
 
 
 
-/* <Expr> ::= <Func Decl> in <Expr> */
-void Rule_Expr_in2(struct TokenStruct *Token, struct ContextStruct *Context) {
-  RuleTemplate(Token,Context);
-  };
-
-
-
-
 /* <Expr> ::= match <Expr> '{' <Case Exprs> '}' */
 void Rule_Expr_match_LBrace_RBrace(struct TokenStruct *Token, struct ContextStruct *Context) {
-  RuleTemplate(Token,Context);
-  };
-
-
-
-
-/* <Expr> ::= <Expr> ',' <Op Assign> */
-void Rule_Expr_Comma(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -1832,6 +1993,14 @@ void Rule_OpAssign_TimesEq(struct TokenStruct *Token, struct ContextStruct *Cont
 
 /* <Op Assign> ::= <Op Or> '/=' <Op Assign> */
 void Rule_OpAssign_DivEq(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Op Assign> ::= <Op Or> '%=' <Op Assign> */
+void Rule_OpAssign_PercentEq(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -2030,14 +2199,6 @@ void Rule_OpCompare_is(struct TokenStruct *Token, struct ContextStruct *Context)
 
 
 
-/* <Op Compare> ::= <Op Compare> in <Op Shift> */
-void Rule_OpCompare_in(struct TokenStruct *Token, struct ContextStruct *Context) {
-  RuleTemplate(Token,Context);
-  };
-
-
-
-
 /* <Op Compare> ::= <Op Shift> */
 void Rule_OpCompare(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
@@ -2150,22 +2311,6 @@ void Rule_OpUnary_Minus(struct TokenStruct *Token, struct ContextStruct *Context
 
 
 
-/* <Op Unary> ::= '*' <Op Unary> */
-void Rule_OpUnary_Times(struct TokenStruct *Token, struct ContextStruct *Context) {
-  RuleTemplate(Token,Context);
-  };
-
-
-
-
-/* <Op Unary> ::= '&' <Op Unary> */
-void Rule_OpUnary_Amp(struct TokenStruct *Token, struct ContextStruct *Context) {
-  RuleTemplate(Token,Context);
-  };
-
-
-
-
 /* <Op Unary> ::= '++' <Op Unary> */
 void Rule_OpUnary_PlusPlus(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
@@ -2246,7 +2391,7 @@ void Rule_OpPointer_Dot(struct TokenStruct *Token, struct ContextStruct *Context
 
 
 
-/* <Op Pointer> ::= <Op Pointer> '[' <Expr> ']' */
+/* <Op Pointer> ::= <Op Pointer> '[' <CSE> ']' */
 void Rule_OpPointer_LBracket_RBracket(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
@@ -2254,7 +2399,7 @@ void Rule_OpPointer_LBracket_RBracket(struct TokenStruct *Token, struct ContextS
 
 
 
-/* <Op Pointer> ::= <Op Pointer> '(' <Expr> ')' */
+/* <Op Pointer> ::= <Op Pointer> '(' <CSE> ')' */
 void Rule_OpPointer_LParen_RParen(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
@@ -2366,8 +2511,8 @@ void Rule_Value_LParen_RParen(struct TokenStruct *Token, struct ContextStruct *C
 
 
 
-/* <Value> ::= '{' <Expr> '}' */
-void Rule_Value_LBrace_RBrace(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <Value> ::= '[' <CSE> ']' */
+void Rule_Value_LBracket_RBracket(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -2475,7 +2620,7 @@ void Rule_NewExpr_new_LParen_RParen_LBrace_RBrace2(struct TokenStruct *Token, st
 
 
 
-extern void (*RuleJumpTable[])(struct TokenStruct *Token, struct ContextStruct *Context) = {
+void (*RuleJumpTable[])(struct TokenStruct *Token, struct ContextStruct *Context) = {
 
   /* 0. <Decls> ::= <Decl> <Decls> */
   Rule_Decls,
@@ -2492,28 +2637,28 @@ extern void (*RuleJumpTable[])(struct TokenStruct *Token, struct ContextStruct *
   /* 4. <Decl> ::= <Enum Decl> */
   Rule_Decl3,
 
-  /* 5. <Decl> ::= <Set Decl> */
-  Rule_Decl4,
-
-  /* 6. <Decl> ::= extern type Id */
+  /* 5. <Decl> ::= extern type Id */
   Rule_Decl_extern_type_Id,
 
-  /* 7. <Decl> ::= <Var Decl> */
+  /* 6. <Decl> ::= private extern type Id */
+  Rule_Decl_private_extern_type_Id,
+
+  /* 7. <Decl> ::= extern private type Id */
+  Rule_Decl_extern_private_type_Id,
+
+  /* 8. <Decl> ::= <Var Decl> */
+  Rule_Decl4,
+
+  /* 9. <Decl> ::= <Import> */
   Rule_Decl5,
 
-  /* 8. <Decl> ::= <Import> */
+  /* 10. <Decl> ::= <CDefFunc Decl> */
   Rule_Decl6,
 
-  /* 9. <Decl> ::= <CDefFunc Decl> */
+  /* 11. <Decl> ::= <Using Stm> */
   Rule_Decl7,
 
-  /* 10. <Decl> ::= <Using Stm> */
-  Rule_Decl8,
-
-  /* 11. <Decl> ::= <CDefStruct> */
-  Rule_Decl9,
-
-  /* 12. <Import> ::= import <File Path> */
+  /* 12. <Import> ::= import <File Path All> */
   Rule_Import_import,
 
   /* 13. <Import> ::= import <File Path> as Id */
@@ -2528,805 +2673,858 @@ extern void (*RuleJumpTable[])(struct TokenStruct *Token, struct ContextStruct *
   /* 16. <File Path> ::= Id */
   Rule_FilePath_Id,
 
-  /* 17. <File Path List> ::= <File Path> ',' <File Path List> */
+  /* 17. <File Path All> ::= Id '.' <File Path All> */
+  Rule_FilePathAll_Id_Dot,
+
+  /* 18. <File Path All> ::= Id '.*' */
+  Rule_FilePathAll_Id_DotTimes,
+
+  /* 19. <File Path All> ::= Id */
+  Rule_FilePathAll_Id,
+
+  /* 20. <File Path List> ::= <File Path> ',' <File Path List> */
   Rule_FilePathList_Comma,
 
-  /* 18. <File Path List> ::= <File Path> */
+  /* 21. <File Path List> ::= <File Path> */
   Rule_FilePathList,
 
-  /* 19. <Fn Header> ::= Id '(' <Params> ')' */
-  Rule_FnHeader_Id_LParen_RParen,
+  /* 22. <Fn Header Proto> ::= Id '(' <Params> ')' */
+  Rule_FnHeaderProto_Id_LParen_RParen,
 
-  /* 20. <Fn Header> ::= Id '(' <Params> ')' '->' <Type> */
-  Rule_FnHeader_Id_LParen_RParen_MinusGt,
+  /* 23. <Fn Header Proto> ::= Id '(' <Params> ')' '->' <Type> */
+  Rule_FnHeaderProto_Id_LParen_RParen_MinusGt,
 
-  /* 21. <Fn Header> ::= Id '(' <Types> ')' */
-  Rule_FnHeader_Id_LParen_RParen2,
+  /* 24. <Fn Header Proto> ::= Id '(' <Types> ')' */
+  Rule_FnHeaderProto_Id_LParen_RParen2,
 
-  /* 22. <Fn Header> ::= Id '(' <Types> ')' '->' <Type> */
-  Rule_FnHeader_Id_LParen_RParen_MinusGt2,
+  /* 25. <Fn Header Proto> ::= Id '(' <Types> ')' '->' <Type> */
+  Rule_FnHeaderProto_Id_LParen_RParen_MinusGt2,
 
-  /* 23. <Fn Header> ::= Id '(' ')' */
-  Rule_FnHeader_Id_LParen_RParen3,
+  /* 26. <Fn Header Proto> ::= Id '(' ')' */
+  Rule_FnHeaderProto_Id_LParen_RParen3,
 
-  /* 24. <Fn Header> ::= Id '(' ')' '->' <Type> */
-  Rule_FnHeader_Id_LParen_RParen_MinusGt3,
+  /* 27. <Fn Header Proto> ::= Id '(' ')' '->' <Type> */
+  Rule_FnHeaderProto_Id_LParen_RParen_MinusGt3,
 
-  /* 25. <Func Decl> ::= function <Fn Header> <Block> */
+  /* 28. <Fn Header Impl> ::= Id '(' <Params> ')' */
+  Rule_FnHeaderImpl_Id_LParen_RParen,
+
+  /* 29. <Fn Header Impl> ::= Id '(' <Params> ')' '->' <Type> */
+  Rule_FnHeaderImpl_Id_LParen_RParen_MinusGt,
+
+  /* 30. <Fn Header Impl> ::= Id '(' ')' */
+  Rule_FnHeaderImpl_Id_LParen_RParen2,
+
+  /* 31. <Fn Header Impl> ::= Id '(' ')' '->' <Type> */
+  Rule_FnHeaderImpl_Id_LParen_RParen_MinusGt2,
+
+  /* 32. <Func Decl> ::= function <Fn Header Impl> <Block> */
   Rule_FuncDecl_function,
 
-  /* 26. <Func Decl> ::= function <Fn Header> '=' <Expr> */
+  /* 33. <Func Decl> ::= function <Fn Header Impl> '=' <Expr> */
   Rule_FuncDecl_function_Eq,
 
-  /* 27. <CFunc Proto> ::= <private final static inherited> function <Fn Header> */
+  /* 34. <Func Decl> ::= private function <Fn Header Impl> <Block> */
+  Rule_FuncDecl_private_function,
+
+  /* 35. <Func Decl> ::= private function <Fn Header Impl> '=' <Expr> */
+  Rule_FuncDecl_private_function_Eq,
+
+  /* 36. <CFunc Proto> ::= <private final static inherited> function <Fn Header Proto> */
   Rule_CFuncProto_function,
 
-  /* 28. <CFunc Decl> ::= <private final static inherited> function <Fn Header> <Block> */
+  /* 37. <CFunc Decl> ::= <private final static inherited> function <Fn Header Impl> <Block> */
   Rule_CFuncDecl_function,
 
-  /* 29. <CFunc Decl> ::= <private final static inherited> function <Fn Header> '=' <Expr> */
+  /* 38. <CFunc Decl> ::= <private final static inherited> function <Fn Header Impl> '=' <Expr> */
   Rule_CFuncDecl_function_Eq,
 
-  /* 30. <private final static inherited> ::= private */
+  /* 39. <private final static inherited> ::= private */
   Rule_privatefinalstaticinherited_private,
 
-  /* 31. <private final static inherited> ::= static */
+  /* 40. <private final static inherited> ::= static */
   Rule_privatefinalstaticinherited_static,
 
-  /* 32. <private final static inherited> ::= final */
+  /* 41. <private final static inherited> ::= final */
   Rule_privatefinalstaticinherited_final,
 
-  /* 33. <private final static inherited> ::= inherited */
+  /* 42. <private final static inherited> ::= inherited */
   Rule_privatefinalstaticinherited_inherited,
 
-  /* 34. <private final static inherited> ::= private static */
+  /* 43. <private final static inherited> ::= private static */
   Rule_privatefinalstaticinherited_private_static,
 
-  /* 35. <private final static inherited> ::= static private */
+  /* 44. <private final static inherited> ::= static private */
   Rule_privatefinalstaticinherited_static_private,
 
-  /* 36. <private final static inherited> ::= private inherited */
+  /* 45. <private final static inherited> ::= private inherited */
   Rule_privatefinalstaticinherited_private_inherited,
 
-  /* 37. <private final static inherited> ::= inherited private */
+  /* 46. <private final static inherited> ::= inherited private */
   Rule_privatefinalstaticinherited_inherited_private,
 
-  /* 38. <private final static inherited> ::= static final */
+  /* 47. <private final static inherited> ::= static final */
   Rule_privatefinalstaticinherited_static_final,
 
-  /* 39. <private final static inherited> ::= final static */
+  /* 48. <private final static inherited> ::= final static */
   Rule_privatefinalstaticinherited_final_static,
 
-  /* 40. <private final static inherited> ::= private final */
+  /* 49. <private final static inherited> ::= private final */
   Rule_privatefinalstaticinherited_private_final,
 
-  /* 41. <private final static inherited> ::= final static private */
+  /* 50. <private final static inherited> ::= final static private */
   Rule_privatefinalstaticinherited_final_static_private,
 
-  /* 42. <private final static inherited> ::= final private static */
+  /* 51. <private final static inherited> ::= final private static */
   Rule_privatefinalstaticinherited_final_private_static,
 
-  /* 43. <private final static inherited> ::= static final private */
+  /* 52. <private final static inherited> ::= static final private */
   Rule_privatefinalstaticinherited_static_final_private,
 
-  /* 44. <private final static inherited> ::= static private final */
+  /* 53. <private final static inherited> ::= static private final */
   Rule_privatefinalstaticinherited_static_private_final,
 
-  /* 45. <private final static inherited> ::= private final static */
+  /* 54. <private final static inherited> ::= private final static */
   Rule_privatefinalstaticinherited_private_final_static,
 
-  /* 46. <private final static inherited> ::= private static final */
+  /* 55. <private final static inherited> ::= private static final */
   Rule_privatefinalstaticinherited_private_static_final,
 
-  /* 47. <private final static inherited> ::=  */
+  /* 56. <private final static inherited> ::=  */
   Rule_privatefinalstaticinherited,
 
-  /* 48. <CDefFunc Decl> ::= extern function <Fn Header> */
+  /* 57. <CDefFunc Decl> ::= extern function <Fn Header Proto> */
   Rule_CDefFuncDecl_extern_function,
 
-  /* 49. <Params> ::= <Param> ',' <Params> */
+  /* 58. <CDefFunc Decl> ::= private extern function <Fn Header Proto> */
+  Rule_CDefFuncDecl_private_extern_function,
+
+  /* 59. <CDefFunc Decl> ::= extern private function <Fn Header Proto> */
+  Rule_CDefFuncDecl_extern_private_function,
+
+  /* 60. <Params> ::= <Param> ',' <Params> */
   Rule_Params_Comma,
 
-  /* 50. <Params> ::= <Param> */
+  /* 61. <Params> ::= <Param> */
   Rule_Params,
 
-  /* 51. <Param> ::= final Id ':' <Type> */
+  /* 62. <Param> ::= final Id ':' <Type> */
   Rule_Param_final_Id_Colon,
 
-  /* 52. <Param> ::= Id ':' <Type> */
+  /* 63. <Param> ::= Id ':' <Type> */
   Rule_Param_Id_Colon,
 
-  /* 53. <Types> ::= <Type> ',' <Types> */
+  /* 64. <Types> ::= <Type> ',' <Types> */
   Rule_Types_Comma,
 
-  /* 54. <Types> ::= <Type> */
+  /* 65. <Types> ::= <Type> */
   Rule_Types,
 
-  /* 55. <Id List> ::= Id ',' <Id List> */
+  /* 66. <Id List> ::= Id ',' <Id List> */
   Rule_IdList_Id_Comma,
 
-  /* 56. <Id List> ::= Id */
+  /* 67. <Id List> ::= Id */
   Rule_IdList_Id,
 
-  /* 57. <Class Decl> ::= <Normal Class> */
+  /* 68. <Class Decl> ::= <Normal Class> */
   Rule_ClassDecl,
 
-  /* 58. <Class Decl> ::= <Abstract Class> */
+  /* 69. <Class Decl> ::= <Abstract Class> */
   Rule_ClassDecl2,
 
-  /* 59. <Normal Class> ::= class <Class Name> '{' <CDecls> '}' */
+  /* 70. <Class Decl> ::= private <Normal Class> */
+  Rule_ClassDecl_private,
+
+  /* 71. <Class Decl> ::= private <Abstract Class> */
+  Rule_ClassDecl_private2,
+
+  /* 72. <Normal Class> ::= class <Class Name> '{' <CDecls> '}' */
   Rule_NormalClass_class_LBrace_RBrace,
 
-  /* 60. <Normal Class> ::= class <Class Name> extends <Extend Class Name List> '{' <CDecls> '}' */
+  /* 73. <Normal Class> ::= class <Class Name> extends <Extend Class Name List> '{' <CDecls> '}' */
   Rule_NormalClass_class_extends_LBrace_RBrace,
 
-  /* 61. <Abstract Class> ::= abstract class <Class Name> '{' <ACDecls> '}' */
+  /* 74. <Abstract Class> ::= abstract class <Class Name> '{' <ACDecls> '}' */
   Rule_AbstractClass_abstract_class_LBrace_RBrace,
 
-  /* 62. <Abstract Class> ::= abstract class <Class Name> extends <Extend Class Name List> '{' <ACDecls> '}' */
+  /* 75. <Abstract Class> ::= abstract class <Class Name> extends <Extend Class Name List> '{' <ACDecls> '}' */
   Rule_AbstractClass_abstract_class_extends_LBrace_RBrace,
 
-  /* 63. <Class Name> ::= Id */
+  /* 76. <Class Name> ::= Id */
   Rule_ClassName_Id,
 
-  /* 64. <Class Name> ::= Id '<' <Id List> '>' */
+  /* 77. <Class Name> ::= Id '<' <Id List> '>' */
   Rule_ClassName_Id_Lt_Gt,
 
-  /* 65. <Extend Class Name> ::= <Pkg> */
+  /* 78. <Extend Class Name> ::= <Pkg> */
   Rule_ExtendClassName,
 
-  /* 66. <Extend Class Name> ::= <Pkg> '<' <Extend Class Name List> '>' */
+  /* 79. <Extend Class Name> ::= <Pkg> '<' <Extend Class Name List> '>' */
   Rule_ExtendClassName_Lt_Gt,
 
-  /* 67. <Extend Class Name List> ::= <Extend Class Name> ',' <Extend Class Name List> */
+  /* 80. <Extend Class Name List> ::= <Extend Class Name> ',' <Extend Class Name List> */
   Rule_ExtendClassNameList_Comma,
 
-  /* 68. <Extend Class Name List> ::= <Extend Class Name> */
+  /* 81. <Extend Class Name List> ::= <Extend Class Name> */
   Rule_ExtendClassNameList,
 
-  /* 69. <CDecls> ::= <CDecl> <CDecls> */
+  /* 82. <CDecls> ::= <CDecl> <CDecls> */
   Rule_CDecls,
 
-  /* 70. <CDecls> ::=  */
+  /* 83. <CDecls> ::=  */
   Rule_CDecls2,
 
-  /* 71. <ACDecls> ::= <ACDecl> <ACDecls> */
+  /* 84. <ACDecls> ::= <ACDecl> <ACDecls> */
   Rule_ACDecls,
 
-  /* 72. <ACDecls> ::=  */
+  /* 85. <ACDecls> ::=  */
   Rule_ACDecls2,
 
-  /* 73. <CDecl> ::= <CFunc Decl> */
+  /* 86. <CDecl> ::= <CFunc Decl> */
   Rule_CDecl,
 
-  /* 74. <CDecl> ::= <CVar Decl> */
+  /* 87. <CDecl> ::= <CVar Decl> */
   Rule_CDecl2,
 
-  /* 75. <CDecl> ::= <Using Stm> */
+  /* 88. <CDecl> ::= <Using Stm> */
   Rule_CDecl3,
 
-  /* 76. <CDecl> ::= <Operator Stm> */
+  /* 89. <CDecl> ::= <Operator Impl> */
   Rule_CDecl4,
 
-  /* 77. <ACDecl> ::= <CFunc Decl> */
+  /* 90. <ACDecl> ::= <CFunc Decl> */
   Rule_ACDecl,
 
-  /* 78. <ACDecl> ::= <CFunc Proto> */
+  /* 91. <ACDecl> ::= <CFunc Proto> */
   Rule_ACDecl2,
 
-  /* 79. <ACDecl> ::= <CVar Decl> */
+  /* 92. <ACDecl> ::= <CVar Decl> */
   Rule_ACDecl3,
 
-  /* 80. <ACDecl> ::= <Using Stm> */
+  /* 93. <ACDecl> ::= <Using Stm> */
   Rule_ACDecl4,
 
-  /* 81. <ACDecl> ::= <Operator Stm> */
+  /* 94. <ACDecl> ::= <Operator Impl> */
   Rule_ACDecl5,
 
-  /* 82. <Operator Stm> ::= operator <Operator> <Op Header> '=' <Expr> */
-  Rule_OperatorStm_operator_Eq,
+  /* 95. <ACDecl> ::= <Operator Proto> */
+  Rule_ACDecl6,
 
-  /* 83. <Operator Stm> ::= operator <Operator> <Op Header> <Block> */
-  Rule_OperatorStm_operator,
+  /* 96. <Operator Impl> ::= operator <Operator> <Op Header Impl> '=' <Expr> */
+  Rule_OperatorImpl_operator_Eq,
 
-  /* 84. <CDefStruct> ::= extern struct Id '{' <Params> '}' */
+  /* 97. <Operator Impl> ::= operator <Operator> <Op Header Impl> <Block> */
+  Rule_OperatorImpl_operator,
+
+  /* 98. <Operator Proto> ::= operator <Operator> <Op Header Proto> */
+  Rule_OperatorProto_operator,
+
+  /* 99. <CDefStruct> ::= extern struct Id '{' <Params> '}' */
   Rule_CDefStruct_extern_struct_Id_LBrace_RBrace,
 
-  /* 85. <Operator> ::= '+' */
+  /* 100. <Operator> ::= '+' */
   Rule_Operator_Plus,
 
-  /* 86. <Operator> ::= '-' */
+  /* 101. <Operator> ::= '-' */
   Rule_Operator_Minus,
 
-  /* 87. <Operator> ::= '*' */
+  /* 102. <Operator> ::= '*' */
   Rule_Operator_Times,
 
-  /* 88. <Operator> ::= '/' */
+  /* 103. <Operator> ::= '/' */
   Rule_Operator_Div,
 
-  /* 89. <Operator> ::= '%' */
+  /* 104. <Operator> ::= '%' */
   Rule_Operator_Percent,
 
-  /* 90. <Operator> ::= '^' */
+  /* 105. <Operator> ::= '^' */
   Rule_Operator_Caret,
 
-  /* 91. <Operator> ::= '&' */
+  /* 106. <Operator> ::= '&' */
   Rule_Operator_Amp,
 
-  /* 92. <Operator> ::= '|' */
+  /* 107. <Operator> ::= '|' */
   Rule_Operator_Pipe,
 
-  /* 93. <Operator> ::= '~' */
+  /* 108. <Operator> ::= '~' */
   Rule_Operator_Tilde,
 
-  /* 94. <Operator> ::= '!' */
+  /* 109. <Operator> ::= '!' */
   Rule_Operator_Exclam,
 
-  /* 95. <Operator> ::= '=' */
+  /* 110. <Operator> ::= '=' */
   Rule_Operator_Eq,
 
-  /* 96. <Operator> ::= '<' */
+  /* 111. <Operator> ::= '<' */
   Rule_Operator_Lt,
 
-  /* 97. <Operator> ::= '>' */
+  /* 112. <Operator> ::= '>' */
   Rule_Operator_Gt,
 
-  /* 98. <Operator> ::= '+=' */
+  /* 113. <Operator> ::= '+=' */
   Rule_Operator_PlusEq,
 
-  /* 99. <Operator> ::= '-=' */
+  /* 114. <Operator> ::= '-=' */
   Rule_Operator_MinusEq,
 
-  /* 100. <Operator> ::= '*=' */
+  /* 115. <Operator> ::= '*=' */
   Rule_Operator_TimesEq,
 
-  /* 101. <Operator> ::= '/=' */
+  /* 116. <Operator> ::= '/=' */
   Rule_Operator_DivEq,
 
-  /* 102. <Operator> ::= '%=' */
+  /* 117. <Operator> ::= '%=' */
   Rule_Operator_PercentEq,
 
-  /* 103. <Operator> ::= '^=' */
+  /* 118. <Operator> ::= '^=' */
   Rule_Operator_CaretEq,
 
-  /* 104. <Operator> ::= '&=' */
+  /* 119. <Operator> ::= '&=' */
   Rule_Operator_AmpEq,
 
-  /* 105. <Operator> ::= '|=' */
+  /* 120. <Operator> ::= '|=' */
   Rule_Operator_PipeEq,
 
-  /* 106. <Operator> ::= '<<' */
+  /* 121. <Operator> ::= '<<' */
   Rule_Operator_LtLt,
 
-  /* 107. <Operator> ::= '>>' */
+  /* 122. <Operator> ::= '>>' */
   Rule_Operator_GtGt,
 
-  /* 108. <Operator> ::= '>>=' */
+  /* 123. <Operator> ::= '>>=' */
   Rule_Operator_GtGtEq,
 
-  /* 109. <Operator> ::= '<<=' */
+  /* 124. <Operator> ::= '<<=' */
   Rule_Operator_LtLtEq,
 
-  /* 110. <Operator> ::= '==' */
+  /* 125. <Operator> ::= '==' */
   Rule_Operator_EqEq,
 
-  /* 111. <Operator> ::= '!=' */
+  /* 126. <Operator> ::= '!=' */
   Rule_Operator_ExclamEq,
 
-  /* 112. <Operator> ::= '<=' */
+  /* 127. <Operator> ::= '<=' */
   Rule_Operator_LtEq,
 
-  /* 113. <Operator> ::= '>=' */
+  /* 128. <Operator> ::= '>=' */
   Rule_Operator_GtEq,
 
-  /* 114. <Operator> ::= '&&' */
+  /* 129. <Operator> ::= '&&' */
   Rule_Operator_AmpAmp,
 
-  /* 115. <Operator> ::= '||' */
+  /* 130. <Operator> ::= '||' */
   Rule_Operator_PipePipe,
 
-  /* 116. <Operator> ::= '++' */
+  /* 131. <Operator> ::= '++' */
   Rule_Operator_PlusPlus,
 
-  /* 117. <Operator> ::= '--' */
+  /* 132. <Operator> ::= '--' */
   Rule_Operator_MinusMinus,
 
-  /* 118. <Operator> ::= ',' */
+  /* 133. <Operator> ::= ',' */
   Rule_Operator_Comma,
 
-  /* 119. <Operator> ::= '(' ')' */
+  /* 134. <Operator> ::= '(' ')' */
   Rule_Operator_LParen_RParen,
 
-  /* 120. <Operator> ::= '[' ']' */
+  /* 135. <Operator> ::= '[' ']' */
   Rule_Operator_LBracket_RBracket,
 
-  /* 121. <Op Header> ::= '(' <Params> ')' */
-  Rule_OpHeader_LParen_RParen,
+  /* 136. <Op Header Proto> ::= '(' <Params> ')' */
+  Rule_OpHeaderProto_LParen_RParen,
 
-  /* 122. <Op Header> ::= '(' <Params> ')' '->' <Type> */
-  Rule_OpHeader_LParen_RParen_MinusGt,
+  /* 137. <Op Header Proto> ::= '(' <Params> ')' '->' <Type> */
+  Rule_OpHeaderProto_LParen_RParen_MinusGt,
 
-  /* 123. <Op Header> ::= '(' <Types> ')' */
-  Rule_OpHeader_LParen_RParen2,
+  /* 138. <Op Header Proto> ::= '(' <Types> ')' */
+  Rule_OpHeaderProto_LParen_RParen2,
 
-  /* 124. <Op Header> ::= '(' <Types> ')' '->' <Type> */
-  Rule_OpHeader_LParen_RParen_MinusGt2,
+  /* 139. <Op Header Proto> ::= '(' <Types> ')' '->' <Type> */
+  Rule_OpHeaderProto_LParen_RParen_MinusGt2,
 
-  /* 125. <Op Header> ::= '(' ')' */
-  Rule_OpHeader_LParen_RParen3,
+  /* 140. <Op Header Proto> ::= '(' ')' */
+  Rule_OpHeaderProto_LParen_RParen3,
 
-  /* 126. <Op Header> ::= '(' ')' '->' <Type> */
-  Rule_OpHeader_LParen_RParen_MinusGt3,
+  /* 141. <Op Header Proto> ::= '(' ')' '->' <Type> */
+  Rule_OpHeaderProto_LParen_RParen_MinusGt3,
 
-  /* 127. <Var Decl> ::= let final <Var Header> */
+  /* 142. <Op Header Impl> ::= '(' <Params> ')' */
+  Rule_OpHeaderImpl_LParen_RParen,
+
+  /* 143. <Op Header Impl> ::= '(' <Params> ')' '->' <Type> */
+  Rule_OpHeaderImpl_LParen_RParen_MinusGt,
+
+  /* 144. <Op Header Impl> ::= '(' ')' */
+  Rule_OpHeaderImpl_LParen_RParen2,
+
+  /* 145. <Op Header Impl> ::= '(' ')' '->' <Type> */
+  Rule_OpHeaderImpl_LParen_RParen_MinusGt2,
+
+  /* 146. <Var Decl> ::= let final <Var Header> */
   Rule_VarDecl_let_final,
 
-  /* 128. <Var Decl> ::= let <Var Header> */
+  /* 147. <Var Decl> ::= let <Var Header> */
   Rule_VarDecl_let,
 
-  /* 129. <CVar Decl> ::= let <private final static inherited> <Var Header> */
+  /* 148. <Var Decl> ::= let private <Var Header> */
+  Rule_VarDecl_let_private,
+
+  /* 149. <Var Decl> ::= let private final <Var Header> */
+  Rule_VarDecl_let_private_final,
+
+  /* 150. <Var Decl> ::= let final private <Var Header> */
+  Rule_VarDecl_let_final_private,
+
+  /* 151. <CVar Decl> ::= let <private final static inherited> <Var Header> */
   Rule_CVarDecl_let,
 
-  /* 130. <Var Header> ::= <Id List> ':' <Type> '=' <Expr> */
+  /* 152. <Var Header> ::= <Id List> ':' <Type> '=' <Expr> */
   Rule_VarHeader_Colon_Eq,
 
-  /* 131. <Var Header> ::= <Id List> ':' <Type> */
+  /* 153. <Var Header> ::= <Id List> ':' <Type> */
   Rule_VarHeader_Colon,
 
-  /* 132. <Var Header> ::= <Id List> '=' <Expr> */
+  /* 154. <Var Header> ::= <Id List> '=' <Expr> */
   Rule_VarHeader_Eq,
 
-  /* 133. <Enum Decl> ::= enum Id '{' <Enum Def> '}' */
+  /* 155. <Enum Decl> ::= enum Id '{' <Enum Def> '}' */
   Rule_EnumDecl_enum_Id_LBrace_RBrace,
 
-  /* 134. <Enum Def> ::= Id ',' <Enum Def> */
+  /* 156. <Enum Decl> ::= private enum Id '{' <Enum Def> '}' */
+  Rule_EnumDecl_private_enum_Id_LBrace_RBrace,
+
+  /* 157. <Enum Def> ::= Id ',' <Enum Def> */
   Rule_EnumDef_Id_Comma,
 
-  /* 135. <Enum Def> ::= Id */
+  /* 158. <Enum Def> ::= Id */
   Rule_EnumDef_Id,
 
-  /* 136. <Set Decl> ::= set Id '{' <Enum Def> '}' */
-  Rule_SetDecl_set_Id_LBrace_RBrace,
-
-  /* 137. <Type> ::= <Base> */
+  /* 159. <Type> ::= <Base> */
   Rule_Type,
 
-  /* 138. <Type> ::= <Fn Type> */
+  /* 160. <Type> ::= <Fn Type> */
   Rule_Type2,
 
-  /* 139. <Type> ::= <Pkg> */
+  /* 161. <Type> ::= <Pkg> */
   Rule_Type3,
 
-  /* 140. <Type> ::= <Pkg> '<' <Types> '>' */
+  /* 162. <Type> ::= <Pkg> '<' <Types> '>' */
   Rule_Type_Lt_Gt,
 
-  /* 141. <Type> ::= <Type> '[' ']' */
+  /* 163. <Type> ::= <Type> '[' ']' */
   Rule_Type_LBracket_RBracket,
 
-  /* 142. <Type> ::= '(' <Type> ')' */
+  /* 164. <Type> ::= '(' <Type> ')' */
   Rule_Type_LParen_RParen,
 
-  /* 143. <Fn Type> ::= fn '(' ')' */
+  /* 165. <Fn Type> ::= fn '(' ')' */
   Rule_FnType_fn_LParen_RParen,
 
-  /* 144. <Fn Type> ::= fn '(' ')' '->' <Type> */
+  /* 166. <Fn Type> ::= fn '(' ')' '->' <Type> */
   Rule_FnType_fn_LParen_RParen_MinusGt,
 
-  /* 145. <Fn Type> ::= fn '(' <Types> ')' */
+  /* 167. <Fn Type> ::= fn '(' <Types> ')' */
   Rule_FnType_fn_LParen_RParen2,
 
-  /* 146. <Fn Type> ::= fn '(' <Types> ')' '->' <Type> */
+  /* 168. <Fn Type> ::= fn '(' <Types> ')' '->' <Type> */
   Rule_FnType_fn_LParen_RParen_MinusGt2,
 
-  /* 147. <Type Constructor> ::= <Pkg> */
-  Rule_TypeConstructor,
-
-  /* 148. <Type Constructor> ::= <Pkg> '<' <Types> '>' */
-  Rule_TypeConstructor_Lt_Gt,
-
-  /* 149. <Base> ::= <Sign> <Scalar> */
+  /* 169. <Base> ::= <Sign> <Scalar> */
   Rule_Base,
 
-  /* 150. <Base> ::= 'size_t' */
+  /* 170. <Base> ::= 'size_t' */
   Rule_Base_size_t,
 
-  /* 151. <Sign> ::= signed */
+  /* 171. <Sign> ::= signed */
   Rule_Sign_signed,
 
-  /* 152. <Sign> ::= unsigned */
+  /* 172. <Sign> ::= unsigned */
   Rule_Sign_unsigned,
 
-  /* 153. <Sign> ::=  */
+  /* 173. <Sign> ::=  */
   Rule_Sign,
 
-  /* 154. <Scalar> ::= char */
+  /* 174. <Scalar> ::= char */
   Rule_Scalar_char,
 
-  /* 155. <Scalar> ::= int */
+  /* 175. <Scalar> ::= int */
   Rule_Scalar_int,
 
-  /* 156. <Scalar> ::= short */
+  /* 176. <Scalar> ::= short */
   Rule_Scalar_short,
 
-  /* 157. <Scalar> ::= long */
+  /* 177. <Scalar> ::= long */
   Rule_Scalar_long,
 
-  /* 158. <Scalar> ::= short int */
+  /* 178. <Scalar> ::= short int */
   Rule_Scalar_short_int,
 
-  /* 159. <Scalar> ::= long int */
+  /* 179. <Scalar> ::= long int */
   Rule_Scalar_long_int,
 
-  /* 160. <Scalar> ::= float */
+  /* 180. <Scalar> ::= float */
   Rule_Scalar_float,
 
-  /* 161. <Scalar> ::= double */
+  /* 181. <Scalar> ::= double */
   Rule_Scalar_double,
 
-  /* 162. <Scalar> ::= byte */
+  /* 182. <Scalar> ::= byte */
   Rule_Scalar_byte,
 
-  /* 163. <Stm> ::= <Var Decl> */
+  /* 183. <Stm> ::= <Var Decl> */
   Rule_Stm,
 
-  /* 164. <Stm> ::= <Using Stm> */
+  /* 184. <Stm> ::= <Using Stm> */
   Rule_Stm2,
 
-  /* 165. <Stm> ::= <If Stm> */
+  /* 185. <Stm> ::= <If Stm> */
   Rule_Stm3,
 
-  /* 166. <Stm> ::= while <Expr> <Block> */
+  /* 186. <Stm> ::= while <Expr> <Block> */
   Rule_Stm_while,
 
-  /* 167. <Stm> ::= for <Arg> ';' <Arg> ';' <Arg> <Block> */
+  /* 187. <Stm> ::= for <Arg> ';' <Arg> ';' <Arg> <Block> */
   Rule_Stm_for_Semi_Semi,
 
-  /* 168. <Stm> ::= foreach Id in <Expr> <Block> */
+  /* 188. <Stm> ::= foreach Id in <Expr> <Block> */
   Rule_Stm_foreach_Id_in,
 
-  /* 169. <Stm> ::= <Normal Stm> */
+  /* 189. <Stm> ::= <Normal Stm> */
   Rule_Stm4,
 
-  /* 170. <Using Stm> ::= using <Pkg> */
+  /* 190. <Using Stm> ::= using <Pkg> */
   Rule_UsingStm_using,
 
-  /* 171. <Pkg> ::= Id '.' <Pkg> */
+  /* 191. <Pkg> ::= Id '.' <Pkg> */
   Rule_Pkg_Id_Dot,
 
-  /* 172. <Pkg> ::= Id */
+  /* 192. <Pkg> ::= Id */
   Rule_Pkg_Id,
 
-  /* 173. <If Stm> ::= if <Expr> <Block> <else-if> */
+  /* 193. <If Stm> ::= if <Expr> <Block> <else-if> */
   Rule_IfStm_if,
 
-  /* 174. <else-if> ::= else if <Expr> <Block> <else-if> */
+  /* 194. <else-if> ::= else if <Expr> <Block> <else-if> */
   Rule_elseif_else_if,
 
-  /* 175. <else-if> ::= else <Block> */
+  /* 195. <else-if> ::= else <Block> */
   Rule_elseif_else,
 
-  /* 176. <else-if> ::=  */
+  /* 196. <else-if> ::=  */
   Rule_elseif,
 
-  /* 177. <Normal Stm> ::= do <Block> while <Expr> */
+  /* 197. <Normal Stm> ::= do <Block> while <Expr> */
   Rule_NormalStm_do_while,
 
-  /* 178. <Normal Stm> ::= match <Expr> '{' <Case Stms> '}' */
+  /* 198. <Normal Stm> ::= match <Expr> '{' <Case Stms> '}' */
   Rule_NormalStm_match_LBrace_RBrace,
 
-  /* 179. <Normal Stm> ::= <Block> */
+  /* 199. <Normal Stm> ::= <Block> */
   Rule_NormalStm,
 
-  /* 180. <Normal Stm> ::= <Expr> */
+  /* 200. <Normal Stm> ::= <Expr> */
   Rule_NormalStm2,
 
-  /* 181. <Normal Stm> ::= break */
+  /* 201. <Normal Stm> ::= break */
   Rule_NormalStm_break,
 
-  /* 182. <Normal Stm> ::= continue */
+  /* 202. <Normal Stm> ::= continue */
   Rule_NormalStm_continue,
 
-  /* 183. <Normal Stm> ::= return <Expr> */
+  /* 203. <Normal Stm> ::= return <Expr> */
   Rule_NormalStm_return,
 
-  /* 184. <Normal Stm> ::= return */
+  /* 204. <Normal Stm> ::= return */
   Rule_NormalStm_return2,
 
-  /* 185. <Normal Stm> ::= ';' */
+  /* 205. <Normal Stm> ::= ';' */
   Rule_NormalStm_Semi,
 
-  /* 186. <Arg> ::= <Expr> */
+  /* 206. <Arg> ::= <Expr> */
   Rule_Arg,
 
-  /* 187. <Arg> ::=  */
+  /* 207. <Arg> ::=  */
   Rule_Arg2,
 
-  /* 188. <Case Stms> ::= case <Expr> when <Expr> <Block> <Case Stms> */
+  /* 208. <Case Stms> ::= case <Expr> when <Expr> <Block> <Case Stms> */
   Rule_CaseStms_case_when,
 
-  /* 189. <Case Stms> ::= case <Expr> <Block> <Case Stms> */
+  /* 209. <Case Stms> ::= case <Expr> <Block> <Case Stms> */
   Rule_CaseStms_case,
 
-  /* 190. <Case Stms> ::= else <Block> */
+  /* 210. <Case Stms> ::= else <Block> */
   Rule_CaseStms_else,
 
-  /* 191. <Block> ::= '{' <Stm List> '}' */
+  /* 211. <Block> ::= '{' <Stm List> '}' */
   Rule_Block_LBrace_RBrace,
 
-  /* 192. <Stm List> ::= <Stm> <Stm List> */
+  /* 212. <Stm List> ::= <Stm> <Stm List> */
   Rule_StmList,
 
-  /* 193. <Stm List> ::=  */
+  /* 213. <Stm List> ::=  */
   Rule_StmList2,
 
-  /* 194. <Expr> ::= <Var Decl> in <Expr> */
+  /* 214. <CSE> ::= <Expr> */
+  Rule_CSE,
+
+  /* 215. <CSE> ::= <CSE> ',' <Expr> */
+  Rule_CSE_Comma,
+
+  /* 216. <Expr> ::= <Var Decl> in <Expr> */
   Rule_Expr_in,
 
-  /* 195. <Expr> ::= <Func Decl> in <Expr> */
-  Rule_Expr_in2,
-
-  /* 196. <Expr> ::= match <Expr> '{' <Case Exprs> '}' */
+  /* 217. <Expr> ::= match <Expr> '{' <Case Exprs> '}' */
   Rule_Expr_match_LBrace_RBrace,
 
-  /* 197. <Expr> ::= <Expr> ',' <Op Assign> */
-  Rule_Expr_Comma,
-
-  /* 198. <Expr> ::= <Op Assign> */
+  /* 218. <Expr> ::= <Op Assign> */
   Rule_Expr,
 
-  /* 199. <Op Assign> ::= <Op Or> '=' <Op Assign> */
+  /* 219. <Op Assign> ::= <Op Or> '=' <Op Assign> */
   Rule_OpAssign_Eq,
 
-  /* 200. <Op Assign> ::= <Op Or> '+=' <Op Assign> */
+  /* 220. <Op Assign> ::= <Op Or> '+=' <Op Assign> */
   Rule_OpAssign_PlusEq,
 
-  /* 201. <Op Assign> ::= <Op Or> '-=' <Op Assign> */
+  /* 221. <Op Assign> ::= <Op Or> '-=' <Op Assign> */
   Rule_OpAssign_MinusEq,
 
-  /* 202. <Op Assign> ::= <Op Or> '*=' <Op Assign> */
+  /* 222. <Op Assign> ::= <Op Or> '*=' <Op Assign> */
   Rule_OpAssign_TimesEq,
 
-  /* 203. <Op Assign> ::= <Op Or> '/=' <Op Assign> */
+  /* 223. <Op Assign> ::= <Op Or> '/=' <Op Assign> */
   Rule_OpAssign_DivEq,
 
-  /* 204. <Op Assign> ::= <Op Or> '^=' <Op Assign> */
+  /* 224. <Op Assign> ::= <Op Or> '%=' <Op Assign> */
+  Rule_OpAssign_PercentEq,
+
+  /* 225. <Op Assign> ::= <Op Or> '^=' <Op Assign> */
   Rule_OpAssign_CaretEq,
 
-  /* 205. <Op Assign> ::= <Op Or> '&=' <Op Assign> */
+  /* 226. <Op Assign> ::= <Op Or> '&=' <Op Assign> */
   Rule_OpAssign_AmpEq,
 
-  /* 206. <Op Assign> ::= <Op Or> '|=' <Op Assign> */
+  /* 227. <Op Assign> ::= <Op Or> '|=' <Op Assign> */
   Rule_OpAssign_PipeEq,
 
-  /* 207. <Op Assign> ::= <Op Or> '>>=' <Op Assign> */
+  /* 228. <Op Assign> ::= <Op Or> '>>=' <Op Assign> */
   Rule_OpAssign_GtGtEq,
 
-  /* 208. <Op Assign> ::= <Op Or> '<<=' <Op Assign> */
+  /* 229. <Op Assign> ::= <Op Or> '<<=' <Op Assign> */
   Rule_OpAssign_LtLtEq,
 
-  /* 209. <Op Assign> ::= <Op Or> */
+  /* 230. <Op Assign> ::= <Op Or> */
   Rule_OpAssign,
 
-  /* 210. <Op Or> ::= <Op Or> '||' <Op And> */
+  /* 231. <Op Or> ::= <Op Or> '||' <Op And> */
   Rule_OpOr_PipePipe,
 
-  /* 211. <Op Or> ::= <Op And> */
+  /* 232. <Op Or> ::= <Op And> */
   Rule_OpOr,
 
-  /* 212. <Op And> ::= <Op And> '&&' <Op BinOR> */
+  /* 233. <Op And> ::= <Op And> '&&' <Op BinOR> */
   Rule_OpAnd_AmpAmp,
 
-  /* 213. <Op And> ::= <Op BinOR> */
+  /* 234. <Op And> ::= <Op BinOR> */
   Rule_OpAnd,
 
-  /* 214. <Op BinOR> ::= <Op BinOR> '|' <Op BinXOR> */
+  /* 235. <Op BinOR> ::= <Op BinOR> '|' <Op BinXOR> */
   Rule_OpBinOR_Pipe,
 
-  /* 215. <Op BinOR> ::= <Op BinXOR> */
+  /* 236. <Op BinOR> ::= <Op BinXOR> */
   Rule_OpBinOR,
 
-  /* 216. <Op BinXOR> ::= <Op BinXOR> '^' <Op BinAND> */
+  /* 237. <Op BinXOR> ::= <Op BinXOR> '^' <Op BinAND> */
   Rule_OpBinXOR_Caret,
 
-  /* 217. <Op BinXOR> ::= <Op BinAND> */
+  /* 238. <Op BinXOR> ::= <Op BinAND> */
   Rule_OpBinXOR,
 
-  /* 218. <Op BinAND> ::= <Op BinAND> '&' <Op Equate> */
+  /* 239. <Op BinAND> ::= <Op BinAND> '&' <Op Equate> */
   Rule_OpBinAND_Amp,
 
-  /* 219. <Op BinAND> ::= <Op Equate> */
+  /* 240. <Op BinAND> ::= <Op Equate> */
   Rule_OpBinAND,
 
-  /* 220. <Op Equate> ::= <Op Equate> '==' <Op Compare> */
+  /* 241. <Op Equate> ::= <Op Equate> '==' <Op Compare> */
   Rule_OpEquate_EqEq,
 
-  /* 221. <Op Equate> ::= <Op Equate> '!=' <Op Compare> */
+  /* 242. <Op Equate> ::= <Op Equate> '!=' <Op Compare> */
   Rule_OpEquate_ExclamEq,
 
-  /* 222. <Op Equate> ::= <Op Compare> */
+  /* 243. <Op Equate> ::= <Op Compare> */
   Rule_OpEquate,
 
-  /* 223. <Op Compare> ::= <Op Compare> '<' <Op Shift> */
+  /* 244. <Op Compare> ::= <Op Compare> '<' <Op Shift> */
   Rule_OpCompare_Lt,
 
-  /* 224. <Op Compare> ::= <Op Compare> '>' <Op Shift> */
+  /* 245. <Op Compare> ::= <Op Compare> '>' <Op Shift> */
   Rule_OpCompare_Gt,
 
-  /* 225. <Op Compare> ::= <Op Compare> '<=' <Op Shift> */
+  /* 246. <Op Compare> ::= <Op Compare> '<=' <Op Shift> */
   Rule_OpCompare_LtEq,
 
-  /* 226. <Op Compare> ::= <Op Compare> '>=' <Op Shift> */
+  /* 247. <Op Compare> ::= <Op Compare> '>=' <Op Shift> */
   Rule_OpCompare_GtEq,
 
-  /* 227. <Op Compare> ::= <Op Compare> is <Type> */
+  /* 248. <Op Compare> ::= <Op Compare> is <Type> */
   Rule_OpCompare_is,
 
-  /* 228. <Op Compare> ::= <Op Compare> in <Op Shift> */
-  Rule_OpCompare_in,
-
-  /* 229. <Op Compare> ::= <Op Shift> */
+  /* 249. <Op Compare> ::= <Op Shift> */
   Rule_OpCompare,
 
-  /* 230. <Op Shift> ::= <Op Shift> '<<' <Op Add> */
+  /* 250. <Op Shift> ::= <Op Shift> '<<' <Op Add> */
   Rule_OpShift_LtLt,
 
-  /* 231. <Op Shift> ::= <Op Shift> '>>' <Op Add> */
+  /* 251. <Op Shift> ::= <Op Shift> '>>' <Op Add> */
   Rule_OpShift_GtGt,
 
-  /* 232. <Op Shift> ::= <Op Add> */
+  /* 252. <Op Shift> ::= <Op Add> */
   Rule_OpShift,
 
-  /* 233. <Op Add> ::= <Op Add> '+' <Op Mult> */
+  /* 253. <Op Add> ::= <Op Add> '+' <Op Mult> */
   Rule_OpAdd_Plus,
 
-  /* 234. <Op Add> ::= <Op Add> '-' <Op Mult> */
+  /* 254. <Op Add> ::= <Op Add> '-' <Op Mult> */
   Rule_OpAdd_Minus,
 
-  /* 235. <Op Add> ::= <Op Mult> */
+  /* 255. <Op Add> ::= <Op Mult> */
   Rule_OpAdd,
 
-  /* 236. <Op Mult> ::= <Op Mult> '*' <Op Unary> */
+  /* 256. <Op Mult> ::= <Op Mult> '*' <Op Unary> */
   Rule_OpMult_Times,
 
-  /* 237. <Op Mult> ::= <Op Mult> '/' <Op Unary> */
+  /* 257. <Op Mult> ::= <Op Mult> '/' <Op Unary> */
   Rule_OpMult_Div,
 
-  /* 238. <Op Mult> ::= <Op Mult> '%' <Op Unary> */
+  /* 258. <Op Mult> ::= <Op Mult> '%' <Op Unary> */
   Rule_OpMult_Percent,
 
-  /* 239. <Op Mult> ::= <Op Unary> */
+  /* 259. <Op Mult> ::= <Op Unary> */
   Rule_OpMult,
 
-  /* 240. <Op Unary> ::= '!' <Op Unary> */
+  /* 260. <Op Unary> ::= '!' <Op Unary> */
   Rule_OpUnary_Exclam,
 
-  /* 241. <Op Unary> ::= '~' <Op Unary> */
+  /* 261. <Op Unary> ::= '~' <Op Unary> */
   Rule_OpUnary_Tilde,
 
-  /* 242. <Op Unary> ::= '-' <Op Unary> */
+  /* 262. <Op Unary> ::= '-' <Op Unary> */
   Rule_OpUnary_Minus,
 
-  /* 243. <Op Unary> ::= '*' <Op Unary> */
-  Rule_OpUnary_Times,
-
-  /* 244. <Op Unary> ::= '&' <Op Unary> */
-  Rule_OpUnary_Amp,
-
-  /* 245. <Op Unary> ::= '++' <Op Unary> */
+  /* 263. <Op Unary> ::= '++' <Op Unary> */
   Rule_OpUnary_PlusPlus,
 
-  /* 246. <Op Unary> ::= '--' <Op Unary> */
+  /* 264. <Op Unary> ::= '--' <Op Unary> */
   Rule_OpUnary_MinusMinus,
 
-  /* 247. <Op Unary> ::= <Op Pointer> '++' */
+  /* 265. <Op Unary> ::= <Op Pointer> '++' */
   Rule_OpUnary_PlusPlus2,
 
-  /* 248. <Op Unary> ::= <Op Pointer> '--' */
+  /* 266. <Op Unary> ::= <Op Pointer> '--' */
   Rule_OpUnary_MinusMinus2,
 
-  /* 249. <Op Unary> ::= <Op Unary> as <Type> */
+  /* 267. <Op Unary> ::= <Op Unary> as <Type> */
   Rule_OpUnary_as,
 
-  /* 250. <Op Unary> ::= <New Expr> */
+  /* 268. <Op Unary> ::= <New Expr> */
   Rule_OpUnary,
 
-  /* 251. <Op Unary> ::= delete <Op Pointer> */
+  /* 269. <Op Unary> ::= delete <Op Pointer> */
   Rule_OpUnary_delete,
 
-  /* 252. <Op Unary> ::= sizeof '(' <Type> ')' */
+  /* 270. <Op Unary> ::= sizeof '(' <Type> ')' */
   Rule_OpUnary_sizeof_LParen_RParen,
 
-  /* 253. <Op Unary> ::= <Op Pointer> */
+  /* 271. <Op Unary> ::= <Op Pointer> */
   Rule_OpUnary2,
 
-  /* 254. <Op Pointer> ::= <Op Pointer> '.' <Value> */
+  /* 272. <Op Pointer> ::= <Op Pointer> '.' <Value> */
   Rule_OpPointer_Dot,
 
-  /* 255. <Op Pointer> ::= <Op Pointer> '[' <Expr> ']' */
+  /* 273. <Op Pointer> ::= <Op Pointer> '[' <CSE> ']' */
   Rule_OpPointer_LBracket_RBracket,
 
-  /* 256. <Op Pointer> ::= <Op Pointer> '(' <Expr> ')' */
+  /* 274. <Op Pointer> ::= <Op Pointer> '(' <CSE> ')' */
   Rule_OpPointer_LParen_RParen,
 
-  /* 257. <Op Pointer> ::= <Op Pointer> '(' ')' */
+  /* 275. <Op Pointer> ::= <Op Pointer> '(' ')' */
   Rule_OpPointer_LParen_RParen2,
 
-  /* 258. <Op Pointer> ::= <Value> */
+  /* 276. <Op Pointer> ::= <Value> */
   Rule_OpPointer,
 
-  /* 259. <Value> ::= OctLiteral */
+  /* 277. <Value> ::= OctLiteral */
   Rule_Value_OctLiteral,
 
-  /* 260. <Value> ::= HexLiteral */
+  /* 278. <Value> ::= HexLiteral */
   Rule_Value_HexLiteral,
 
-  /* 261. <Value> ::= DecLiteral */
+  /* 279. <Value> ::= DecLiteral */
   Rule_Value_DecLiteral,
 
-  /* 262. <Value> ::= BinLiteral */
+  /* 280. <Value> ::= BinLiteral */
   Rule_Value_BinLiteral,
 
-  /* 263. <Value> ::= StringLiteral */
+  /* 281. <Value> ::= StringLiteral */
   Rule_Value_StringLiteral,
 
-  /* 264. <Value> ::= CharLiteral */
+  /* 282. <Value> ::= CharLiteral */
   Rule_Value_CharLiteral,
 
-  /* 265. <Value> ::= FloatLiteral */
+  /* 283. <Value> ::= FloatLiteral */
   Rule_Value_FloatLiteral,
 
-  /* 266. <Value> ::= null */
+  /* 284. <Value> ::= null */
   Rule_Value_null,
 
-  /* 267. <Value> ::= <Pkg> */
+  /* 285. <Value> ::= <Pkg> */
   Rule_Value,
 
-  /* 268. <Value> ::= <Lambda Expr> */
+  /* 286. <Value> ::= <Lambda Expr> */
   Rule_Value2,
 
-  /* 269. <Value> ::= '(' <Expr> ')' */
+  /* 287. <Value> ::= '(' <Expr> ')' */
   Rule_Value_LParen_RParen,
 
-  /* 270. <Value> ::= '{' <Expr> '}' */
-  Rule_Value_LBrace_RBrace,
+  /* 288. <Value> ::= '[' <CSE> ']' */
+  Rule_Value_LBracket_RBracket,
 
-  /* 271. <Lambda Expr> ::= lambda '(' <Params> ')' <Block> */
+  /* 289. <Lambda Expr> ::= lambda '(' <Params> ')' <Block> */
   Rule_LambdaExpr_lambda_LParen_RParen,
 
-  /* 272. <Lambda Expr> ::= lambda '(' <Params> ')' '=' <Expr> */
+  /* 290. <Lambda Expr> ::= lambda '(' <Params> ')' '=' <Expr> */
   Rule_LambdaExpr_lambda_LParen_RParen_Eq,
 
-  /* 273. <Lambda Expr> ::= lambda '(' <Params> ')' '->' <Type> <Block> */
+  /* 291. <Lambda Expr> ::= lambda '(' <Params> ')' '->' <Type> <Block> */
   Rule_LambdaExpr_lambda_LParen_RParen_MinusGt,
 
-  /* 274. <Lambda Expr> ::= lambda '(' <Params> ')' '->' <Type> '=' <Expr> */
+  /* 292. <Lambda Expr> ::= lambda '(' <Params> ')' '->' <Type> '=' <Expr> */
   Rule_LambdaExpr_lambda_LParen_RParen_MinusGt_Eq,
 
-  /* 275. <Case Exprs> ::= case <Expr> when <Expr> '=>' <Expr> <Case Exprs> */
+  /* 293. <Case Exprs> ::= case <Expr> when <Expr> '=>' <Expr> <Case Exprs> */
   Rule_CaseExprs_case_when_EqGt,
 
-  /* 276. <Case Exprs> ::= case <Expr> '=>' <Expr> <Case Exprs> */
+  /* 294. <Case Exprs> ::= case <Expr> '=>' <Expr> <Case Exprs> */
   Rule_CaseExprs_case_EqGt,
 
-  /* 277. <Case Exprs> ::= else '=>' <Expr> */
+  /* 295. <Case Exprs> ::= else '=>' <Expr> */
   Rule_CaseExprs_else_EqGt,
 
-  /* 278. <New Expr> ::= new <Type> '(' ')' */
+  /* 296. <New Expr> ::= new <Type> '(' ')' */
   Rule_NewExpr_new_LParen_RParen,
 
-  /* 279. <New Expr> ::= new <Type> '(' <Expr> ')' */
+  /* 297. <New Expr> ::= new <Type> '(' <Expr> ')' */
   Rule_NewExpr_new_LParen_RParen2,
 
-  /* 280. <New Expr> ::= new <Type> */
+  /* 298. <New Expr> ::= new <Type> */
   Rule_NewExpr_new,
 
-  /* 281. <New Expr> ::= new <Type> '(' ')' '{' <CDecl> '}' */
+  /* 299. <New Expr> ::= new <Type> '(' ')' '{' <CDecl> '}' */
   Rule_NewExpr_new_LParen_RParen_LBrace_RBrace,
 
-  /* 282. <New Expr> ::= new <Type> '(' <Expr> ')' '{' <CDecl> '}' */
+  /* 300. <New Expr> ::= new <Type> '(' <Expr> ')' '{' <CDecl> '}' */
   Rule_NewExpr_new_LParen_RParen_LBrace_RBrace2
   };
-
 
 
 struct ContextStruct* parseAst(struct TokenStruct *Token, struct ContextStruct *parent)

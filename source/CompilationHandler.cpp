@@ -56,6 +56,7 @@ CompilationHandler::~CompilationHandler()
 CompilationService* CompilationHandler::createFromMakefile(std::string makefile)
 {
     /* TODO Feature */
+    return NULL;
 }
 
 CompilationService* CompilationHandler::createFromSource(std::string source)

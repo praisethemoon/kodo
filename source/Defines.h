@@ -43,7 +43,7 @@ THIS SOFTWARE IS PROVIDED BY THE AUTHORS "AS IS" AND ANY EXPRESS OR IMPLIED WARR
 #define PS_TIMESDIV 5 // '*/'
 #define PS_DIVTIMES 6 // '/*'
 #define PS_DIVDIV 7 // '//'
-#define PS_MINUS 8 // GrammarCharset0'-'
+#define PS_MINUS 8 // '-'
 #define PS_MINUSMINUS 9 // '--'
 #define PS_EXCLAM 10 // '!'
 #define PS_EXCLAMEQ 11 // '!='
@@ -58,81 +58,81 @@ THIS SOFTWARE IS PROVIDED BY THE AUTHORS "AS IS" AND ANY EXPRESS OR IMPLIED WARR
 #define PS_TIMESEQ 20 // '*='
 #define PS_COMMA 21 // ','
 #define PS_DOT 22 // '.'
-#define PS_DIV 23 // '/'
-#define PS_DIVEQ 24 // '/='
-#define PS_COLON 25 // ':'
-#define PS_SEMI 26 // ';'
-#define PS_LBRACKET 27 // '['
-#define PS_RBRACKET 28 // ']'
-#define PS_CARET 29 // '^'
-#define PS_CARETEQ 30 // '^='
-#define PS_LBRACE 31 // '{'
-#define PS_PIPE 32 // '|'
-#define PS_PIPEPIPE 33 // '||'
-#define PS_PIPEEQ 34 // '|='
-#define PS_RBRACE 35 // '}'
-#define PS_TILDE 36 // '~'
-#define PS_PLUS 37 // '+'
-#define PS_PLUSPLUS 38 // '++'
-#define PS_PLUSEQ 39 // '+='
-#define PS_LT 40 // '<'
-#define PS_LTLT 41 // '<<'
-#define PS_LTLTEQ 42 // '<<='
-#define PS_LTEQ 43 // '<='
-#define PS_EQ 44 // '='
-#define PS_MINUSEQ 45 // '-='
-#define PS_EQEQ 46 // '=='
-#define PS_EQGT 47 // '=>'
-#define PS_GT 48 // '>'
-#define PS_MINUSGT 49 // '->'
-#define PS_GTEQ 50 // '>='
-#define PS_GTGT 51 // '>>'
-#define PS_GTGTEQ 52 // '>>='
-#define PS_ABSTRACT 53 // abstract
-#define PS_AS 54 // as
-#define PS_BINLITERAL 55 // BinLiteral
-#define PS_BREAK 56 // break
-#define PS_BYTE 57 // byte
-#define PS_CASE 58 // case
-#define PS_CHAR 59 // char
-#define PS_CHARLITERAL 60 // CharLiteral
-#define PS_CLASS 61 // class
-#define PS_CONTINUE 62 // continue
-#define PS_DECLITERAL 63 // DecLiteral
-#define PS_DELETE 64 // delete
-#define PS_DO 65 // do
-#define PS_DOUBLE 66 // double
-#define PS_ELSE 67 // else
-#define PS_ENUM 68 // enum
-#define PS_EXTENDS 69 // extends
-#define PS_EXTERN 70 // extern
-#define PS_FINAL 71 // final
-#define PS_FLOAT 72 // float
-#define PS_FLOATLITERAL 73 // FloatLiteral
-#define PS_FN 74 // fn
-#define PS_FOR 75 // for
-#define PS_FOREACH 76 // foreach
-#define PS_FROM 77 // from
-#define PS_FUNCTION 78 // function
-#define PS_HEXLITERAL 79 // HexLiteral
-#define PS_ID 80 // Id
-#define PS_IF 81 // if
-#define PS_IMPORT 82 // import
-#define PS_IN 83 // in
-#define PS_INHERITED 84 // inherited
-#define PS_INT 85 // int
-#define PS_IS 86 // is
-#define PS_LAMBDA 87 // lambda
-#define PS_LET 88 // let
-#define PS_LONG 89 // long
-#define PS_MATCH 90 // match
-#define PS_NEW 91 // new
-#define PS_NULL 92 // null
-#define PS_OCTLITERAL 93 // OctLiteral
-#define PS_OPERATOR 94 // operator
-#define PS_PRIVATE 95 // private
-#define PS_RETURN 96 // return
-#define PS_SET 97 // set
+#define PS_DOTTIMES 23 // '.*'
+#define PS_DIV 24 // '/'
+#define PS_DIVEQ 25 // '/='
+#define PS_COLON 26 // ':'
+#define PS_SEMI 27 // ';'
+#define PS_LBRACKET 28 // '['
+#define PS_RBRACKET 29 // ']'
+#define PS_CARET 30 // '^'
+#define PS_CARETEQ 31 // '^='
+#define PS_LBRACE 32 // '{'
+#define PS_PIPE 33 // '|'
+#define PS_PIPEPIPE 34 // '||'
+#define PS_PIPEEQ 35 // '|='
+#define PS_RBRACE 36 // '}'
+#define PS_TILDE 37 // '~'
+#define PS_PLUS 38 // '+'
+#define PS_PLUSPLUS 39 // '++'
+#define PS_PLUSEQ 40 // '+='
+#define PS_LT 41 // '<'
+#define PS_LTLT 42 // '<<'
+#define PS_LTLTEQ 43 // '<<='
+#define PS_LTEQ 44 // '<='
+#define PS_EQ 45 // '='
+#define PS_MINUSEQ 46 // '-='
+#define PS_EQEQ 47 // '=='
+#define PS_EQGT 48 // '=>'
+#define PS_GT 49 // '>'
+#define PS_MINUSGT 50 // '->'
+#define PS_GTEQ 51 // '>='
+#define PS_GTGT 52 // '>>'
+#define PS_GTGTEQ 53 // '>>='
+#define PS_ABSTRACT 54 // abstract
+#define PS_AS 55 // as
+#define PS_BINLITERAL 56 // BinLiteral
+#define PS_BREAK 57 // break
+#define PS_BYTE 58 // byte
+#define PS_CASE 59 // case
+#define PS_CHAR 60 // char
+#define PS_CHARLITERAL 61 // CharLiteral
+#define PS_CLASS 62 // class
+#define PS_CONTINUE 63 // continue
+#define PS_DECLITERAL 64 // DecLiteral
+#define PS_DELETE 65 // delete
+#define PS_DO 66 // do
+#define PS_DOUBLE 67 // double
+#define PS_ELSE 68 // else
+#define PS_ENUM 69 // enum
+#define PS_EXTENDS 70 // extends
+#define PS_EXTERN 71 // extern
+#define PS_FINAL 72 // final
+#define PS_FLOAT 73 // float
+#define PS_FLOATLITERAL 74 // FloatLiteral
+#define PS_FN 75 // fn
+#define PS_FOR 76 // for
+#define PS_FOREACH 77 // foreach
+#define PS_FROM 78 // from
+#define PS_FUNCTION 79 // function
+#define PS_HEXLITERAL 80 // HexLiteral
+#define PS_ID 81 // Id
+#define PS_IF 82 // if
+#define PS_IMPORT 83 // import
+#define PS_IN 84 // in
+#define PS_INHERITED 85 // inherited
+#define PS_INT 86 // int
+#define PS_IS 87 // is
+#define PS_LAMBDA 88 // lambda
+#define PS_LET 89 // let
+#define PS_LONG 90 // long
+#define PS_MATCH 91 // match
+#define PS_NEW 92 // new
+#define PS_NULL 93 // null
+#define PS_OCTLITERAL 94 // OctLiteral
+#define PS_OPERATOR 95 // operator
+#define PS_PRIVATE 96 // private
+#define PS_RETURN 97 // return
 #define PS_SHORT 98 // short
 #define PS_SIGNED 99 // signed
 #define PS_SIZE_T 100 // 'size_t'
@@ -161,58 +161,61 @@ THIS SOFTWARE IS PROVIDED BY THE AUTHORS "AS IS" AND ANY EXPRESS OR IMPLIED WARR
 #define PS_CFUNCPROTO 123 // <CFunc Proto>
 #define PS_CLASSDECL 124 // <Class Decl>
 #define PS_CLASSNAME 125 // <Class Name>
-#define PS_CVARDECL 126 // <CVar Decl>
-#define PS_DECL 127 // <Decl>
-#define PS_DECLS 128 // <Decls>
-#define PS_ELSEMINUSIF 129 // <else-if>
-#define PS_ENUMDECL 130 // <Enum Decl>
-#define PS_ENUMDEF 131 // <Enum Def>
-#define PS_EXPR 132 // <Expr>
-#define PS_EXTENDCLASSNAME 133 // <Extend Class Name>
-#define PS_EXTENDCLASSNAMELIST 134 // <Extend Class Name List>
-#define PS_FILEPATH 135 // <File Path>
-#define PS_FILEPATHLIST 136 // <File Path List>
-#define PS_FNHEADER 137 // <Fn Header>
-#define PS_FNTYPE 138 // <Fn Type>
-#define PS_FUNCDECL 139 // <Func Decl>
-#define PS_IDLIST 140 // <Id List>
-#define PS_IFSTM 141 // <If Stm>
-#define PS_IMPORT2 142 // <Import>
-#define PS_LAMBDAEXPR 143 // <Lambda Expr>
-#define PS_NEWEXPR 144 // <New Expr>
-#define PS_NORMALCLASS 145 // <Normal Class>
-#define PS_NORMALSTM 146 // <Normal Stm>
-#define PS_OPADD 147 // <Op Add>
-#define PS_OPAND 148 // <Op And>
-#define PS_OPASSIGN 149 // <Op Assign>
-#define PS_OPBINAND 150 // <Op BinAND>
-#define PS_OPBINOR 151 // <Op BinOR>
-#define PS_OPBINXOR 152 // <Op BinXOR>
-#define PS_OPCOMPARE 153 // <Op Compare>
-#define PS_OPEQUATE 154 // <Op Equate>
-#define PS_OPHEADER 155 // <Op Header>
-#define PS_OPMULT 156 // <Op Mult>
-#define PS_OPOR 157 // <Op Or>
-#define PS_OPPOINTER 158 // <Op Pointer>
-#define PS_OPSHIFT 159 // <Op Shift>
-#define PS_OPUNARY 160 // <Op Unary>
-#define PS_OPERATOR2 161 // <Operator>
-#define PS_OPERATORSTM 162 // <Operator Stm>
-#define PS_PARAM 163 // <Param>
-#define PS_PARAMS 164 // <Params>
-#define PS_PKG 165 // <Pkg>
-#define PS_PRIVATEFINALSTATICINHERITED 166 // <private final static inherited>
-#define PS_SCALAR 167 // <Scalar>
-#define PS_SETDECL 168 // <Set Decl>
-#define PS_SIGN 169 // <Sign>
-#define PS_STM 170 // <Stm>
-#define PS_STMLIST 171 // <Stm List>
-#define PS_TYPE2 172 // <Type>
-#define PS_TYPECONSTRUCTOR 173 // <Type Constructor>
-#define PS_TYPES 174 // <Types>
-#define PS_USINGSTM 175 // <Using Stm>
-#define PS_VALUE 176 // <Value>
-#define PS_VARDECL 177 // <Var Decl>
-#define PS_VARHEADER 178 // <Var Header>
+#define PS_CSE 126 // <CSE>
+#define PS_CVARDECL 127 // <CVar Decl>
+#define PS_DECL 128 // <Decl>
+#define PS_DECLS 129 // <Decls>
+#define PS_ELSEMINUSIF 130 // <else-if>
+#define PS_ENUMDECL 131 // <Enum Decl>
+#define PS_ENUMDEF 132 // <Enum Def>
+#define PS_EXPR 133 // <Expr>
+#define PS_EXTENDCLASSNAME 134 // <Extend Class Name>
+#define PS_EXTENDCLASSNAMELIST 135 // <Extend Class Name List>
+#define PS_FILEPATH 136 // <File Path>
+#define PS_FILEPATHALL 137 // <File Path All>
+#define PS_FILEPATHLIST 138 // <File Path List>
+#define PS_FNHEADERIMPL 139 // <Fn Header Impl>
+#define PS_FNHEADERPROTO 140 // <Fn Header Proto>
+#define PS_FNTYPE 141 // <Fn Type>
+#define PS_FUNCDECL 142 // <Func Decl>
+#define PS_IDLIST 143 // <Id List>
+#define PS_IFSTM 144 // <If Stm>
+#define PS_IMPORT2 145 // <Import>
+#define PS_LAMBDAEXPR 146 // <Lambda Expr>
+#define PS_NEWEXPR 147 // <New Expr>
+#define PS_NORMALCLASS 148 // <Normal Class>
+#define PS_NORMALSTM 149 // <Normal Stm>
+#define PS_OPADD 150 // <Op Add>
+#define PS_OPAND 151 // <Op And>
+#define PS_OPASSIGN 152 // <Op Assign>
+#define PS_OPBINAND 153 // <Op BinAND>
+#define PS_OPBINOR 154 // <Op BinOR>
+#define PS_OPBINXOR 155 // <Op BinXOR>
+#define PS_OPCOMPARE 156 // <Op Compare>
+#define PS_OPEQUATE 157 // <Op Equate>
+#define PS_OPHEADERIMPL 158 // <Op Header Impl>
+#define PS_OPHEADERPROTO 159 // <Op Header Proto>
+#define PS_OPMULT 160 // <Op Mult>
+#define PS_OPOR 161 // <Op Or>
+#define PS_OPPOINTER 162 // <Op Pointer>
+#define PS_OPSHIFT 163 // <Op Shift>
+#define PS_OPUNARY 164 // <Op Unary>
+#define PS_OPERATOR2 165 // <Operator>
+#define PS_OPERATORIMPL 166 // <Operator Impl>
+#define PS_OPERATORPROTO 167 // <Operator Proto>
+#define PS_PARAM 168 // <Param>
+#define PS_PARAMS 169 // <Params>
+#define PS_PKG 170 // <Pkg>
+#define PS_PRIVATEFINALSTATICINHERITED 171 // <private final static inherited>
+#define PS_SCALAR 172 // <Scalar>
+#define PS_SIGN 173 // <Sign>
+#define PS_STM 174 // <Stm>
+#define PS_STMLIST 175 // <Stm List>
+#define PS_TYPE2 176 // <Type>
+#define PS_TYPES 177 // <Types>
+#define PS_USINGSTM 178 // <Using Stm>
+#define PS_VALUE 179 // <Value>
+#define PS_VARDECL 180 // <Var Decl>
+#define PS_VARHEADER 181 // <Var Header>
 
 #endif
