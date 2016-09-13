@@ -39,6 +39,8 @@ THIS SOFTWARE IS PROVIDED BY THE AUTHORS "AS IS" AND ANY EXPRESS OR IMPLIED WARR
 #include "FileUtils.h"
 #include "Compiler.h"
 
+#include "lua/lua.hpp"
+
 /*
  * CompilationHandler
  */
@@ -55,7 +57,7 @@ CompilationHandler::~CompilationHandler()
 
 CompilationService* CompilationHandler::createFromMakefile(std::string makefile)
 {
-    /* TODO Feature */
+    return new MakefileCompilationService(this, makefile);
 }
 
 CompilationService* CompilationHandler::createFromSource(std::string source)
@@ -81,9 +83,17 @@ CompilationService::~CompilationService()
  *  MakefileCompilationService
  */
 
-MakefileCompilationService::MakefileCompilationService(CompilationHandler *compilationHandler): CompilationService(compilationHandler)
+MakefileCompilationService::MakefileCompilationService(CompilationHandler *compilationHandler, std::string makefile): CompilationService(compilationHandler)
 {
+    makefileSource = makefile;
 
+    /* creating state */
+    L = luaL_newstate();
+    luaL_openlibs(L);
+
+    luaL_dofile(L, makefileSource.c_str());
+
+    lua_close(L);
 }
 
 MakefileCompilationService::~MakefileCompilationService()

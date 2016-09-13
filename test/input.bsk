@@ -1,7 +1,7 @@
- let x: int = 3
+let x: int = 3
 let x = 3
 
-class AIEntity {
+local class AIEntity {
     function fact(x: int) -> int {
         match x {
             case 0 { return 1 }
@@ -24,7 +24,7 @@ class AIEntity {
     }    
 }
 
-extern type ptrFILE
+local extern type ptrFILE
 
 extern function fprintf(ptrFile, String)
 
@@ -32,12 +32,20 @@ abstract class AIEntity {
     function get(int) -> int
 }
 
-function get() -> int {
+local function get() -> int {
     return 3
 }
 
-let x = new AIEntity() {
+let local final x = new AIEntity() {
     function init() {
         return -1
     } 
 }
+
+let x = [1, 2, std.String, let x = 3 in [1, 2, 3]]
+
+function posAt(x: int) -> ( fn(int, int) -> (int, byte) , int) {
+    return (1, 2)
+}
+
+let y = system+(1, 2 ,3)

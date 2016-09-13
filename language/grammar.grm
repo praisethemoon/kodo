@@ -1,0 +1,456 @@
+! -----------------------------------------------------------------------
+! berserk programming language
+!
+! A general purpose multiparadigms programming language
+! -----------------------------------------------------------------------
+
+
+"Name"    = 'berserk' 
+"Version" = '2016'
+"Author"  = 'Soulaymen Chouri' 
+"About"   = 'High level programming language'
+
+"Case Sensitive" = True
+"Start Symbol"   = <Decls>
+
+{Hex Digit}      = {Digit} + [abcdefABCDEF]
+{Oct Digit}      = [01234567]
+{Bin Digit}      = [01]
+                 
+{Id Head}        = {Letter} + [_]
+{Id Tail}        = {Id Head} + {Digit}
+
+{String Ch}      = {Printable} - ["]
+{Char Ch}        = {Printable} - ['']
+
+DecLiteral       = [123456789]{digit}*
+BinLiteral       = 0b{Bin Digit}*
+OctLiteral       = 0{Oct Digit}*
+HexLiteral       = 0x{Hex Digit}+
+                 
+FloatLiteral     = {Digit}*'.'{Digit}+
+
+StringLiteral    = '"'( {String Ch} | '\'{Printable} )* '"'
+CharLiteral      = '' ( {Char Ch} | '\'{Printable} )''
+
+Id               = {Id Head}{Id Tail}*
+
+
+! ===================================================================
+! Comments
+! ===================================================================
+
+Comment Start = '/*'
+Comment End   = '*/'
+Comment Line  = '//'
+
+
+! Typically, berserk comments cannot be nested. As a result, the 
+! Comment Start and Comment End terminals cannot be used.
+!
+! To implement non-nested comments, the whitespace terminal is
+! modified to accept them. In the definition below, Whitespace 
+! is defined as one or more {Whitespace} characters OR a series
+! of characters delimited by /* and */. Note that the characters
+! between the two delimiters cannot contain the */ sequence. 
+!
+! Uncomment the following to prevent block commments. Make sure 
+! to comment the Comment Start and Comment End definitions.
+!
+! {Non Slash}     = {Printable} - [/]  
+! {Non Asterisk}  = {Printable} - [*]
+! 
+! Whitespace     = {Whitespace}+   
+!                | '/*' (  {Non Asterisk} | '*' {Non Slash}? )*  '*/'
+
+!=======================================================
+
+<Decls> ::= <Decl> <Decls>
+          |
+
+<Decl>  ::= <Func Decl>
+          | <Class Decl>
+          | <Enum Decl>
+          !| <Set Decl>
+          | extern type Id
+          | local extern type Id
+          | extern local type Id
+          | <Var Decl>    
+          | <Import>
+          | <CDefFunc Decl>        
+          | <Using Stm>  
+          !| <CDefStruct>
+          
+
+<Import> ::= import <File Path All>
+           | import <File Path> as Id
+           | from <File Path> import <File Path List>
+          
+<File Path> ::= ID '.' <File Path>             
+              | ID
+
+<File Path All> ::= ID '.' <File Path All>
+                  | ID '.*'
+                  | ID
+
+<File Path List> ::= <File Path> ',' <File Path List>
+                   | <File Path>
+              
+! ===================================================================
+! Function  Declaration
+! ===================================================================
+
+<Fn Header Proto> ::= Id '(' <Params> ')' 
+                    | Id '(' <Params> ')' '->' <Type>
+                    | Id '(' <Types> ')'
+                    | Id '(' <Types> ')' '->' <Type>
+                    | Id '(' ')'
+                    | Id '(' ')' '->' <type>
+
+<Fn Header Impl> ::= Id '(' <Params> ')' 
+                   | Id '(' <Params> ')' '->' <Type>
+                   | Id '(' ')'
+                   | Id '(' ')' '->' <type>
+
+<Func Decl>  ::= function <Fn Header Impl> <Block>
+               | function <Fn Header Impl> '=' <Expr> 
+               | local function <Fn Header Impl> <Block>
+               | local function <Fn Header Impl> '=' <Expr> 
+
+
+<CFunc Proto> ::= <private final static inherited> function <Fn Header Proto>
+
+<CFunc Decl>  ::= <private final static inherited> function <Fn Header Impl> <Block>
+                | <private final static inherited> function <Fn Header Impl> '=' <Expr> 
+
+<private final static inherited> ::= private
+                                   | static
+                                   | final
+                                   | inherited
+                                   | private static
+                                   | static private
+                                   | private inherited
+                                   | inherited private
+                                   | static final
+                                   | final static
+                                   | private final
+                                   | final static private
+                                   | final private static
+                                   | static final private
+                                   | static private final
+                                   | private final static
+                                   | private static final
+                                   |
+
+        
+<CDefFunc Decl> ::= extern function <Fn Header Proto>
+                  | local extern function <Fn Header Proto>
+                  | extern local function <Fn Header Proto>
+    
+<Params>     ::= <Param> ',' <Params>
+               | <Param>
+               
+<Param>      ::= final ID ':' <Type>
+               |       ID ':' <Type>
+               
+<Types>      ::= <Type>  ',' <Types>
+               | <Type> 
+   
+<Id List>    ::= Id ',' <Id List>
+               | Id
+          
+
+! ===================================================================
+! Class Declaration
+! ===================================================================
+
+<Class Decl>  ::= <Normal Class>
+                | <Abstract Class>
+                | local <Normal Class>
+                | local <Abstract Class>
+
+
+<Normal Class> ::= class <Class Name> '{' <CDecls> '}' 
+                 | class <Class Name> extends <Extend Class Name List> '{' <CDecls> '}'
+            
+<Abstract Class> ::= abstract class <Class Name> '{' <ACDecls> '}' 
+                   | abstract class <Class Name> extends <Extend Class Name List> '{' <ACDecls> '}'
+            
+<Class Name> ::= Id
+               | Id '<' <Id List> '>'
+
+<Extend Class Name> ::= <Pkg>
+                      | <Pkg> '<' <Extend Class Name List> '>'
+
+<Extend Class Name List> ::= <Extend Class Name> ',' <Extend Class Name List>
+                           | <Extend Class Name>  
+
+<CDecls> ::= <CDecl> <CDecls>
+           |
+
+<ACDecls> ::= <ACDecl> <ACDecls>
+            |
+            
+! Normal class decl           
+<CDecl> ::= <CFunc Decl>
+          | <CVar Decl>    
+          | <Using Stm>
+          | <Operator Impl>
+
+! abstract class decl
+<ACDecl>::= <CFunc Decl>
+          | <CFunc Proto>
+          | <CVar Decl>    
+          | <Using Stm>
+          | <Operator Impl>
+          | <Operator Proto>
+
+          
+<Operator Impl> ::= operator <Operator> <Op Header Impl> '=' <Expr> 
+                  | operator <Operator> <Op Header Impl> <Block>
+
+<Operator Proto> ::= operator <Operator> <Op Header Proto>
+
+<CDefStruct> ::= extern struct Id  '{' <Params> '}'
+              
+<Operator> ::= '+' | '-' | '*' | '/' | '%' | '^'  | '&' | '|' | '~' | '!' | '=' | '<' | '>' | '+=' | '-=' 
+             | '*=' | '/=' | '%=' | '^=' | '&=' | '|=' | '<<' | '>>' | '>>=' | '<<=' | '==' | '!=' | '<=' 
+             | '>=' | '&&' | '||' | '++' | '--' | ','  | '(' ')' | '[' ']' 
+   
+<Op Header Proto> ::= '(' <Params> ')' 
+                    | '(' <Params> ')' '->' <Type>
+                    | '(' <Types> ')'
+                    | '(' <Types> ')' '->' <Type>
+                    | '(' ')'
+                    | '(' ')' '->' <type>
+
+<Op Header Impl> ::= '(' <Params> ')' 
+                   | '(' <Params> ')' '->' <Type>
+                   | '(' ')'
+                   | '(' ')' '->' <type>
+                        
+! ===================================================================
+! Variable Declaration
+! ===================================================================
+
+            
+<Var Decl>     ::= let final <Var Header>
+                 | let       <Var Header>
+                 | let local <Var Header>
+                 | let local final <Var Header>
+                 | let final local <Var Header>
+
+<CVar Decl>     ::= let <private final static inherited> <Var Header>
+
+<Var Header> ::= <Id List> ':' <Type> '=' <Expr>            
+               | <Id List> ':' <Type>
+               | <Id List>            '=' <Expr> 
+             
+! ===================================================================
+! Enumerations and Sets
+! ===================================================================
+
+<Enum Decl>    ::= enum Id '{' <Enum Def> '}'  
+                 | local enum Id '{' <Enum Def> '}'
+ 
+<Enum Def>     ::= Id ',' <Enum Def>
+                 | Id
+
+!<Set Decl> ::= set Id '{' <Enum Def> '}'
+
+! ===================================================================
+! Types
+! ===================================================================
+
+<Type>     ::= <Base>
+             | <Fn Type>
+             | <Pkg> 
+             | <Pkg> '<' <Types> '>'
+             | <Type> '[' ']'
+             | '(' <Types> ')' !Tuple
+
+<Fn Type> ::= 'fn' '(' ')'
+            | 'fn' '(' ')' '->' <type>
+            | 'fn' '(' <Types>  ')'
+            | 'fn' '(' <Types>  ')' '->' <Type>
+
+<Base>     ::= <Sign> <Scalar>
+             | size_t
+
+<Sign>     ::= signed 
+             | unsigned
+             |
+
+<Scalar>   ::= char
+             | int
+             | short
+             | long
+             | short int
+             | long int
+             | float
+             | double 
+             | byte           
+
+! ===================================================================
+! Statements
+! ===================================================================
+
+<Stm>        ::= <Var Decl>
+               | <Using Stm>
+               | <If Stm>
+               | while <Expr> <Block>
+               | for <Arg> ';' <Arg> ';' <Arg> <Block>
+               | foreach Id in <Expr> <Block>
+               | <Normal Stm>
+
+<Using Stm> ::= using <Pkg>
+
+<Pkg> ::= ID '.' <Pkg>
+        | ID 
+
+<If Stm> ::= if <Expr> <Block> <else-if>
+
+<else-if> ::= else if <Expr> <Block> <else-if>
+           |  else <Block>
+           | 
+
+           
+<Normal Stm> ::= do <Block> while <Expr>
+               | match <Expr> '{' <Case Stms> '}'
+               | <Block>
+               | <Expr>
+               | break 
+               | continue 
+               | return <Expr> 
+               | return
+               | ';'              !Null statement
+
+
+<Arg>       ::= <Expr> 
+              | 
+
+<Case Stms> ::= case <Expr> when <Expr> <Block> <Case Stms>
+              | case <Expr>             <Block> <Case Stms>
+              | else                    <Block>                          
+
+<Block>     ::= '{' <Stm List> '}' 
+
+<Stm List>  ::=  <Stm> <Stm List> 
+              | 
+
+
+! ===================================================================
+! Here begins the berserk 15 levels of operator precedence.
+! ===================================================================
+
+! commar seperated expressions
+<CSE> ::= <Expr>              
+        | <CSE> ',' <Expr>   
+
+<Expr>       ::= <Var Decl> in <Expr>
+               !| <Func Decl> in <Expr> no nested function support
+               | match <Expr> '{' <Case Exprs> '}'
+               | <Op Assign>
+
+<Op Assign>  ::= <Op Or> '='   <Op Assign>
+               | <Op Or> '+='  <Op Assign>
+               | <Op Or> '-='  <Op Assign>
+               | <Op Or> '*='  <Op Assign>
+               | <Op Or> '/='  <Op Assign>
+               | <Op Or> '%='  <Op Assign>
+               | <Op Or> '^='  <Op Assign>
+               | <Op Or> '&='  <Op Assign>
+               | <Op Or> '|='  <Op Assign>
+               | <Op Or> '>>=' <Op Assign>
+               | <Op Or> '<<=' <Op Assign>
+               | <Op Or>
+
+<Op Or>      ::= <Op Or> '||' <Op And>
+               | <Op And>
+
+<Op And>     ::= <Op And> '&&' <Op BinOR>
+               | <Op BinOR>
+
+<Op BinOR>   ::= <Op BinOr> '|' <Op BinXOR>
+               | <Op BinXOR>
+
+<Op BinXOR>  ::= <Op BinXOR> '^' <Op BinAND>
+               | <Op BinAND>
+
+<Op BinAND>  ::= <Op BinAND> '&' <Op Equate>
+               | <Op Equate>
+
+<Op Equate>  ::= <Op Equate> '==' <Op Compare>
+               | <Op Equate> '!=' <Op Compare>
+               | <Op Compare>
+
+<Op Compare> ::= <Op Compare> '<'  <Op Shift>
+               | <Op Compare> '>'  <Op Shift>
+               | <Op Compare> '<=' <Op Shift>
+               | <Op Compare> '>=' <Op Shift>
+               | <Op Compare> is <Type>
+               !| <Op Compare> in <Op Shift> confuses with let .. in
+               | <Op Shift>
+
+<Op Shift>   ::= <Op Shift> '<<' <Op Add>
+               | <Op Shift> '>>' <Op Add>
+               | <Op Add>
+
+<Op Add>     ::= <Op Add> '+' <Op Mult>
+               | <Op Add> '-' <Op Mult>
+               | <Op Mult>
+
+<Op Mult>    ::= <Op Mult> '*' <Op Unary>
+               | <Op Mult> '/' <Op Unary>
+               | <Op Mult> '%' <Op Unary>
+               | <Op Unary>
+
+<Op Unary>   ::= '!'    <Op Unary>
+               | '~'    <Op Unary>   
+               | '-'    <Op Unary>              
+               | '++'   <Op Unary>
+               | '--'   <Op Unary>
+               | <Op Pointer> '++'
+               | <Op Pointer> '--'
+               | <Op Unary> as <Type>   !CAST
+               | <New Expr>
+               | delete <Op Pointer>
+               | sizeof '(' <Type> ')'
+               | <Op Pointer>
+
+<Op Pointer> ::= <Op Pointer> '.' <Value>
+               | <Op Pointer> '[' <CSE> ']'
+               | <Op Pointer> '(' <CSE> ')'
+               | <Op Pointer> '(' ')'    
+               | <Value>
+
+<Value>      ::= OctLiteral
+               | HexLiteral
+               | DecLiteral  
+               | BinLiteral
+               | StringLiteral
+               | CharLiteral
+               | FloatLiteral
+               | null
+               | _
+               | <Pkg>
+               | <Lambda Expr>  
+               | '(' <CSE> ')'
+               | '[' for Id ':' <Type> in <Expr> '=>' <Expr> ']'
+               | '[' for Id            in <Expr> '=>' <Expr> ']'               
+               | '[' <CSE> ']'              
+               
+<Lambda Expr> ::= lambda '(' <Params> ')' <Block>
+                | lambda '(' <Params> ')' '=' <Expr>
+                | lambda '(' <Params> ')' '->' <Type> <Block>
+                | lambda '(' <Params> ')' '->' <Type> '=' <Expr>
+
+<Case Exprs> ::= case <Expr> when <Expr> '=>' <Expr> <Case Exprs>
+               | case <Expr>             '=>' <Expr> <Case Exprs>
+               | else                    '=>' <Expr>        
+               
+<New Expr> ::= new <Type> '('        ')'
+             | new <Type> '(' <Expr> ')'
+             | new <Type> 
+             | new <Type> '('        ')' '{' <CDecl> '}'!oh yeah, Java-style
+             | new <Type> '(' <Expr> ')' '{' <CDecl> '}' 

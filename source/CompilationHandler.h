@@ -41,6 +41,8 @@ THIS SOFTWARE IS PROVIDED BY THE AUTHORS "AS IS" AND ANY EXPRESS OR IMPLIED WARR
 #include <thread>
 #include "Compiler.h"
 
+#include "lua/lua.hpp"
+
 class CompilationService;
 
 class CompilationHandler
@@ -67,7 +69,9 @@ public:
 
 class MakefileCompilationService: public CompilationService {
     std::string makefileSource;
-    MakefileCompilationService(CompilationHandler*);
+    lua_State *L;
+public:
+    MakefileCompilationService(CompilationHandler*, std::string);
     ~MakefileCompilationService();
     virtual void run();
 };

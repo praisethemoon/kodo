@@ -32,7 +32,6 @@ THIS SOFTWARE IS PROVIDED BY THE AUTHORS "AS IS" AND ANY EXPRESS OR IMPLIED WARR
 
 */
 
-
 #include <iostream>
 #include <cstdio>
 #include <cstring>
@@ -44,7 +43,6 @@ THIS SOFTWARE IS PROVIDED BY THE AUTHORS "AS IS" AND ANY EXPRESS OR IMPLIED WARR
 #include "FileUtils.h"
 #include "CompilationHandler.h"
 #include "Compiler.h"
-
 
 void parseCmd(int argc, char* argv[])
 {
@@ -68,17 +66,26 @@ void parseCmd(int argc, char* argv[])
     {
         if (strcmp(argv[1], "-c") == 0)
         {
-
+            CompilationHandler *compilationHandler = new CompilationHandler();
+            CompilationService* service = compilationHandler->createFromSource(argv[2]);
+            service ->run();
+            delete service;
+            delete compilationHandler;
+        }
+        else if(strcmp(argv[1], "-lua") == 0)
+        {
+            CompilationHandler *compilationHandler = new CompilationHandler();
+            CompilationService* service = compilationHandler->createFromMakefile(argv[2]);
+            service->run();
+            delete service;
+            delete compilationHandler;
         }
     }
 }
 
 int main(int argc, char *argv[]){
-    CompilationHandler *compilationHandler = new CompilationHandler();
-    CompilationService* service = compilationHandler->createFromSource("/home/akaisora/qtprojects/berserk/test/input.bsk");
-    service ->run();
-    delete service;
-    delete compilationHandler;
+    printf("%s", BERSERK_LOGO);
+    parseCmd(argc, argv);
 
     return 0;
 }

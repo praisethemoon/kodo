@@ -70,7 +70,7 @@ THIS SOFTWARE IS PROVIDED BY THE AUTHORS "AS IS" AND ANY EXPRESS OR IMPLIED WARR
 /* Grammar table and sub-tables. */
 struct SymbolStruct {              /* Grammar.SymbolArray[] */
   short Kind;                         /* 0...7, See SYMBOL defines. */
-  wchar_t *Name;                      /* String with name of symbol. */
+  const wchar_t *Name;                      /* String with name of symbol. */
   };
 struct DfaEdgeStruct {             /* Grammar.DfaArray[].Edges[] */
   int TargetState;                    /* Index into Grammar.DfaArray[]. */
@@ -86,7 +86,7 @@ struct RuleStruct {                /* Grammar.RuleArray[] */
   int Head;                           /* Index into Grammar.SymbolArray[]. */
   int SymbolsCount;                   /* Number of items in Symbols[] array. */
   int *Symbols;                       /* Array of indexes into Grammar.SymbolArray[]. */
-  wchar_t *Description;               /* String with BNF of the rule. */
+  const wchar_t *Description;               /* String with BNF of the rule. */
   };
 struct ActionStruct {              /* Grammar.LalrArray[].Actions[] */
   int Entry;                          /* Index into Grammar.SymbolArray[]. */

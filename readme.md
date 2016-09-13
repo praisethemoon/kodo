@@ -40,6 +40,10 @@ the language is multi-paradigm supporting the following features
    - Statically typed (strong type checking)
    - Easy FFI (can easily communicate with C)
 
+# Compiler
+Berserk compiler is work in progress. It currently supports only one file as input and perform lexical analysis and partial parsing. No type checking, no AST created, no code generated.
+Instead of creating some makefile with wierd syntax and macros, berserk compiler comes with lua embedded and extended to easily create simple cross-platform build scripts.
+
 # Contributing
 The language is still in its early development stages. The compiler is being written in C/C++ and LLVM is being used as backend. You can either contribute straight to the source code or request feature or file a bug. For more information feel free to contact me.
 
