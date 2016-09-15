@@ -75,7 +75,8 @@ SOURCES += main.cpp \
     lua/lundump.c \
     lua/lutf8lib.c \
     lua/lvm.c \
-    lua/lzio.c
+    lua/lzio.c \
+    Ast.cpp
 
 HEADERS += \
     Grammar.h \
@@ -133,7 +134,15 @@ HEADERS += \
     lua/luaconf.h \
     lua/lundump.h \
     lua/lvm.h \
-    lua/lzio.h
+    lua/lzio.h \
+    Ast.h
 
 DISTFILES += \
     lua/README
+
+LIBS += -LC:/Users/Mega-PC/Desktop/libs/llvm-3.9.0.src/build/Debug/lib -lLLVMCore -lLLVMSupport
+
+INCLUDEPATH += C:\Users\Mega-PC\Desktop\libs\llvm-3.9.0.src\build\examples\Kaleidoscope\Chapter6 \
+C:\Users\Mega-PC\Desktop\libs\llvm-3.9.0.src\examples\Kaleidoscope\Chapter6 \
+C:\Users\Mega-PC\Desktop\libs\llvm-3.9.0.src\build\include \
+C:\Users\Mega-PC\Desktop\libs\llvm-3.9.0.src\include \

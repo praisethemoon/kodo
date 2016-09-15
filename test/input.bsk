@@ -1,5 +1,9 @@
+
+using std
+
 let x: int = 3
 let x = 3
+
 
 local class AIEntity {
     function fact(x: int) -> int {
@@ -36,7 +40,7 @@ local function get() -> int {
     return 3
 }
 
-let local final x = new AIEntity() {
+let local atomic  x = new AIEntity() {
     function init() {
         return -1
     } 
@@ -44,8 +48,10 @@ let local final x = new AIEntity() {
 
 let x = [1, 2, std.String, let x = 3 in [1, 2, 3]]
 
-function posAt(x: int) -> ( fn(int, int) -> (int, byte) , int) {
+synchronized function posAt(x: int) -> ( fn(int, int) -> (int, byte) , int) {
+    using std
     return (1, 2)
+   /* using std */
 }
 
 let y = system+(1, 2 ,3)

@@ -65,22 +65,26 @@ Comment Line  = '//'
 
 !=======================================================
 
-<Decls> ::= <Decl> <Decls>
-          |
+<Decls> ::= <Imports> <Using Stms> <Decl List>
+          | 
+
+<Decl List> ::= <Decl> <Decl List>
+              | <Decl>
 
 <Decl>  ::= <Func Decl>
           | <Class Decl>
           | <Enum Decl>
-          !| <Set Decl>
           | extern type Id
           | local extern type Id
           | extern local type Id
-          | <Var Decl>    
-          | <Import>
+          | <Var Decl>   
           | <CDefFunc Decl>        
-          | <Using Stm>  
+          !| <Using Stm>  not anymore!
           !| <CDefStruct>
+          !| <Set Decl>
           
+<Imports> ::= <Import> <Imports>
+            |
 
 <Import> ::= import <File Path All>
            | import <File Path> as Id
@@ -112,40 +116,71 @@ Comment Line  = '//'
                    | Id '(' ')'
                    | Id '(' ')' '->' <type>
 
-<Func Decl>  ::= function <Fn Header Impl> <Block>
-               | function <Fn Header Impl> '=' <Expr> 
-               | local function <Fn Header Impl> <Block>
-               | local function <Fn Header Impl> '=' <Expr> 
+<Func Decl>  ::= function <Fn Header Impl> <Func Body>
+               | local function <Fn Header Impl> <Func Body>
+               | synchronized function <Fn Header Impl> <Func Body>
+               | synchronized local function <Fn Header Impl> <Func Body>
+               | local synchronized function <Fn Header Impl> <Func Body>
+               | pure function <Fn Header Impl> <Func Body>
+               | local pure function <Fn Header Impl> <Func Body>
+               | pure local function <Fn Header Impl> <Func Body>
 
+<Func Body> ::= '=' <Expr>
+              | <Block>
 
-<CFunc Proto> ::= <private final static inherited> function <Fn Header Proto>
+<CFunc Proto> ::= function <Fn Header Proto>
+                !
+                | pure function <Fn Header Proto>
+                | static function <Fn Header Proto>
+                | private function <Fn Header Proto>
+                | inherited function <Fn Header Proto>
+                !               
+                | pure static function <Fn Header Proto>
+                | pure private function <Fn Header Proto>
+                | pure inherited function <Fn Header Proto>
+                !
+                | static pure <Fn Header Proto>
+                | static private <Fn Header Proto>
+                | static inherited <Fn Header Proto>
+                !
+                | private pure <Fn Header Proto>
+                | private static <Fn Header Proto>
+                | private inherited <Fn Header Proto>
+                !
+                | inherited pure <Fn Header Proto>
+                | inherited private <Fn Header Proto>
+                | inherited static <Fn Header Proto>
+                !
+                | pure static private <Fn Header Proto>
+                ! pure static inherited   << does not make any sense .. just so i dont mess combinations
+                | pure private static <Fn Header Proto>
+                | pure private inherited <Fn Header Proto>
+                | pure inherited private <Fn Header Proto>
+                ! pure inherited static   << does name make any sense as well 
+                ! 
+                ! static pure inherited 
+                | static pure private <Fn Header Proto>
+                | static private pure <Fn Header Proto>
+                | static private inherited <Fn Header Proto>
+                ! static inherited pure
+                | static inherited private <Fn Header Proto>
+                !
+                | inherited private pure <Fn Header Proto>
+                ! inherited private static
+                | inherited pure private <Fn Header Proto>
+                | inherited pure static <Fn Header Proto>
 
-<CFunc Decl>  ::= <private final static inherited> function <Fn Header Impl> <Block>
-                | <private final static inherited> function <Fn Header Impl> '=' <Expr> 
-
-<private final static inherited> ::= private
-                                   | static
-                                   | final
-                                   | inherited
-                                   | private static
-                                   | static private
-                                   | private inherited
-                                   | inherited private
-                                   | static final
-                                   | final static
-                                   | private final
-                                   | final static private
-                                   | final private static
-                                   | static final private
-                                   | static private final
-                                   | private final static
-                                   | private static final
-                                   |
-
+<CFunc Decl>  ::= <CFunc Proto> <Func Body>
         
 <CDefFunc Decl> ::= extern function <Fn Header Proto>
-                  | local extern function <Fn Header Proto>
+                  | extern pure function <Fn Header Proto>
                   | extern local function <Fn Header Proto>
+                  | local extern function <Fn Header Proto>
+                  | local pure extern function <Fn Header Proto>
+                  | local extern pure function <Fn Header Proto>
+                  | pure extern function <Fn Header Proto>
+                  | pure local extern function <Fn Header Proto>
+                  | pure extern local function <Fn Header Proto>
     
 <Params>     ::= <Param> ',' <Params>
                | <Param>
@@ -193,18 +228,15 @@ Comment Line  = '//'
             
 ! Normal class decl           
 <CDecl> ::= <CFunc Decl>
-          | <CVar Decl>    
-          | <Using Stm>
+          | <CVar Decl>   
           | <Operator Impl>
 
 ! abstract class decl
 <ACDecl>::= <CFunc Decl>
           | <CFunc Proto>
-          | <CVar Decl>    
-          | <Using Stm>
+          | <CVar Decl>  
           | <Operator Impl>
           | <Operator Proto>
-
           
 <Operator Impl> ::= operator <Operator> <Op Header Impl> '=' <Expr> 
                   | operator <Operator> <Op Header Impl> <Block>
@@ -239,12 +271,43 @@ Comment Line  = '//'
                  | let local <Var Header>
                  | let local final <Var Header>
                  | let final local <Var Header>
+                 | let atomic <Var Header>
+                 | let local atomic <Var Header>
+                 | let atomic local <Var Header>
 
-<CVar Decl>     ::= let <private final static inherited> <Var Header>
+<CVar Decl>     ::= let <Var Header>
+                  | let final <Var Header>
+                  | let final static <Var Header>
+                  | let final private <Var Header>
+                  | let final private static <Var Header>
+                  | let final static private <Var Header>
+                  !
+                  | let static <Var Header>
+                  | let static final <Var Header>
+                  | let static atomic <Var Header>
+                  | let static private <Var Header>
+                  | let static private atomic <Var Header>
+                  | let static private final <Var Header>
+                  | let static atomic private <Var Header>
+                  !
+                  | let private <Var Header>
+                  | let private static <Var Header>
+                  | let private static atomic <Var Header>
+                  | let private final <Var Header>
+                  | let private static final <Var Header>
+                  | let private final static <Var Header>
+                  | let private atomic static
+                  !
+                  | let atomic <Var Header>
+                  | let atomic private <Var Header>
+                  | let atomic static <Var Header>
+                  | let atomic private static <Var Header>
+                  | let atomic static private <Var Header>                                   
+                  
 
-<Var Header> ::= <Id List> ':' <Type> '=' <Expr>            
+<Var Header> ::= <Id List> ':' <Type> '=' <CSE>
                | <Id List> ':' <Type>
-               | <Id List>            '=' <Expr> 
+               | <Id List>            '=' <CSE>
              
 ! ===================================================================
 ! Enumerations and Sets
@@ -296,7 +359,6 @@ Comment Line  = '//'
 ! ===================================================================
 
 <Stm>        ::= <Var Decl>
-               | <Using Stm>
                | <If Stm>
                | while <Expr> <Block>
                | for <Arg> ';' <Arg> ';' <Arg> <Block>
@@ -304,6 +366,9 @@ Comment Line  = '//'
                | <Normal Stm>
 
 <Using Stm> ::= using <Pkg>
+
+<Using Stms> ::= <Using Stm> <Using Stms>
+               | 
 
 <Pkg> ::= ID '.' <Pkg>
         | ID 
@@ -333,7 +398,7 @@ Comment Line  = '//'
               | case <Expr>             <Block> <Case Stms>
               | else                    <Block>                          
 
-<Block>     ::= '{' <Stm List> '}' 
+<Block>     ::= '{' <Using Stms> <Stm List> '}' 
 
 <Stm List>  ::=  <Stm> <Stm List> 
               | 

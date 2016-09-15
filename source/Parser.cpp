@@ -207,7 +207,7 @@ void RuleTemplate(struct TokenStruct *Token, ContextStruct *parent) {
 
 
 
-/* <Decls> ::= <Decl> <Decls> */
+/* <Decls> ::= <Using Stms> <Decl List> */
 void Rule_Decls(struct TokenStruct *Token, ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
@@ -217,6 +217,22 @@ void Rule_Decls(struct TokenStruct *Token, ContextStruct *Context) {
 
 /* <Decls> ::=  */
 void Rule_Decls2(struct TokenStruct *Token, ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Decl List> ::= <Decl> <Decl List> */
+void Rule_DeclList(struct TokenStruct *Token, ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Decl List> ::= <Decl> */
+void Rule_DeclList2(struct TokenStruct *Token, ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -289,14 +305,6 @@ void Rule_Decl5(struct TokenStruct *Token, ContextStruct *Context) {
 
 /* <Decl> ::= <CDefFunc Decl> */
 void Rule_Decl6(struct TokenStruct *Token, ContextStruct *Context) {
-  RuleTemplate(Token,Context);
-  };
-
-
-
-
-/* <Decl> ::= <Using Stm> */
-void Rule_Decl7(struct TokenStruct *Token, ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -911,16 +919,8 @@ void Rule_CDecl2(struct TokenStruct *Token, ContextStruct *Context) {
 
 
 
-/* <CDecl> ::= <Using Stm> */
-void Rule_CDecl3(struct TokenStruct *Token, ContextStruct *Context) {
-  RuleTemplate(Token,Context);
-  };
-
-
-
-
 /* <CDecl> ::= <Operator Impl> */
-void Rule_CDecl4(struct TokenStruct *Token, ContextStruct *Context) {
+void Rule_CDecl3(struct TokenStruct *Token, ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -951,7 +951,7 @@ void Rule_ACDecl3(struct TokenStruct *Token, ContextStruct *Context) {
 
 
 
-/* <ACDecl> ::= <Using Stm> */
+/* <ACDecl> ::= <Operator Impl> */
 void Rule_ACDecl4(struct TokenStruct *Token, ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
@@ -959,16 +959,8 @@ void Rule_ACDecl4(struct TokenStruct *Token, ContextStruct *Context) {
 
 
 
-/* <ACDecl> ::= <Operator Impl> */
-void Rule_ACDecl5(struct TokenStruct *Token, ContextStruct *Context) {
-  RuleTemplate(Token,Context);
-  };
-
-
-
-
 /* <ACDecl> ::= <Operator Proto> */
-void Rule_ACDecl6(struct TokenStruct *Token, ContextStruct *Context) {
+void Rule_ACDecl5(struct TokenStruct *Token, ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -1679,16 +1671,8 @@ void Rule_Stm(struct TokenStruct *Token, ContextStruct *Context) {
 
 
 
-/* <Stm> ::= <Using Stm> */
-void Rule_Stm2(struct TokenStruct *Token, ContextStruct *Context) {
-  RuleTemplate(Token,Context);
-  };
-
-
-
-
 /* <Stm> ::= <If Stm> */
-void Rule_Stm3(struct TokenStruct *Token, ContextStruct *Context) {
+void Rule_Stm2(struct TokenStruct *Token, ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -1720,7 +1704,7 @@ void Rule_Stm_foreach_Id_in(struct TokenStruct *Token, ContextStruct *Context) {
 
 
 /* <Stm> ::= <Normal Stm> */
-void Rule_Stm4(struct TokenStruct *Token, ContextStruct *Context) {
+void Rule_Stm3(struct TokenStruct *Token, ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -1729,6 +1713,22 @@ void Rule_Stm4(struct TokenStruct *Token, ContextStruct *Context) {
 
 /* <Using Stm> ::= using <Pkg> */
 void Rule_UsingStm_using(struct TokenStruct *Token, ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Using Stms> ::= <Using Stm> <Using Stms> */
+void Rule_UsingStms(struct TokenStruct *Token, ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Using Stms> ::=  */
+void Rule_UsingStms2(struct TokenStruct *Token, ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -1895,7 +1895,7 @@ void Rule_CaseStms_else(struct TokenStruct *Token, ContextStruct *Context) {
 
 
 
-/* <Block> ::= '{' <Stm List> '}' */
+/* <Block> ::= '{' <Using Stms> <Stm List> '}' */
 void Rule_Block_LBrace_RBrace(struct TokenStruct *Token, ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
@@ -2646,275 +2646,275 @@ void Rule_NewExpr_new_LParen_RParen_LBrace_RBrace2(struct TokenStruct *Token, Co
 
 void (*RuleJumpTable[])(struct TokenStruct *Token, ContextStruct *Context) = {
 
-  /* 0. <Decls> ::= <Decl> <Decls> */
+  /* 0. <Decls> ::= <Using Stms> <Decl List> */
   Rule_Decls,
 
   /* 1. <Decls> ::=  */
   Rule_Decls2,
 
-  /* 2. <Decl> ::= <Func Decl> */
+  /* 2. <Decl List> ::= <Decl> <Decl List> */
+  Rule_DeclList,
+
+  /* 3. <Decl List> ::= <Decl> */
+  Rule_DeclList2,
+
+  /* 4. <Decl> ::= <Func Decl> */
   Rule_Decl,
 
-  /* 3. <Decl> ::= <Class Decl> */
+  /* 5. <Decl> ::= <Class Decl> */
   Rule_Decl2,
 
-  /* 4. <Decl> ::= <Enum Decl> */
+  /* 6. <Decl> ::= <Enum Decl> */
   Rule_Decl3,
 
-  /* 5. <Decl> ::= extern type Id */
+  /* 7. <Decl> ::= extern type Id */
   Rule_Decl_extern_type_Id,
 
-  /* 6. <Decl> ::= local extern type Id */
+  /* 8. <Decl> ::= local extern type Id */
   Rule_Decl_local_extern_type_Id,
 
-  /* 7. <Decl> ::= extern local type Id */
+  /* 9. <Decl> ::= extern local type Id */
   Rule_Decl_extern_local_type_Id,
 
-  /* 8. <Decl> ::= <Var Decl> */
+  /* 10. <Decl> ::= <Var Decl> */
   Rule_Decl4,
 
-  /* 9. <Decl> ::= <Import> */
+  /* 11. <Decl> ::= <Import> */
   Rule_Decl5,
 
-  /* 10. <Decl> ::= <CDefFunc Decl> */
+  /* 12. <Decl> ::= <CDefFunc Decl> */
   Rule_Decl6,
 
-  /* 11. <Decl> ::= <Using Stm> */
-  Rule_Decl7,
-
-  /* 12. <Import> ::= import <File Path All> */
+  /* 13. <Import> ::= import <File Path All> */
   Rule_Import_import,
 
-  /* 13. <Import> ::= import <File Path> as Id */
+  /* 14. <Import> ::= import <File Path> as Id */
   Rule_Import_import_as_Id,
 
-  /* 14. <Import> ::= from <File Path> import <File Path List> */
+  /* 15. <Import> ::= from <File Path> import <File Path List> */
   Rule_Import_from_import,
 
-  /* 15. <File Path> ::= Id '.' <File Path> */
+  /* 16. <File Path> ::= Id '.' <File Path> */
   Rule_FilePath_Id_Dot,
 
-  /* 16. <File Path> ::= Id */
+  /* 17. <File Path> ::= Id */
   Rule_FilePath_Id,
 
-  /* 17. <File Path All> ::= Id '.' <File Path All> */
+  /* 18. <File Path All> ::= Id '.' <File Path All> */
   Rule_FilePathAll_Id_Dot,
 
-  /* 18. <File Path All> ::= Id '.*' */
+  /* 19. <File Path All> ::= Id '.*' */
   Rule_FilePathAll_Id_DotTimes,
 
-  /* 19. <File Path All> ::= Id */
+  /* 20. <File Path All> ::= Id */
   Rule_FilePathAll_Id,
 
-  /* 20. <File Path List> ::= <File Path> ',' <File Path List> */
+  /* 21. <File Path List> ::= <File Path> ',' <File Path List> */
   Rule_FilePathList_Comma,
 
-  /* 21. <File Path List> ::= <File Path> */
+  /* 22. <File Path List> ::= <File Path> */
   Rule_FilePathList,
 
-  /* 22. <Fn Header Proto> ::= Id '(' <Params> ')' */
+  /* 23. <Fn Header Proto> ::= Id '(' <Params> ')' */
   Rule_FnHeaderProto_Id_LParen_RParen,
 
-  /* 23. <Fn Header Proto> ::= Id '(' <Params> ')' '->' <Type> */
+  /* 24. <Fn Header Proto> ::= Id '(' <Params> ')' '->' <Type> */
   Rule_FnHeaderProto_Id_LParen_RParen_MinusGt,
 
-  /* 24. <Fn Header Proto> ::= Id '(' <Types> ')' */
+  /* 25. <Fn Header Proto> ::= Id '(' <Types> ')' */
   Rule_FnHeaderProto_Id_LParen_RParen2,
 
-  /* 25. <Fn Header Proto> ::= Id '(' <Types> ')' '->' <Type> */
+  /* 26. <Fn Header Proto> ::= Id '(' <Types> ')' '->' <Type> */
   Rule_FnHeaderProto_Id_LParen_RParen_MinusGt2,
 
-  /* 26. <Fn Header Proto> ::= Id '(' ')' */
+  /* 27. <Fn Header Proto> ::= Id '(' ')' */
   Rule_FnHeaderProto_Id_LParen_RParen3,
 
-  /* 27. <Fn Header Proto> ::= Id '(' ')' '->' <Type> */
+  /* 28. <Fn Header Proto> ::= Id '(' ')' '->' <Type> */
   Rule_FnHeaderProto_Id_LParen_RParen_MinusGt3,
 
-  /* 28. <Fn Header Impl> ::= Id '(' <Params> ')' */
+  /* 29. <Fn Header Impl> ::= Id '(' <Params> ')' */
   Rule_FnHeaderImpl_Id_LParen_RParen,
 
-  /* 29. <Fn Header Impl> ::= Id '(' <Params> ')' '->' <Type> */
+  /* 30. <Fn Header Impl> ::= Id '(' <Params> ')' '->' <Type> */
   Rule_FnHeaderImpl_Id_LParen_RParen_MinusGt,
 
-  /* 30. <Fn Header Impl> ::= Id '(' ')' */
+  /* 31. <Fn Header Impl> ::= Id '(' ')' */
   Rule_FnHeaderImpl_Id_LParen_RParen2,
 
-  /* 31. <Fn Header Impl> ::= Id '(' ')' '->' <Type> */
+  /* 32. <Fn Header Impl> ::= Id '(' ')' '->' <Type> */
   Rule_FnHeaderImpl_Id_LParen_RParen_MinusGt2,
 
-  /* 32. <Func Decl> ::= function <Fn Header Impl> <Block> */
+  /* 33. <Func Decl> ::= function <Fn Header Impl> <Block> */
   Rule_FuncDecl_function,
 
-  /* 33. <Func Decl> ::= function <Fn Header Impl> '=' <Expr> */
+  /* 34. <Func Decl> ::= function <Fn Header Impl> '=' <Expr> */
   Rule_FuncDecl_function_Eq,
 
-  /* 34. <Func Decl> ::= local function <Fn Header Impl> <Block> */
+  /* 35. <Func Decl> ::= local function <Fn Header Impl> <Block> */
   Rule_FuncDecl_local_function,
 
-  /* 35. <Func Decl> ::= local function <Fn Header Impl> '=' <Expr> */
+  /* 36. <Func Decl> ::= local function <Fn Header Impl> '=' <Expr> */
   Rule_FuncDecl_local_function_Eq,
 
-  /* 36. <CFunc Proto> ::= <private final static inherited> function <Fn Header Proto> */
+  /* 37. <CFunc Proto> ::= <private final static inherited> function <Fn Header Proto> */
   Rule_CFuncProto_function,
 
-  /* 37. <CFunc Decl> ::= <private final static inherited> function <Fn Header Impl> <Block> */
+  /* 38. <CFunc Decl> ::= <private final static inherited> function <Fn Header Impl> <Block> */
   Rule_CFuncDecl_function,
 
-  /* 38. <CFunc Decl> ::= <private final static inherited> function <Fn Header Impl> '=' <Expr> */
+  /* 39. <CFunc Decl> ::= <private final static inherited> function <Fn Header Impl> '=' <Expr> */
   Rule_CFuncDecl_function_Eq,
 
-  /* 39. <private final static inherited> ::= private */
+  /* 40. <private final static inherited> ::= private */
   Rule_privatefinalstaticinherited_private,
 
-  /* 40. <private final static inherited> ::= static */
+  /* 41. <private final static inherited> ::= static */
   Rule_privatefinalstaticinherited_static,
 
-  /* 41. <private final static inherited> ::= final */
+  /* 42. <private final static inherited> ::= final */
   Rule_privatefinalstaticinherited_final,
 
-  /* 42. <private final static inherited> ::= inherited */
+  /* 43. <private final static inherited> ::= inherited */
   Rule_privatefinalstaticinherited_inherited,
 
-  /* 43. <private final static inherited> ::= private static */
+  /* 44. <private final static inherited> ::= private static */
   Rule_privatefinalstaticinherited_private_static,
 
-  /* 44. <private final static inherited> ::= static private */
+  /* 45. <private final static inherited> ::= static private */
   Rule_privatefinalstaticinherited_static_private,
 
-  /* 45. <private final static inherited> ::= private inherited */
+  /* 46. <private final static inherited> ::= private inherited */
   Rule_privatefinalstaticinherited_private_inherited,
 
-  /* 46. <private final static inherited> ::= inherited private */
+  /* 47. <private final static inherited> ::= inherited private */
   Rule_privatefinalstaticinherited_inherited_private,
 
-  /* 47. <private final static inherited> ::= static final */
+  /* 48. <private final static inherited> ::= static final */
   Rule_privatefinalstaticinherited_static_final,
 
-  /* 48. <private final static inherited> ::= final static */
+  /* 49. <private final static inherited> ::= final static */
   Rule_privatefinalstaticinherited_final_static,
 
-  /* 49. <private final static inherited> ::= private final */
+  /* 50. <private final static inherited> ::= private final */
   Rule_privatefinalstaticinherited_private_final,
 
-  /* 50. <private final static inherited> ::= final static private */
+  /* 51. <private final static inherited> ::= final static private */
   Rule_privatefinalstaticinherited_final_static_private,
 
-  /* 51. <private final static inherited> ::= final private static */
+  /* 52. <private final static inherited> ::= final private static */
   Rule_privatefinalstaticinherited_final_private_static,
 
-  /* 52. <private final static inherited> ::= static final private */
+  /* 53. <private final static inherited> ::= static final private */
   Rule_privatefinalstaticinherited_static_final_private,
 
-  /* 53. <private final static inherited> ::= static private final */
+  /* 54. <private final static inherited> ::= static private final */
   Rule_privatefinalstaticinherited_static_private_final,
 
-  /* 54. <private final static inherited> ::= private final static */
+  /* 55. <private final static inherited> ::= private final static */
   Rule_privatefinalstaticinherited_private_final_static,
 
-  /* 55. <private final static inherited> ::= private static final */
+  /* 56. <private final static inherited> ::= private static final */
   Rule_privatefinalstaticinherited_private_static_final,
 
-  /* 56. <private final static inherited> ::=  */
+  /* 57. <private final static inherited> ::=  */
   Rule_privatefinalstaticinherited,
 
-  /* 57. <CDefFunc Decl> ::= extern function <Fn Header Proto> */
+  /* 58. <CDefFunc Decl> ::= extern function <Fn Header Proto> */
   Rule_CDefFuncDecl_extern_function,
 
-  /* 58. <CDefFunc Decl> ::= local extern function <Fn Header Proto> */
+  /* 59. <CDefFunc Decl> ::= local extern function <Fn Header Proto> */
   Rule_CDefFuncDecl_local_extern_function,
 
-  /* 59. <CDefFunc Decl> ::= extern local function <Fn Header Proto> */
+  /* 60. <CDefFunc Decl> ::= extern local function <Fn Header Proto> */
   Rule_CDefFuncDecl_extern_local_function,
 
-  /* 60. <Params> ::= <Param> ',' <Params> */
+  /* 61. <Params> ::= <Param> ',' <Params> */
   Rule_Params_Comma,
 
-  /* 61. <Params> ::= <Param> */
+  /* 62. <Params> ::= <Param> */
   Rule_Params,
 
-  /* 62. <Param> ::= final Id ':' <Type> */
+  /* 63. <Param> ::= final Id ':' <Type> */
   Rule_Param_final_Id_Colon,
 
-  /* 63. <Param> ::= Id ':' <Type> */
+  /* 64. <Param> ::= Id ':' <Type> */
   Rule_Param_Id_Colon,
 
-  /* 64. <Types> ::= <Type> ',' <Types> */
+  /* 65. <Types> ::= <Type> ',' <Types> */
   Rule_Types_Comma,
 
-  /* 65. <Types> ::= <Type> */
+  /* 66. <Types> ::= <Type> */
   Rule_Types,
 
-  /* 66. <Id List> ::= Id ',' <Id List> */
+  /* 67. <Id List> ::= Id ',' <Id List> */
   Rule_IdList_Id_Comma,
 
-  /* 67. <Id List> ::= Id */
+  /* 68. <Id List> ::= Id */
   Rule_IdList_Id,
 
-  /* 68. <Class Decl> ::= <Normal Class> */
+  /* 69. <Class Decl> ::= <Normal Class> */
   Rule_ClassDecl,
 
-  /* 69. <Class Decl> ::= <Abstract Class> */
+  /* 70. <Class Decl> ::= <Abstract Class> */
   Rule_ClassDecl2,
 
-  /* 70. <Class Decl> ::= local <Normal Class> */
+  /* 71. <Class Decl> ::= local <Normal Class> */
   Rule_ClassDecl_local,
 
-  /* 71. <Class Decl> ::= local <Abstract Class> */
+  /* 72. <Class Decl> ::= local <Abstract Class> */
   Rule_ClassDecl_local2,
 
-  /* 72. <Normal Class> ::= class <Class Name> '{' <CDecls> '}' */
+  /* 73. <Normal Class> ::= class <Class Name> '{' <CDecls> '}' */
   Rule_NormalClass_class_LBrace_RBrace,
 
-  /* 73. <Normal Class> ::= class <Class Name> extends <Extend Class Name List> '{' <CDecls> '}' */
+  /* 74. <Normal Class> ::= class <Class Name> extends <Extend Class Name List> '{' <CDecls> '}' */
   Rule_NormalClass_class_extends_LBrace_RBrace,
 
-  /* 74. <Abstract Class> ::= abstract class <Class Name> '{' <ACDecls> '}' */
+  /* 75. <Abstract Class> ::= abstract class <Class Name> '{' <ACDecls> '}' */
   Rule_AbstractClass_abstract_class_LBrace_RBrace,
 
-  /* 75. <Abstract Class> ::= abstract class <Class Name> extends <Extend Class Name List> '{' <ACDecls> '}' */
+  /* 76. <Abstract Class> ::= abstract class <Class Name> extends <Extend Class Name List> '{' <ACDecls> '}' */
   Rule_AbstractClass_abstract_class_extends_LBrace_RBrace,
 
-  /* 76. <Class Name> ::= Id */
+  /* 77. <Class Name> ::= Id */
   Rule_ClassName_Id,
 
-  /* 77. <Class Name> ::= Id '<' <Id List> '>' */
+  /* 78. <Class Name> ::= Id '<' <Id List> '>' */
   Rule_ClassName_Id_Lt_Gt,
 
-  /* 78. <Extend Class Name> ::= <Pkg> */
+  /* 79. <Extend Class Name> ::= <Pkg> */
   Rule_ExtendClassName,
 
-  /* 79. <Extend Class Name> ::= <Pkg> '<' <Extend Class Name List> '>' */
+  /* 80. <Extend Class Name> ::= <Pkg> '<' <Extend Class Name List> '>' */
   Rule_ExtendClassName_Lt_Gt,
 
-  /* 80. <Extend Class Name List> ::= <Extend Class Name> ',' <Extend Class Name List> */
+  /* 81. <Extend Class Name List> ::= <Extend Class Name> ',' <Extend Class Name List> */
   Rule_ExtendClassNameList_Comma,
 
-  /* 81. <Extend Class Name List> ::= <Extend Class Name> */
+  /* 82. <Extend Class Name List> ::= <Extend Class Name> */
   Rule_ExtendClassNameList,
 
-  /* 82. <CDecls> ::= <CDecl> <CDecls> */
+  /* 83. <CDecls> ::= <CDecl> <CDecls> */
   Rule_CDecls,
 
-  /* 83. <CDecls> ::=  */
+  /* 84. <CDecls> ::=  */
   Rule_CDecls2,
 
-  /* 84. <ACDecls> ::= <ACDecl> <ACDecls> */
+  /* 85. <ACDecls> ::= <ACDecl> <ACDecls> */
   Rule_ACDecls,
 
-  /* 85. <ACDecls> ::=  */
+  /* 86. <ACDecls> ::=  */
   Rule_ACDecls2,
 
-  /* 86. <CDecl> ::= <CFunc Decl> */
+  /* 87. <CDecl> ::= <CFunc Decl> */
   Rule_CDecl,
 
-  /* 87. <CDecl> ::= <CVar Decl> */
+  /* 88. <CDecl> ::= <CVar Decl> */
   Rule_CDecl2,
 
-  /* 88. <CDecl> ::= <Using Stm> */
-  Rule_CDecl3,
-
   /* 89. <CDecl> ::= <Operator Impl> */
-  Rule_CDecl4,
+  Rule_CDecl3,
 
   /* 90. <ACDecl> ::= <CFunc Decl> */
   Rule_ACDecl,
@@ -2925,299 +2925,299 @@ void (*RuleJumpTable[])(struct TokenStruct *Token, ContextStruct *Context) = {
   /* 92. <ACDecl> ::= <CVar Decl> */
   Rule_ACDecl3,
 
-  /* 93. <ACDecl> ::= <Using Stm> */
+  /* 93. <ACDecl> ::= <Operator Impl> */
   Rule_ACDecl4,
 
-  /* 94. <ACDecl> ::= <Operator Impl> */
+  /* 94. <ACDecl> ::= <Operator Proto> */
   Rule_ACDecl5,
 
-  /* 95. <ACDecl> ::= <Operator Proto> */
-  Rule_ACDecl6,
-
-  /* 96. <Operator Impl> ::= operator <Operator> <Op Header Impl> '=' <Expr> */
+  /* 95. <Operator Impl> ::= operator <Operator> <Op Header Impl> '=' <Expr> */
   Rule_OperatorImpl_operator_Eq,
 
-  /* 97. <Operator Impl> ::= operator <Operator> <Op Header Impl> <Block> */
+  /* 96. <Operator Impl> ::= operator <Operator> <Op Header Impl> <Block> */
   Rule_OperatorImpl_operator,
 
-  /* 98. <Operator Proto> ::= operator <Operator> <Op Header Proto> */
+  /* 97. <Operator Proto> ::= operator <Operator> <Op Header Proto> */
   Rule_OperatorProto_operator,
 
-  /* 99. <CDefStruct> ::= extern struct Id '{' <Params> '}' */
+  /* 98. <CDefStruct> ::= extern struct Id '{' <Params> '}' */
   Rule_CDefStruct_extern_struct_Id_LBrace_RBrace,
 
-  /* 100. <Operator> ::= '+' */
+  /* 99. <Operator> ::= '+' */
   Rule_Operator_Plus,
 
-  /* 101. <Operator> ::= '-' */
+  /* 100. <Operator> ::= '-' */
   Rule_Operator_Minus,
 
-  /* 102. <Operator> ::= '*' */
+  /* 101. <Operator> ::= '*' */
   Rule_Operator_Times,
 
-  /* 103. <Operator> ::= '/' */
+  /* 102. <Operator> ::= '/' */
   Rule_Operator_Div,
 
-  /* 104. <Operator> ::= '%' */
+  /* 103. <Operator> ::= '%' */
   Rule_Operator_Percent,
 
-  /* 105. <Operator> ::= '^' */
+  /* 104. <Operator> ::= '^' */
   Rule_Operator_Caret,
 
-  /* 106. <Operator> ::= '&' */
+  /* 105. <Operator> ::= '&' */
   Rule_Operator_Amp,
 
-  /* 107. <Operator> ::= '|' */
+  /* 106. <Operator> ::= '|' */
   Rule_Operator_Pipe,
 
-  /* 108. <Operator> ::= '~' */
+  /* 107. <Operator> ::= '~' */
   Rule_Operator_Tilde,
 
-  /* 109. <Operator> ::= '!' */
+  /* 108. <Operator> ::= '!' */
   Rule_Operator_Exclam,
 
-  /* 110. <Operator> ::= '=' */
+  /* 109. <Operator> ::= '=' */
   Rule_Operator_Eq,
 
-  /* 111. <Operator> ::= '<' */
+  /* 110. <Operator> ::= '<' */
   Rule_Operator_Lt,
 
-  /* 112. <Operator> ::= '>' */
+  /* 111. <Operator> ::= '>' */
   Rule_Operator_Gt,
 
-  /* 113. <Operator> ::= '+=' */
+  /* 112. <Operator> ::= '+=' */
   Rule_Operator_PlusEq,
 
-  /* 114. <Operator> ::= '-=' */
+  /* 113. <Operator> ::= '-=' */
   Rule_Operator_MinusEq,
 
-  /* 115. <Operator> ::= '*=' */
+  /* 114. <Operator> ::= '*=' */
   Rule_Operator_TimesEq,
 
-  /* 116. <Operator> ::= '/=' */
+  /* 115. <Operator> ::= '/=' */
   Rule_Operator_DivEq,
 
-  /* 117. <Operator> ::= '%=' */
+  /* 116. <Operator> ::= '%=' */
   Rule_Operator_PercentEq,
 
-  /* 118. <Operator> ::= '^=' */
+  /* 117. <Operator> ::= '^=' */
   Rule_Operator_CaretEq,
 
-  /* 119. <Operator> ::= '&=' */
+  /* 118. <Operator> ::= '&=' */
   Rule_Operator_AmpEq,
 
-  /* 120. <Operator> ::= '|=' */
+  /* 119. <Operator> ::= '|=' */
   Rule_Operator_PipeEq,
 
-  /* 121. <Operator> ::= '<<' */
+  /* 120. <Operator> ::= '<<' */
   Rule_Operator_LtLt,
 
-  /* 122. <Operator> ::= '>>' */
+  /* 121. <Operator> ::= '>>' */
   Rule_Operator_GtGt,
 
-  /* 123. <Operator> ::= '>>=' */
+  /* 122. <Operator> ::= '>>=' */
   Rule_Operator_GtGtEq,
 
-  /* 124. <Operator> ::= '<<=' */
+  /* 123. <Operator> ::= '<<=' */
   Rule_Operator_LtLtEq,
 
-  /* 125. <Operator> ::= '==' */
+  /* 124. <Operator> ::= '==' */
   Rule_Operator_EqEq,
 
-  /* 126. <Operator> ::= '!=' */
+  /* 125. <Operator> ::= '!=' */
   Rule_Operator_ExclamEq,
 
-  /* 127. <Operator> ::= '<=' */
+  /* 126. <Operator> ::= '<=' */
   Rule_Operator_LtEq,
 
-  /* 128. <Operator> ::= '>=' */
+  /* 127. <Operator> ::= '>=' */
   Rule_Operator_GtEq,
 
-  /* 129. <Operator> ::= '&&' */
+  /* 128. <Operator> ::= '&&' */
   Rule_Operator_AmpAmp,
 
-  /* 130. <Operator> ::= '||' */
+  /* 129. <Operator> ::= '||' */
   Rule_Operator_PipePipe,
 
-  /* 131. <Operator> ::= '++' */
+  /* 130. <Operator> ::= '++' */
   Rule_Operator_PlusPlus,
 
-  /* 132. <Operator> ::= '--' */
+  /* 131. <Operator> ::= '--' */
   Rule_Operator_MinusMinus,
 
-  /* 133. <Operator> ::= ',' */
+  /* 132. <Operator> ::= ',' */
   Rule_Operator_Comma,
 
-  /* 134. <Operator> ::= '(' ')' */
+  /* 133. <Operator> ::= '(' ')' */
   Rule_Operator_LParen_RParen,
 
-  /* 135. <Operator> ::= '[' ']' */
+  /* 134. <Operator> ::= '[' ']' */
   Rule_Operator_LBracket_RBracket,
 
-  /* 136. <Op Header Proto> ::= '(' <Params> ')' */
+  /* 135. <Op Header Proto> ::= '(' <Params> ')' */
   Rule_OpHeaderProto_LParen_RParen,
 
-  /* 137. <Op Header Proto> ::= '(' <Params> ')' '->' <Type> */
+  /* 136. <Op Header Proto> ::= '(' <Params> ')' '->' <Type> */
   Rule_OpHeaderProto_LParen_RParen_MinusGt,
 
-  /* 138. <Op Header Proto> ::= '(' <Types> ')' */
+  /* 137. <Op Header Proto> ::= '(' <Types> ')' */
   Rule_OpHeaderProto_LParen_RParen2,
 
-  /* 139. <Op Header Proto> ::= '(' <Types> ')' '->' <Type> */
+  /* 138. <Op Header Proto> ::= '(' <Types> ')' '->' <Type> */
   Rule_OpHeaderProto_LParen_RParen_MinusGt2,
 
-  /* 140. <Op Header Proto> ::= '(' ')' */
+  /* 139. <Op Header Proto> ::= '(' ')' */
   Rule_OpHeaderProto_LParen_RParen3,
 
-  /* 141. <Op Header Proto> ::= '(' ')' '->' <Type> */
+  /* 140. <Op Header Proto> ::= '(' ')' '->' <Type> */
   Rule_OpHeaderProto_LParen_RParen_MinusGt3,
 
-  /* 142. <Op Header Impl> ::= '(' <Params> ')' */
+  /* 141. <Op Header Impl> ::= '(' <Params> ')' */
   Rule_OpHeaderImpl_LParen_RParen,
 
-  /* 143. <Op Header Impl> ::= '(' <Params> ')' '->' <Type> */
+  /* 142. <Op Header Impl> ::= '(' <Params> ')' '->' <Type> */
   Rule_OpHeaderImpl_LParen_RParen_MinusGt,
 
-  /* 144. <Op Header Impl> ::= '(' ')' */
+  /* 143. <Op Header Impl> ::= '(' ')' */
   Rule_OpHeaderImpl_LParen_RParen2,
 
-  /* 145. <Op Header Impl> ::= '(' ')' '->' <Type> */
+  /* 144. <Op Header Impl> ::= '(' ')' '->' <Type> */
   Rule_OpHeaderImpl_LParen_RParen_MinusGt2,
 
-  /* 146. <Var Decl> ::= let final <Var Header> */
+  /* 145. <Var Decl> ::= let final <Var Header> */
   Rule_VarDecl_let_final,
 
-  /* 147. <Var Decl> ::= let <Var Header> */
+  /* 146. <Var Decl> ::= let <Var Header> */
   Rule_VarDecl_let,
 
-  /* 148. <Var Decl> ::= let local <Var Header> */
+  /* 147. <Var Decl> ::= let local <Var Header> */
   Rule_VarDecl_let_local,
 
-  /* 149. <Var Decl> ::= let local final <Var Header> */
+  /* 148. <Var Decl> ::= let local final <Var Header> */
   Rule_VarDecl_let_local_final,
 
-  /* 150. <Var Decl> ::= let final local <Var Header> */
+  /* 149. <Var Decl> ::= let final local <Var Header> */
   Rule_VarDecl_let_final_local,
 
-  /* 151. <CVar Decl> ::= let <private final static inherited> <Var Header> */
+  /* 150. <CVar Decl> ::= let <private final static inherited> <Var Header> */
   Rule_CVarDecl_let,
 
-  /* 152. <Var Header> ::= <Id List> ':' <Type> '=' <Expr> */
+  /* 151. <Var Header> ::= <Id List> ':' <Type> '=' <Expr> */
   Rule_VarHeader_Colon_Eq,
 
-  /* 153. <Var Header> ::= <Id List> ':' <Type> */
+  /* 152. <Var Header> ::= <Id List> ':' <Type> */
   Rule_VarHeader_Colon,
 
-  /* 154. <Var Header> ::= <Id List> '=' <Expr> */
+  /* 153. <Var Header> ::= <Id List> '=' <Expr> */
   Rule_VarHeader_Eq,
 
-  /* 155. <Enum Decl> ::= enum Id '{' <Enum Def> '}' */
+  /* 154. <Enum Decl> ::= enum Id '{' <Enum Def> '}' */
   Rule_EnumDecl_enum_Id_LBrace_RBrace,
 
-  /* 156. <Enum Decl> ::= local enum Id '{' <Enum Def> '}' */
+  /* 155. <Enum Decl> ::= local enum Id '{' <Enum Def> '}' */
   Rule_EnumDecl_local_enum_Id_LBrace_RBrace,
 
-  /* 157. <Enum Def> ::= Id ',' <Enum Def> */
+  /* 156. <Enum Def> ::= Id ',' <Enum Def> */
   Rule_EnumDef_Id_Comma,
 
-  /* 158. <Enum Def> ::= Id */
+  /* 157. <Enum Def> ::= Id */
   Rule_EnumDef_Id,
 
-  /* 159. <Type> ::= <Base> */
+  /* 158. <Type> ::= <Base> */
   Rule_Type,
 
-  /* 160. <Type> ::= <Fn Type> */
+  /* 159. <Type> ::= <Fn Type> */
   Rule_Type2,
 
-  /* 161. <Type> ::= <Pkg> */
+  /* 160. <Type> ::= <Pkg> */
   Rule_Type3,
 
-  /* 162. <Type> ::= <Pkg> '<' <Types> '>' */
+  /* 161. <Type> ::= <Pkg> '<' <Types> '>' */
   Rule_Type_Lt_Gt,
 
-  /* 163. <Type> ::= <Type> '[' ']' */
+  /* 162. <Type> ::= <Type> '[' ']' */
   Rule_Type_LBracket_RBracket,
 
-  /* 164. <Type> ::= '(' <Types> ')' */
+  /* 163. <Type> ::= '(' <Types> ')' */
   Rule_Type_LParen_RParen,
 
-  /* 165. <Fn Type> ::= fn '(' ')' */
+  /* 164. <Fn Type> ::= fn '(' ')' */
   Rule_FnType_fn_LParen_RParen,
 
-  /* 166. <Fn Type> ::= fn '(' ')' '->' <Type> */
+  /* 165. <Fn Type> ::= fn '(' ')' '->' <Type> */
   Rule_FnType_fn_LParen_RParen_MinusGt,
 
-  /* 167. <Fn Type> ::= fn '(' <Types> ')' */
+  /* 166. <Fn Type> ::= fn '(' <Types> ')' */
   Rule_FnType_fn_LParen_RParen2,
 
-  /* 168. <Fn Type> ::= fn '(' <Types> ')' '->' <Type> */
+  /* 167. <Fn Type> ::= fn '(' <Types> ')' '->' <Type> */
   Rule_FnType_fn_LParen_RParen_MinusGt2,
 
-  /* 169. <Base> ::= <Sign> <Scalar> */
+  /* 168. <Base> ::= <Sign> <Scalar> */
   Rule_Base,
 
-  /* 170. <Base> ::= 'size_t' */
+  /* 169. <Base> ::= 'size_t' */
   Rule_Base_size_t,
 
-  /* 171. <Sign> ::= signed */
+  /* 170. <Sign> ::= signed */
   Rule_Sign_signed,
 
-  /* 172. <Sign> ::= unsigned */
+  /* 171. <Sign> ::= unsigned */
   Rule_Sign_unsigned,
 
-  /* 173. <Sign> ::=  */
+  /* 172. <Sign> ::=  */
   Rule_Sign,
 
-  /* 174. <Scalar> ::= char */
+  /* 173. <Scalar> ::= char */
   Rule_Scalar_char,
 
-  /* 175. <Scalar> ::= int */
+  /* 174. <Scalar> ::= int */
   Rule_Scalar_int,
 
-  /* 176. <Scalar> ::= short */
+  /* 175. <Scalar> ::= short */
   Rule_Scalar_short,
 
-  /* 177. <Scalar> ::= long */
+  /* 176. <Scalar> ::= long */
   Rule_Scalar_long,
 
-  /* 178. <Scalar> ::= short int */
+  /* 177. <Scalar> ::= short int */
   Rule_Scalar_short_int,
 
-  /* 179. <Scalar> ::= long int */
+  /* 178. <Scalar> ::= long int */
   Rule_Scalar_long_int,
 
-  /* 180. <Scalar> ::= float */
+  /* 179. <Scalar> ::= float */
   Rule_Scalar_float,
 
-  /* 181. <Scalar> ::= double */
+  /* 180. <Scalar> ::= double */
   Rule_Scalar_double,
 
-  /* 182. <Scalar> ::= byte */
+  /* 181. <Scalar> ::= byte */
   Rule_Scalar_byte,
 
-  /* 183. <Stm> ::= <Var Decl> */
+  /* 182. <Stm> ::= <Var Decl> */
   Rule_Stm,
 
-  /* 184. <Stm> ::= <Using Stm> */
+  /* 183. <Stm> ::= <If Stm> */
   Rule_Stm2,
 
-  /* 185. <Stm> ::= <If Stm> */
-  Rule_Stm3,
-
-  /* 186. <Stm> ::= while <Expr> <Block> */
+  /* 184. <Stm> ::= while <Expr> <Block> */
   Rule_Stm_while,
 
-  /* 187. <Stm> ::= for <Arg> ';' <Arg> ';' <Arg> <Block> */
+  /* 185. <Stm> ::= for <Arg> ';' <Arg> ';' <Arg> <Block> */
   Rule_Stm_for_Semi_Semi,
 
-  /* 188. <Stm> ::= foreach Id in <Expr> <Block> */
+  /* 186. <Stm> ::= foreach Id in <Expr> <Block> */
   Rule_Stm_foreach_Id_in,
 
-  /* 189. <Stm> ::= <Normal Stm> */
-  Rule_Stm4,
+  /* 187. <Stm> ::= <Normal Stm> */
+  Rule_Stm3,
 
-  /* 190. <Using Stm> ::= using <Pkg> */
+  /* 188. <Using Stm> ::= using <Pkg> */
   Rule_UsingStm_using,
+
+  /* 189. <Using Stms> ::= <Using Stm> <Using Stms> */
+  Rule_UsingStms,
+
+  /* 190. <Using Stms> ::=  */
+  Rule_UsingStms2,
 
   /* 191. <Pkg> ::= Id '.' <Pkg> */
   Rule_Pkg_Id_Dot,
@@ -3279,7 +3279,7 @@ void (*RuleJumpTable[])(struct TokenStruct *Token, ContextStruct *Context) = {
   /* 210. <Case Stms> ::= else <Block> */
   Rule_CaseStms_else,
 
-  /* 211. <Block> ::= '{' <Stm List> '}' */
+  /* 211. <Block> ::= '{' <Using Stms> <Stm List> '}' */
   Rule_Block_LBrace_RBrace,
 
   /* 212. <Stm List> ::= <Stm> <Stm List> */
@@ -3556,9 +3556,8 @@ void (*RuleJumpTable[])(struct TokenStruct *Token, ContextStruct *Context) = {
   Rule_NewExpr_new_LParen_RParen_LBrace_RBrace,
 
   /* 303. <New Expr> ::= new <Type> '(' <Expr> ')' '{' <CDecl> '}' */
-  Rule_NewExpr_new_LParen_RParen_LBrace_RBrace2
+  Rule_NewExpr_new_LParen_RParen_LBrace_RBrace2 
   };
-
 
 ContextStruct* parseAst(struct TokenStruct *Token, ContextStruct *parent)
 {

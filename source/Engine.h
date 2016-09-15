@@ -63,8 +63,8 @@ THIS SOFTWARE IS PROVIDED BY THE AUTHORS "AS IS" AND ANY EXPRESS OR IMPLIED WARR
 
 
 /* CaseSensitive values (defined by GOLD). */
-#define False 0
-#define True  1
+//#define False 0
+//#define True  1
 
 
 /* Grammar table and sub-tables. */
