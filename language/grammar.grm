@@ -132,42 +132,42 @@ Comment Line  = '//'
                 !
                 | pure function <Fn Header Proto>
                 | static function <Fn Header Proto>
-                | private function <Fn Header Proto>
+                | <Visibility> function <Fn Header Proto>
                 | inherited function <Fn Header Proto>
                 !               
                 | pure static function <Fn Header Proto>
-                | pure private function <Fn Header Proto>
+                | pure <Visibility> function <Fn Header Proto>
                 | pure inherited function <Fn Header Proto>
                 !
                 | static pure <Fn Header Proto>
-                | static private <Fn Header Proto>
+                | static <Visibility> <Fn Header Proto>
                 | static inherited <Fn Header Proto>
                 !
-                | private pure <Fn Header Proto>
-                | private static <Fn Header Proto>
-                | private inherited <Fn Header Proto>
+                | <Visibility> pure <Fn Header Proto>
+                | <Visibility> static <Fn Header Proto>
+                | <Visibility> inherited <Fn Header Proto>
                 !
                 | inherited pure <Fn Header Proto>
-                | inherited private <Fn Header Proto>
+                | inherited <Visibility> <Fn Header Proto>
                 | inherited static <Fn Header Proto>
                 !
-                | pure static private <Fn Header Proto>
+                | pure static <Visibility> <Fn Header Proto>
                 ! pure static inherited   << does not make any sense .. just so i dont mess combinations
-                | pure private static <Fn Header Proto>
-                | pure private inherited <Fn Header Proto>
-                | pure inherited private <Fn Header Proto>
+                | pure <Visibility> static <Fn Header Proto>
+                | pure <Visibility> inherited <Fn Header Proto>
+                | pure inherited <Visibility> <Fn Header Proto>
                 ! pure inherited static   << does name make any sense as well 
                 ! 
                 ! static pure inherited 
-                | static pure private <Fn Header Proto>
-                | static private pure <Fn Header Proto>
-                | static private inherited <Fn Header Proto>
+                | static pure <Visibility> <Fn Header Proto>
+                | static <Visibility> pure <Fn Header Proto>
+                | static <Visibility> inherited <Fn Header Proto>
                 ! static inherited pure
-                | static inherited private <Fn Header Proto>
+                | static inherited <Visibility> <Fn Header Proto>
                 !
-                | inherited private pure <Fn Header Proto>
-                ! inherited private static
-                | inherited pure private <Fn Header Proto>
+                | inherited <Visibility> pure <Fn Header Proto>
+                ! inherited <Visibility> static
+                | inherited pure <Visibility> <Fn Header Proto>
                 | inherited pure static <Fn Header Proto>
 
 <CFunc Decl>  ::= <CFunc Proto> <Func Body>
@@ -181,6 +181,10 @@ Comment Line  = '//'
                   | pure extern function <Fn Header Proto>
                   | pure local extern function <Fn Header Proto>
                   | pure extern local function <Fn Header Proto>
+
+<Visibility> ::= public 
+               | private
+               | protected
     
 <Params>     ::= <Param> ',' <Params>
                | <Param>
@@ -278,31 +282,31 @@ Comment Line  = '//'
 <CVar Decl>     ::= let <Var Header>
                   | let final <Var Header>
                   | let final static <Var Header>
-                  | let final private <Var Header>
-                  | let final private static <Var Header>
-                  | let final static private <Var Header>
+                  | let final <Visibility> <Var Header>
+                  | let final <Visibility> static <Var Header>
+                  | let final static <Visibility> <Var Header>
                   !
                   | let static <Var Header>
                   | let static final <Var Header>
                   | let static atomic <Var Header>
-                  | let static private <Var Header>
-                  | let static private atomic <Var Header>
-                  | let static private final <Var Header>
-                  | let static atomic private <Var Header>
+                  | let static <Visibility> <Var Header>
+                  | let static <Visibility> atomic <Var Header>
+                  | let static <Visibility> final <Var Header>
+                  | let static atomic <Visibility> <Var Header>
                   !
-                  | let private <Var Header>
-                  | let private static <Var Header>
-                  | let private static atomic <Var Header>
-                  | let private final <Var Header>
-                  | let private static final <Var Header>
-                  | let private final static <Var Header>
-                  | let private atomic static
+                  | let <Visibility> <Var Header>
+                  | let <Visibility> static <Var Header>
+                  | let <Visibility> static atomic <Var Header>
+                  | let <Visibility> final <Var Header>
+                  | let <Visibility> static final <Var Header>
+                  | let <Visibility> final static <Var Header>
+                  | let <Visibility> atomic static
                   !
                   | let atomic <Var Header>
-                  | let atomic private <Var Header>
+                  | let atomic <Visibility> <Var Header>
                   | let atomic static <Var Header>
-                  | let atomic private static <Var Header>
-                  | let atomic static private <Var Header>                                   
+                  | let atomic <Visibility> static <Var Header>
+                  | let atomic static <Visibility> <Var Header>                                   
                   
 
 <Var Header> ::= <Id List> ':' <Type> '=' <CSE>
