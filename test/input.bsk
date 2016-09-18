@@ -46,7 +46,10 @@ let local atomic  x = new AIEntity() {
     } 
 }
 
-let x = [1, 2, std.String, let x = 3 in [1, 2, 3]]
+let x = [1, 2, std.String, let x = 3*100 in [1, 2, x]]
+
+let y = [ for str: String in file.ReadAll() if !str.empty() => str ]
+let z = [ for x: int in [1, 2, 3, 4] => x*x ]
 
 synchronized function posAt(x: int) -> ( fn(int, int) -> (int, byte) , int) {
     using std
@@ -55,3 +58,13 @@ synchronized function posAt(x: int) -> ( fn(int, int) -> (int, byte) , int) {
 }
 
 let y = system+(1, 2 ,3)
+
+let w = new int[][13]
+let w = new int[][13]
+
+let x = ["hello", "world", "awesome", "berserk", "yeah!"]
+let y = map(x, lambda(e: String) -> String = e.length())
+/* now y = [5, 5, 7, 7, 5] */
+
+/* can also be done via list comprehension */
+let y = [for e: String in x => e.length()]

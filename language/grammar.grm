@@ -331,8 +331,7 @@ Comment Line  = '//'
 
 <Type>     ::= <Base>
              | <Fn Type>
-             | <Pkg> 
-             | <Pkg> '<' <Types> '>'
+             | <Pkg Template>
              | <Type> '[' ']'
              | '(' <Types> ')' !Tuple
 
@@ -341,11 +340,15 @@ Comment Line  = '//'
             | 'fn' '(' <Types>  ')'
             | 'fn' '(' <Types>  ')' '->' <Type>
 
+<Pkg Template> ::= <Pkg> 
+                 | <Pkg> '<' <Types> '>'
+
 <Base>     ::= <Sign> <Scalar>
              | size_t
              | byte       
              | float
              | double
+             | bool
              | long double
 
 <Sign>     ::= signed 
@@ -367,7 +370,7 @@ Comment Line  = '//'
                | <If Stm>
                | while <Expr> <Block>
                | for <Arg> ';' <Arg> ';' <Arg> <Block>
-               | foreach Id in <Expr> <Block>
+               | foreach <Param> in <Expr> <Block>
                | <Normal Stm>
 
 <Using Stm> ::= using <Pkg>
@@ -404,6 +407,7 @@ Comment Line  = '//'
               | else                    <Block>                          
 
 <Block>     ::= '{' <Using Stms> <Stm List> '}' 
+              | synchronized '{' <Using Stms> <Stm List> '}' 
 
 <Stm List>  ::=  <Stm> <Stm List> 
               | 
@@ -503,11 +507,15 @@ Comment Line  = '//'
                | FloatLiteral
                | null
                | _
+               | true
+               | false
                | <Pkg>
                | <Lambda Expr>  
                | '(' <CSE> ')'
                | '[' for Id ':' <Type> in <Expr> '=>' <Expr> ']'
-               | '[' for Id            in <Expr> '=>' <Expr> ']'               
+               | '[' for Id            in <Expr> '=>' <Expr> ']'
+               | '[' for Id ':' <Type> in <Expr> if <Expr> '=>' <Expr> ']'
+               | '[' for Id            in <Expr> if <Expr> '=>' <Expr> ']'                  
                | '[' <CSE> ']'              
                
 <Lambda Expr> ::= lambda '(' <Params> ')' <Block>
@@ -519,8 +527,9 @@ Comment Line  = '//'
                | case <Expr>             '=>' <Expr> <Case Exprs>
                | else                    '=>' <Expr>        
                
-<New Expr> ::= new <Type> '('        ')'
-             | new <Type> '(' <Expr> ')'
+<New Expr> ::= new <Pkg Template> '('        ')'
+             | new <Pkg Template> '(' <Expr> ')'
+             | new <Pkg Template> '('        ')' '{' <CDecl> '}'!oh yeah, Java-style
+             | new <Pkg Template> '(' <Expr> ')' '{' <CDecl> '}' 
              | new <Type> 
-             | new <Type> '('        ')' '{' <CDecl> '}'!oh yeah, Java-style
-             | new <Type> '(' <Expr> ')' '{' <CDecl> '}' 
+             | new <Type> '[' <Expr> ']'
