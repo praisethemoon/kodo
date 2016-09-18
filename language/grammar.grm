@@ -74,14 +74,11 @@ Comment Line  = '//'
 <Decl>  ::= <Func Decl>
           | <Class Decl>
           | <Enum Decl>
-          | extern type Id
-          | local extern type Id
-          | extern local type Id
+          !| extern type Id
+          !| local extern type Id
+          !| extern local type Id
           | <Var Decl>   
-          | <CDefFunc Decl>        
-          !| <Using Stm>  not anymore!
-          !| <CDefStruct>
-          !| <Set Decl>
+          | <CDefFunc Decl>     
           
 <Imports> ::= <Import> <Imports>
             |
