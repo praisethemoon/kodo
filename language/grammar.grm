@@ -218,11 +218,11 @@ Comment Line  = '//'
 <Class Name> ::= Id
                | Id '<' <Id List> '>'
 
-<Extend Class Name> ::= <Pkg>
-                      | <Pkg> '<' <Extend Class Name List> '>'
-
 <Extend Class Name List> ::= <Extend Class Name> ',' <Extend Class Name List>
                            | <Extend Class Name>  
+                           
+<Extend Class Name> ::= <Pkg>
+                      | <Pkg> '<' <Extend Class Name List> '>'
 
 <CDecls> ::= <CDecl> <CDecls>
            |
@@ -343,6 +343,10 @@ Comment Line  = '//'
 
 <Base>     ::= <Sign> <Scalar>
              | size_t
+             | byte       
+             | float
+             | double
+             | long double
 
 <Sign>     ::= signed 
              | unsigned
@@ -353,10 +357,7 @@ Comment Line  = '//'
              | short
              | long
              | short int
-             | long int
-             | float
-             | double 
-             | byte           
+             | long int     
 
 ! ===================================================================
 ! Statements
