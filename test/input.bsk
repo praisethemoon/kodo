@@ -29,6 +29,12 @@ local class AIEntity {
 }
 
 
+local class AISmartEntity extends Entity {
+    public inherited(AISmartEntity) function abs () {
+    
+    }
+}
+
 extern function fprintf(ptrFile, String)
 
 abstract class AIEntity {
@@ -57,7 +63,10 @@ synchronized function posAt(x: int) -> ( fn(int, int) -> (int, byte) , int) {
 }
 
 let y = system+(1, 2 ,3)
-
+class Duck extends Bird, Flyable
+{
+    public inherited (Duck) function fly(){  }
+}
 let w = new int[][13]
 let w = new int[][13]
 

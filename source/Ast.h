@@ -155,6 +155,8 @@ class AstLambdaExpr;
 class AstOpNew_;
 class AstOpNewClass;
 
+/* todo: use unordered set instead of vector */
+
 /* this is the top level expr. */
 class AstPackageExpr: public ContextStruct
 {

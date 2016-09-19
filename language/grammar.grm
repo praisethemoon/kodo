@@ -136,36 +136,36 @@ Comment Line  = '//'
                 | pure <Visibility> function <Fn Header Proto>
                 | pure <inherited> function <Fn Header Proto>
                 !
-                | static pure <Fn Header Proto>
-                | static <Visibility> <Fn Header Proto>
-                | static <inherited> <Fn Header Proto>
+                | static pure function <Fn Header Proto>
+                | static <Visibility> function <Fn Header Proto>
+                | static <inherited> function <Fn Header Proto>
                 !
-                | <Visibility> pure <Fn Header Proto>
-                | <Visibility> static <Fn Header Proto>
-                | <Visibility> <inherited> <Fn Header Proto>
+                | <Visibility> pure function <Fn Header Proto>
+                | <Visibility> static function <Fn Header Proto>
+                | <Visibility> <inherited> function <Fn Header Proto>
                 !
-                | <inherited> pure <Fn Header Proto>
-                | <inherited> <Visibility> <Fn Header Proto>
-                | <inherited> static <Fn Header Proto>
+                | <inherited> pure function <Fn Header Proto>
+                | <inherited> <Visibility> function <Fn Header Proto>
+                | <inherited> static function <Fn Header Proto>
                 !
-                | pure static <Visibility> <Fn Header Proto>
+                | pure static <Visibility> function <Fn Header Proto>
                 ! pure static <inherited>   << does not make any sense .. just so i dont mess combinations
-                | pure <Visibility> static <Fn Header Proto>
-                | pure <Visibility> <inherited> <Fn Header Proto>
-                | pure <inherited> <Visibility> <Fn Header Proto>
+                | pure <Visibility> static function <Fn Header Proto>
+                | pure <Visibility> <inherited> function <Fn Header Proto>
+                | pure <inherited> <Visibility> function <Fn Header Proto>
                 ! pure <inherited> static   << does name make any sense as well 
                 ! 
                 ! static pure <inherited> 
-                | static pure <Visibility> <Fn Header Proto>
-                | static <Visibility> pure <Fn Header Proto>
-                | static <Visibility> <inherited> <Fn Header Proto>
+                | static pure <Visibility> function <Fn Header Proto>
+                | static <Visibility> pure function <Fn Header Proto>
+                | static <Visibility> <inherited> function <Fn Header Proto>
                 ! static <inherited> pure
-                | static <inherited> <Visibility> <Fn Header Proto>
+                | static <inherited> <Visibility> function <Fn Header Proto>
                 !
-                | <inherited> <Visibility> pure <Fn Header Proto>
+                | <inherited> <Visibility> pure function <Fn Header Proto>
                 ! <inherited> <Visibility> static
-                | <inherited> pure <Visibility> <Fn Header Proto>
-                | <inherited> pure static <Fn Header Proto>
+                | <inherited> pure <Visibility> function <Fn Header Proto>
+                | <inherited> pure static function <Fn Header Proto>
 
 <CFunc Decl>  ::= <CFunc Proto> <Func Body>
         
@@ -183,7 +183,7 @@ Comment Line  = '//'
                | private
                | protected
 
-<Inherited> ::= inherited '[' <Pkg List> ']'
+<Inherited> ::= inherited '(' <Pkg List> ')'
               | inherited
     
 <Params>     ::= <Param> ',' <Params>
