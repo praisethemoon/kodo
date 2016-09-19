@@ -28,7 +28,6 @@ local class AIEntity {
     }    
 }
 
-local extern type ptrFILE
 
 extern function fprintf(ptrFile, String)
 
