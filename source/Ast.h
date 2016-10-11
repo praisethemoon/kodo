@@ -3,53 +3,72 @@
 
 #include "Parser.h"
 
-class AstImport;
-class AstImportExpr;
-class AstImportAllExpr;
-class AstImportAsExpr;
-class AstImportFromExpr;
+/* Mother of all life */
+class Expr;
 
-class AstFunctionHeader;
+/* Main Entry */
+class PkgExpr;
 
-class AstFunction;
-class AstFunctionBlock;
-class AstFunctionExpr;
+/* imports */
+class ImportExpr;
+class ImportAllExpr;
+class ImportAsExpr;
+class ImportFromExpr;
+class FilePathExpr;
+class FilePathAllExpr;
+class FilePathListExpr;
 
-class AstClassFunctionProto;
-class AstClassFunctionBodyImpl;
-class AstClassFunctionBlockImpl;
+/* function decl */
+class FnHeaderProtoExpr;
+class FnHeaderProtoParamsExpr;
+class FnHeaderProtoTypesExpr;
+class FnHeaderImplExpr;
+class FuncDeclExpr;
+class FuncBodyExpr;
 
-class AstExternType;
-class AstExternFunctionProto;
+/* class function decl/impl */
+class CFuncProtoExpr;
+class CFuncDeclExpr;
+class VisibilityExpr;
+class InheritedExpr;
+class OperatorImplExpr;
+class OperatorProtoExpr;
+class OperatorHeaderProtoExpr;
+class OperatorHeaderImplExpr;
+class ClassVarDeclExpr;
 
-class AstParam;
+/* generic */
+class ParamsExpr;
+class ParamExpr;
+class IdListExpr;
 
-class AstType;
+/* class declaration */
+class ClassExpr;
+class ExtendClassNameListExpr;
+class ExtendClassNameExpr;
 
-class AstId;
+class OperatorExpr;
 
-class AstClassDecl;
-class AstAbstractClassDecl;
-class AstClassExtend;
-class AstClassVarDecl;
+/* var decl */
 
-class AstUsingExpr;
+class VarDeclExpr;
+class VarHeader;
 
-class AstOperatorHeader;
+/* enums */
 
-class AstOperatorOverloadExpr;
-class AstOperatorOverloadBody;
+class EnumDeclExpr;
+class EnumDefListExpr;
 
-class AstVarDecl;
+/* types */
+class TypeExpr;
+class TypesExpr;
+class BaseTypeExpr;
+class FnTypeExpr;
+class ArrayExpr;
+class TupleExpr;
+class PkgExpr;
+class PkgTemplateExpr;
 
-class AstEnumDecl;
-class AstSetDecl;
-
-class AstType;
-class AstFnType;
-class AstBaseType;
-class AstArrayType;
-class AstTemplateType;
 
 class AstStm;
 class AstVarDeclStm;
@@ -154,6 +173,7 @@ class AstLambdaExpr;
 
 class AstOpNew_;
 class AstOpNewClass;
+
 
 /* todo: use unordered set instead of vector */
 
