@@ -150,50 +150,50 @@ THIS SOFTWARE IS PROVIDED BY THE AUTHORS "AS IS" AND ANY EXPRESS OR IMPLIED WARR
 #define PS_STRUCT 112 // struct
 #define PS_SYNCHRONIZED 113 // synchronized
 #define PS_TRUE 114 // true
-#define PS_TYPE 115 // type
-#define PS_UNSIGNED 116 // unsigned
-#define PS_USING 117 // using
-#define PS_WHEN 118 // when
-#define PS_WHILE 119 // while
-#define PS_ABSTRACTCLASS 120 // <Abstract Class>
-#define PS_ACDECL 121 // <ACDecl>
-#define PS_ACDECLS 122 // <ACDecls>
-#define PS_ARG 123 // <Arg>
-#define PS_BASE 124 // <Base>
-#define PS_BLOCK 125 // <Block>
-#define PS_CASEEXPRS 126 // <Case Exprs>
-#define PS_CASESTMS 127 // <Case Stms>
-#define PS_CDECL 128 // <CDecl>
-#define PS_CDECLS 129 // <CDecls>
-#define PS_CDEFFUNCDECL 130 // <CDefFunc Decl>
-#define PS_CDEFSTRUCT 131 // <CDefStruct>
-#define PS_CFUNCDECL 132 // <CFunc Decl>
-#define PS_CFUNCPROTO 133 // <CFunc Proto>
-#define PS_CLASSDECL 134 // <Class Decl>
-#define PS_CLASSNAME 135 // <Class Name>
-#define PS_CSE 136 // <CSE>
-#define PS_CVARDECL 137 // <CVar Decl>
-#define PS_DECL 138 // <Decl>
-#define PS_DECLLIST 139 // <Decl List>
-#define PS_DECLS 140 // <Decls>
-#define PS_ELSEMINUSIF 141 // <else-if>
-#define PS_ENUMDECL 142 // <Enum Decl>
-#define PS_ENUMDEF 143 // <Enum Def>
-#define PS_EXPR 144 // <Expr>
-#define PS_EXTENDCLASSNAME 145 // <Extend Class Name>
-#define PS_EXTENDCLASSNAMELIST 146 // <Extend Class Name List>
-#define PS_FILEPATH 147 // <File Path>
-#define PS_FILEPATHALL 148 // <File Path All>
-#define PS_FILEPATHLIST 149 // <File Path List>
-#define PS_FNHEADERIMPL 150 // <Fn Header Impl>
-#define PS_FNHEADERPROTO 151 // <Fn Header Proto>
-#define PS_FNTYPE 152 // <Fn Type>
-#define PS_FUNCBODY 153 // <Func Body>
-#define PS_FUNCDECL 154 // <Func Decl>
-#define PS_IDLIST 155 // <Id List>
-#define PS_IFSTM 156 // <If Stm>
-#define PS_IMPORT2 157 // <Import>
-#define PS_IMPORTS 158 // <Imports>
+#define PS_UNSIGNED 115 // unsigned
+#define PS_USING 116 // using
+#define PS_WHEN 117 // when
+#define PS_WHILE 118 // while
+#define PS_ABSTRACTCLASS 119 // <Abstract Class>
+#define PS_ACDECL 120 // <ACDecl>
+#define PS_ACDECLS 121 // <ACDecls>
+#define PS_ARG 122 // <Arg>
+#define PS_BASE 123 // <Base>
+#define PS_BLOCK 124 // <Block>
+#define PS_CASEEXPRS 125 // <Case Exprs>
+#define PS_CASESTMS 126 // <Case Stms>
+#define PS_CDECL 127 // <CDecl>
+#define PS_CDECLS 128 // <CDecls>
+#define PS_CDEFFUNCDECL 129 // <CDefFunc Decl>
+#define PS_CDEFSTRUCT 130 // <CDefStruct>
+#define PS_CFUNCDECL 131 // <CFunc Decl>
+#define PS_CFUNCPROTO 132 // <CFunc Proto>
+#define PS_CLASSDECL 133 // <Class Decl>
+#define PS_CLASSNAME 134 // <Class Name>
+#define PS_CSE 135 // <CSE>
+#define PS_CVARDECL 136 // <CVar Decl>
+#define PS_DECL 137 // <Decl>
+#define PS_DECLLIST 138 // <Decl List>
+#define PS_DECLS 139 // <Decls>
+#define PS_ELSEMINUSIF 140 // <else-if>
+#define PS_ENUMDECL 141 // <Enum Decl>
+#define PS_ENUMDEF 142 // <Enum Def>
+#define PS_EXPR 143 // <Expr>
+#define PS_EXTENDCLASSNAME 144 // <Extend Class Name>
+#define PS_EXTENDCLASSNAMELIST 145 // <Extend Class Name List>
+#define PS_FILEPATH 146 // <File Path>
+#define PS_FILEPATHALL 147 // <File Path All>
+#define PS_FILEPATHLIST 148 // <File Path List>
+#define PS_FNHEADERIMPL 149 // <Fn Header Impl>
+#define PS_FNHEADERPROTO 150 // <Fn Header Proto>
+#define PS_FNTYPE 151 // <Fn Type>
+#define PS_FUNCBODY 152 // <Func Body>
+#define PS_FUNCDECL 153 // <Func Decl>
+#define PS_IDLIST 154 // <Id List>
+#define PS_IFSTM 155 // <If Stm>
+#define PS_IMPORT2 156 // <Import>
+#define PS_IMPORTS 157 // <Imports>
+#define PS_INHERITED2 158 // <Inherited>
 #define PS_LAMBDAEXPR 159 // <Lambda Expr>
 #define PS_NEWEXPR 160 // <New Expr>
 #define PS_NORMALCLASS 161 // <Normal Class>
@@ -219,19 +219,20 @@ THIS SOFTWARE IS PROVIDED BY THE AUTHORS "AS IS" AND ANY EXPRESS OR IMPLIED WARR
 #define PS_PARAM 181 // <Param>
 #define PS_PARAMS 182 // <Params>
 #define PS_PKG 183 // <Pkg>
-#define PS_PKGTEMPLATE 184 // <Pkg Template>
-#define PS_SCALAR 185 // <Scalar>
-#define PS_SIGN 186 // <Sign>
-#define PS_STM 187 // <Stm>
-#define PS_STMLIST 188 // <Stm List>
-#define PS_TYPE2 189 // <Type>
-#define PS_TYPES 190 // <Types>
-#define PS_USINGSTM 191 // <Using Stm>
-#define PS_USINGSTMS 192 // <Using Stms>
-#define PS_VALUE 193 // <Value>
-#define PS_VARDECL 194 // <Var Decl>
-#define PS_VARHEADER 195 // <Var Header>
-#define PS_VISIBILITY 196 // <Visibility>
+#define PS_PKGLIST 184 // <Pkg List>
+#define PS_PKGTEMPLATE 185 // <Pkg Template>
+#define PS_SCALAR 186 // <Scalar>
+#define PS_SIGN 187 // <Sign>
+#define PS_STM 188 // <Stm>
+#define PS_STMLIST 189 // <Stm List>
+#define PS_TYPE 190 // <Type>
+#define PS_TYPES 191 // <Types>
+#define PS_USINGSTM 192 // <Using Stm>
+#define PS_USINGSTMS 193 // <Using Stms>
+#define PS_VALUE 194 // <Value>
+#define PS_VARDECL 195 // <Var Decl>
+#define PS_VARHEADER 196 // <Var Header>
+#define PS_VISIBILITY 197 // <Visibility>
 
 
 #endif

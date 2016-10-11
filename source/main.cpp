@@ -87,5 +87,11 @@ int main(int argc, char *argv[]){
     printf("%s", BERSERK_LOGO);
     parseCmd(argc, argv);
 
+    CompilationHandler *compilationHandler = new CompilationHandler();
+    CompilationService* service = compilationHandler->createFromSource("C:/Users/Mega-PC/Desktop/berserk/test/input.bsk");
+    service ->run();
+    delete service;
+    delete compilationHandler;
+
     return 0;
 }

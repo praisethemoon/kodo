@@ -206,7 +206,6 @@ void RuleTemplate(struct TokenStruct *Token, ContextStruct *parent) {
 
 
 
-
 /* <Decls> ::= <Imports> <Using Stms> <Decl List> */
 void Rule_Decls(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
@@ -257,30 +256,6 @@ void Rule_Decl2(struct TokenStruct *Token, struct ContextStruct *Context) {
 
 /* <Decl> ::= <Enum Decl> */
 void Rule_Decl3(struct TokenStruct *Token, struct ContextStruct *Context) {
-  RuleTemplate(Token,Context);
-  };
-
-
-
-
-/* <Decl> ::= extern type Id */
-void Rule_Decl_extern_type_Id(struct TokenStruct *Token, struct ContextStruct *Context) {
-  RuleTemplate(Token,Context);
-  };
-
-
-
-
-/* <Decl> ::= local extern type Id */
-void Rule_Decl_local_extern_type_Id(struct TokenStruct *Token, struct ContextStruct *Context) {
-  RuleTemplate(Token,Context);
-  };
-
-
-
-
-/* <Decl> ::= extern local type Id */
-void Rule_Decl_extern_local_type_Id(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -591,8 +566,8 @@ void Rule_CFuncProto_function2(struct TokenStruct *Token, struct ContextStruct *
 
 
 
-/* <CFunc Proto> ::= inherited function <Fn Header Proto> */
-void Rule_CFuncProto_inherited_function(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= <Inherited> function <Fn Header Proto> */
+void Rule_CFuncProto_function3(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -615,168 +590,168 @@ void Rule_CFuncProto_pure_function2(struct TokenStruct *Token, struct ContextStr
 
 
 
-/* <CFunc Proto> ::= pure inherited function <Fn Header Proto> */
-void Rule_CFuncProto_pure_inherited_function(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= pure <Inherited> function <Fn Header Proto> */
+void Rule_CFuncProto_pure_function3(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <CFunc Proto> ::= static pure <Fn Header Proto> */
-void Rule_CFuncProto_static_pure(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= static pure function <Fn Header Proto> */
+void Rule_CFuncProto_static_pure_function(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <CFunc Proto> ::= static <Visibility> <Fn Header Proto> */
-void Rule_CFuncProto_static(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= static <Visibility> function <Fn Header Proto> */
+void Rule_CFuncProto_static_function2(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <CFunc Proto> ::= static inherited <Fn Header Proto> */
-void Rule_CFuncProto_static_inherited(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= static <Inherited> function <Fn Header Proto> */
+void Rule_CFuncProto_static_function3(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <CFunc Proto> ::= <Visibility> pure <Fn Header Proto> */
-void Rule_CFuncProto_pure(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= <Visibility> pure function <Fn Header Proto> */
+void Rule_CFuncProto_pure_function4(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <CFunc Proto> ::= <Visibility> static <Fn Header Proto> */
-void Rule_CFuncProto_static2(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= <Visibility> static function <Fn Header Proto> */
+void Rule_CFuncProto_static_function4(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <CFunc Proto> ::= <Visibility> inherited <Fn Header Proto> */
-void Rule_CFuncProto_inherited(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= <Visibility> <Inherited> function <Fn Header Proto> */
+void Rule_CFuncProto_function4(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <CFunc Proto> ::= inherited pure <Fn Header Proto> */
-void Rule_CFuncProto_inherited_pure(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= <Inherited> pure function <Fn Header Proto> */
+void Rule_CFuncProto_pure_function5(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <CFunc Proto> ::= inherited <Visibility> <Fn Header Proto> */
-void Rule_CFuncProto_inherited2(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= <Inherited> <Visibility> function <Fn Header Proto> */
+void Rule_CFuncProto_function5(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <CFunc Proto> ::= inherited static <Fn Header Proto> */
-void Rule_CFuncProto_inherited_static(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= <Inherited> static function <Fn Header Proto> */
+void Rule_CFuncProto_static_function5(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <CFunc Proto> ::= pure static <Visibility> <Fn Header Proto> */
-void Rule_CFuncProto_pure_static(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= pure static <Visibility> function <Fn Header Proto> */
+void Rule_CFuncProto_pure_static_function2(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <CFunc Proto> ::= pure <Visibility> static <Fn Header Proto> */
-void Rule_CFuncProto_pure_static2(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= pure <Visibility> static function <Fn Header Proto> */
+void Rule_CFuncProto_pure_static_function3(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <CFunc Proto> ::= pure <Visibility> inherited <Fn Header Proto> */
-void Rule_CFuncProto_pure_inherited(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= pure <Visibility> <Inherited> function <Fn Header Proto> */
+void Rule_CFuncProto_pure_function6(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <CFunc Proto> ::= pure inherited <Visibility> <Fn Header Proto> */
-void Rule_CFuncProto_pure_inherited2(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= pure <Inherited> <Visibility> function <Fn Header Proto> */
+void Rule_CFuncProto_pure_function7(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <CFunc Proto> ::= static pure <Visibility> <Fn Header Proto> */
-void Rule_CFuncProto_static_pure2(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= static pure <Visibility> function <Fn Header Proto> */
+void Rule_CFuncProto_static_pure_function2(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <CFunc Proto> ::= static <Visibility> pure <Fn Header Proto> */
-void Rule_CFuncProto_static_pure3(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= static <Visibility> pure function <Fn Header Proto> */
+void Rule_CFuncProto_static_pure_function3(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <CFunc Proto> ::= static <Visibility> inherited <Fn Header Proto> */
-void Rule_CFuncProto_static_inherited2(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= static <Visibility> <Inherited> function <Fn Header Proto> */
+void Rule_CFuncProto_static_function6(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <CFunc Proto> ::= static inherited <Visibility> <Fn Header Proto> */
-void Rule_CFuncProto_static_inherited3(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= static <Inherited> <Visibility> function <Fn Header Proto> */
+void Rule_CFuncProto_static_function7(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <CFunc Proto> ::= inherited <Visibility> pure <Fn Header Proto> */
-void Rule_CFuncProto_inherited_pure2(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= <Inherited> <Visibility> pure function <Fn Header Proto> */
+void Rule_CFuncProto_pure_function8(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <CFunc Proto> ::= inherited pure <Visibility> <Fn Header Proto> */
-void Rule_CFuncProto_inherited_pure3(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= <Inherited> pure <Visibility> function <Fn Header Proto> */
+void Rule_CFuncProto_pure_function9(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
 
 
 
-/* <CFunc Proto> ::= inherited pure static <Fn Header Proto> */
-void Rule_CFuncProto_inherited_pure_static(struct TokenStruct *Token, struct ContextStruct *Context) {
+/* <CFunc Proto> ::= <Inherited> pure static function <Fn Header Proto> */
+void Rule_CFuncProto_pure_static_function4(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -881,6 +856,22 @@ void Rule_Visibility_private(struct TokenStruct *Token, struct ContextStruct *Co
 
 /* <Visibility> ::= protected */
 void Rule_Visibility_protected(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Inherited> ::= inherited '(' <Pkg List> ')' */
+void Rule_Inherited_inherited_LParen_RParen(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Inherited> ::= inherited */
+void Rule_Inherited_inherited(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
   };
 
@@ -2183,6 +2174,22 @@ void Rule_Pkg_Id(struct TokenStruct *Token, struct ContextStruct *Context) {
 
 
 
+/* <Pkg List> ::= <Pkg> ',' <Pkg List> */
+void Rule_PkgList_Comma(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
+/* <Pkg List> ::= <Pkg> */
+void Rule_PkgList(struct TokenStruct *Token, struct ContextStruct *Context) {
+  RuleTemplate(Token,Context);
+  };
+
+
+
+
 /* <If Stm> ::= if <Expr> <Block> <else-if> */
 void Rule_IfStm_if(struct TokenStruct *Token, struct ContextStruct *Context) {
   RuleTemplate(Token,Context);
@@ -3147,1075 +3154,1078 @@ void (*RuleJumpTable[])(struct TokenStruct *Token, struct ContextStruct *Context
   /* 6. <Decl> ::= <Enum Decl> */
   Rule_Decl3,
 
-  /* 7. <Decl> ::= extern type Id */
-  Rule_Decl_extern_type_Id,
-
-  /* 8. <Decl> ::= local extern type Id */
-  Rule_Decl_local_extern_type_Id,
-
-  /* 9. <Decl> ::= extern local type Id */
-  Rule_Decl_extern_local_type_Id,
-
-  /* 10. <Decl> ::= <Var Decl> */
+  /* 7. <Decl> ::= <Var Decl> */
   Rule_Decl4,
 
-  /* 11. <Decl> ::= <CDefFunc Decl> */
+  /* 8. <Decl> ::= <CDefFunc Decl> */
   Rule_Decl5,
 
-  /* 12. <Imports> ::= <Import> <Imports> */
+  /* 9. <Imports> ::= <Import> <Imports> */
   Rule_Imports,
 
-  /* 13. <Imports> ::=  */
+  /* 10. <Imports> ::=  */
   Rule_Imports2,
 
-  /* 14. <Import> ::= import <File Path All> */
+  /* 11. <Import> ::= import <File Path All> */
   Rule_Import_import,
 
-  /* 15. <Import> ::= import <File Path> as Id */
+  /* 12. <Import> ::= import <File Path> as Id */
   Rule_Import_import_as_Id,
 
-  /* 16. <Import> ::= from <File Path> import <File Path List> */
+  /* 13. <Import> ::= from <File Path> import <File Path List> */
   Rule_Import_from_import,
 
-  /* 17. <File Path> ::= Id '.' <File Path> */
+  /* 14. <File Path> ::= Id '.' <File Path> */
   Rule_FilePath_Id_Dot,
 
-  /* 18. <File Path> ::= Id */
+  /* 15. <File Path> ::= Id */
   Rule_FilePath_Id,
 
-  /* 19. <File Path All> ::= Id '.' <File Path All> */
+  /* 16. <File Path All> ::= Id '.' <File Path All> */
   Rule_FilePathAll_Id_Dot,
 
-  /* 20. <File Path All> ::= Id '.*' */
+  /* 17. <File Path All> ::= Id '.*' */
   Rule_FilePathAll_Id_DotTimes,
 
-  /* 21. <File Path All> ::= Id */
+  /* 18. <File Path All> ::= Id */
   Rule_FilePathAll_Id,
 
-  /* 22. <File Path List> ::= <File Path> ',' <File Path List> */
+  /* 19. <File Path List> ::= <File Path> ',' <File Path List> */
   Rule_FilePathList_Comma,
 
-  /* 23. <File Path List> ::= <File Path> */
+  /* 20. <File Path List> ::= <File Path> */
   Rule_FilePathList,
 
-  /* 24. <Fn Header Proto> ::= Id '(' <Params> ')' */
+  /* 21. <Fn Header Proto> ::= Id '(' <Params> ')' */
   Rule_FnHeaderProto_Id_LParen_RParen,
 
-  /* 25. <Fn Header Proto> ::= Id '(' <Params> ')' '->' <Type> */
+  /* 22. <Fn Header Proto> ::= Id '(' <Params> ')' '->' <Type> */
   Rule_FnHeaderProto_Id_LParen_RParen_MinusGt,
 
-  /* 26. <Fn Header Proto> ::= Id '(' <Types> ')' */
+  /* 23. <Fn Header Proto> ::= Id '(' <Types> ')' */
   Rule_FnHeaderProto_Id_LParen_RParen2,
 
-  /* 27. <Fn Header Proto> ::= Id '(' <Types> ')' '->' <Type> */
+  /* 24. <Fn Header Proto> ::= Id '(' <Types> ')' '->' <Type> */
   Rule_FnHeaderProto_Id_LParen_RParen_MinusGt2,
 
-  /* 28. <Fn Header Proto> ::= Id '(' ')' */
+  /* 25. <Fn Header Proto> ::= Id '(' ')' */
   Rule_FnHeaderProto_Id_LParen_RParen3,
 
-  /* 29. <Fn Header Proto> ::= Id '(' ')' '->' <Type> */
+  /* 26. <Fn Header Proto> ::= Id '(' ')' '->' <Type> */
   Rule_FnHeaderProto_Id_LParen_RParen_MinusGt3,
 
-  /* 30. <Fn Header Impl> ::= Id '(' <Params> ')' */
+  /* 27. <Fn Header Impl> ::= Id '(' <Params> ')' */
   Rule_FnHeaderImpl_Id_LParen_RParen,
 
-  /* 31. <Fn Header Impl> ::= Id '(' <Params> ')' '->' <Type> */
+  /* 28. <Fn Header Impl> ::= Id '(' <Params> ')' '->' <Type> */
   Rule_FnHeaderImpl_Id_LParen_RParen_MinusGt,
 
-  /* 32. <Fn Header Impl> ::= Id '(' ')' */
+  /* 29. <Fn Header Impl> ::= Id '(' ')' */
   Rule_FnHeaderImpl_Id_LParen_RParen2,
 
-  /* 33. <Fn Header Impl> ::= Id '(' ')' '->' <Type> */
+  /* 30. <Fn Header Impl> ::= Id '(' ')' '->' <Type> */
   Rule_FnHeaderImpl_Id_LParen_RParen_MinusGt2,
 
-  /* 34. <Func Decl> ::= function <Fn Header Impl> <Func Body> */
+  /* 31. <Func Decl> ::= function <Fn Header Impl> <Func Body> */
   Rule_FuncDecl_function,
 
-  /* 35. <Func Decl> ::= local function <Fn Header Impl> <Func Body> */
+  /* 32. <Func Decl> ::= local function <Fn Header Impl> <Func Body> */
   Rule_FuncDecl_local_function,
 
-  /* 36. <Func Decl> ::= synchronized function <Fn Header Impl> <Func Body> */
+  /* 33. <Func Decl> ::= synchronized function <Fn Header Impl> <Func Body> */
   Rule_FuncDecl_synchronized_function,
 
-  /* 37. <Func Decl> ::= synchronized local function <Fn Header Impl> <Func Body> */
+  /* 34. <Func Decl> ::= synchronized local function <Fn Header Impl> <Func Body> */
   Rule_FuncDecl_synchronized_local_function,
 
-  /* 38. <Func Decl> ::= local synchronized function <Fn Header Impl> <Func Body> */
+  /* 35. <Func Decl> ::= local synchronized function <Fn Header Impl> <Func Body> */
   Rule_FuncDecl_local_synchronized_function,
 
-  /* 39. <Func Decl> ::= pure function <Fn Header Impl> <Func Body> */
+  /* 36. <Func Decl> ::= pure function <Fn Header Impl> <Func Body> */
   Rule_FuncDecl_pure_function,
 
-  /* 40. <Func Decl> ::= local pure function <Fn Header Impl> <Func Body> */
+  /* 37. <Func Decl> ::= local pure function <Fn Header Impl> <Func Body> */
   Rule_FuncDecl_local_pure_function,
 
-  /* 41. <Func Decl> ::= pure local function <Fn Header Impl> <Func Body> */
+  /* 38. <Func Decl> ::= pure local function <Fn Header Impl> <Func Body> */
   Rule_FuncDecl_pure_local_function,
 
-  /* 42. <Func Body> ::= '=' <Expr> */
+  /* 39. <Func Body> ::= '=' <Expr> */
   Rule_FuncBody_Eq,
 
-  /* 43. <Func Body> ::= <Block> */
+  /* 40. <Func Body> ::= <Block> */
   Rule_FuncBody,
 
-  /* 44. <CFunc Proto> ::= function <Fn Header Proto> */
+  /* 41. <CFunc Proto> ::= function <Fn Header Proto> */
   Rule_CFuncProto_function,
 
-  /* 45. <CFunc Proto> ::= pure function <Fn Header Proto> */
+  /* 42. <CFunc Proto> ::= pure function <Fn Header Proto> */
   Rule_CFuncProto_pure_function,
 
-  /* 46. <CFunc Proto> ::= static function <Fn Header Proto> */
+  /* 43. <CFunc Proto> ::= static function <Fn Header Proto> */
   Rule_CFuncProto_static_function,
 
-  /* 47. <CFunc Proto> ::= <Visibility> function <Fn Header Proto> */
+  /* 44. <CFunc Proto> ::= <Visibility> function <Fn Header Proto> */
   Rule_CFuncProto_function2,
 
-  /* 48. <CFunc Proto> ::= inherited function <Fn Header Proto> */
-  Rule_CFuncProto_inherited_function,
+  /* 45. <CFunc Proto> ::= <Inherited> function <Fn Header Proto> */
+  Rule_CFuncProto_function3,
 
-  /* 49. <CFunc Proto> ::= pure static function <Fn Header Proto> */
+  /* 46. <CFunc Proto> ::= pure static function <Fn Header Proto> */
   Rule_CFuncProto_pure_static_function,
 
-  /* 50. <CFunc Proto> ::= pure <Visibility> function <Fn Header Proto> */
+  /* 47. <CFunc Proto> ::= pure <Visibility> function <Fn Header Proto> */
   Rule_CFuncProto_pure_function2,
 
-  /* 51. <CFunc Proto> ::= pure inherited function <Fn Header Proto> */
-  Rule_CFuncProto_pure_inherited_function,
+  /* 48. <CFunc Proto> ::= pure <Inherited> function <Fn Header Proto> */
+  Rule_CFuncProto_pure_function3,
 
-  /* 52. <CFunc Proto> ::= static pure <Fn Header Proto> */
-  Rule_CFuncProto_static_pure,
+  /* 49. <CFunc Proto> ::= static pure function <Fn Header Proto> */
+  Rule_CFuncProto_static_pure_function,
 
-  /* 53. <CFunc Proto> ::= static <Visibility> <Fn Header Proto> */
-  Rule_CFuncProto_static,
+  /* 50. <CFunc Proto> ::= static <Visibility> function <Fn Header Proto> */
+  Rule_CFuncProto_static_function2,
 
-  /* 54. <CFunc Proto> ::= static inherited <Fn Header Proto> */
-  Rule_CFuncProto_static_inherited,
+  /* 51. <CFunc Proto> ::= static <Inherited> function <Fn Header Proto> */
+  Rule_CFuncProto_static_function3,
 
-  /* 55. <CFunc Proto> ::= <Visibility> pure <Fn Header Proto> */
-  Rule_CFuncProto_pure,
+  /* 52. <CFunc Proto> ::= <Visibility> pure function <Fn Header Proto> */
+  Rule_CFuncProto_pure_function4,
 
-  /* 56. <CFunc Proto> ::= <Visibility> static <Fn Header Proto> */
-  Rule_CFuncProto_static2,
+  /* 53. <CFunc Proto> ::= <Visibility> static function <Fn Header Proto> */
+  Rule_CFuncProto_static_function4,
 
-  /* 57. <CFunc Proto> ::= <Visibility> inherited <Fn Header Proto> */
-  Rule_CFuncProto_inherited,
+  /* 54. <CFunc Proto> ::= <Visibility> <Inherited> function <Fn Header Proto> */
+  Rule_CFuncProto_function4,
 
-  /* 58. <CFunc Proto> ::= inherited pure <Fn Header Proto> */
-  Rule_CFuncProto_inherited_pure,
+  /* 55. <CFunc Proto> ::= <Inherited> pure function <Fn Header Proto> */
+  Rule_CFuncProto_pure_function5,
 
-  /* 59. <CFunc Proto> ::= inherited <Visibility> <Fn Header Proto> */
-  Rule_CFuncProto_inherited2,
+  /* 56. <CFunc Proto> ::= <Inherited> <Visibility> function <Fn Header Proto> */
+  Rule_CFuncProto_function5,
 
-  /* 60. <CFunc Proto> ::= inherited static <Fn Header Proto> */
-  Rule_CFuncProto_inherited_static,
+  /* 57. <CFunc Proto> ::= <Inherited> static function <Fn Header Proto> */
+  Rule_CFuncProto_static_function5,
 
-  /* 61. <CFunc Proto> ::= pure static <Visibility> <Fn Header Proto> */
-  Rule_CFuncProto_pure_static,
+  /* 58. <CFunc Proto> ::= pure static <Visibility> function <Fn Header Proto> */
+  Rule_CFuncProto_pure_static_function2,
 
-  /* 62. <CFunc Proto> ::= pure <Visibility> static <Fn Header Proto> */
-  Rule_CFuncProto_pure_static2,
+  /* 59. <CFunc Proto> ::= pure <Visibility> static function <Fn Header Proto> */
+  Rule_CFuncProto_pure_static_function3,
 
-  /* 63. <CFunc Proto> ::= pure <Visibility> inherited <Fn Header Proto> */
-  Rule_CFuncProto_pure_inherited,
+  /* 60. <CFunc Proto> ::= pure <Visibility> <Inherited> function <Fn Header Proto> */
+  Rule_CFuncProto_pure_function6,
 
-  /* 64. <CFunc Proto> ::= pure inherited <Visibility> <Fn Header Proto> */
-  Rule_CFuncProto_pure_inherited2,
+  /* 61. <CFunc Proto> ::= pure <Inherited> <Visibility> function <Fn Header Proto> */
+  Rule_CFuncProto_pure_function7,
 
-  /* 65. <CFunc Proto> ::= static pure <Visibility> <Fn Header Proto> */
-  Rule_CFuncProto_static_pure2,
+  /* 62. <CFunc Proto> ::= static pure <Visibility> function <Fn Header Proto> */
+  Rule_CFuncProto_static_pure_function2,
 
-  /* 66. <CFunc Proto> ::= static <Visibility> pure <Fn Header Proto> */
-  Rule_CFuncProto_static_pure3,
+  /* 63. <CFunc Proto> ::= static <Visibility> pure function <Fn Header Proto> */
+  Rule_CFuncProto_static_pure_function3,
 
-  /* 67. <CFunc Proto> ::= static <Visibility> inherited <Fn Header Proto> */
-  Rule_CFuncProto_static_inherited2,
+  /* 64. <CFunc Proto> ::= static <Visibility> <Inherited> function <Fn Header Proto> */
+  Rule_CFuncProto_static_function6,
 
-  /* 68. <CFunc Proto> ::= static inherited <Visibility> <Fn Header Proto> */
-  Rule_CFuncProto_static_inherited3,
+  /* 65. <CFunc Proto> ::= static <Inherited> <Visibility> function <Fn Header Proto> */
+  Rule_CFuncProto_static_function7,
 
-  /* 69. <CFunc Proto> ::= inherited <Visibility> pure <Fn Header Proto> */
-  Rule_CFuncProto_inherited_pure2,
+  /* 66. <CFunc Proto> ::= <Inherited> <Visibility> pure function <Fn Header Proto> */
+  Rule_CFuncProto_pure_function8,
 
-  /* 70. <CFunc Proto> ::= inherited pure <Visibility> <Fn Header Proto> */
-  Rule_CFuncProto_inherited_pure3,
+  /* 67. <CFunc Proto> ::= <Inherited> pure <Visibility> function <Fn Header Proto> */
+  Rule_CFuncProto_pure_function9,
 
-  /* 71. <CFunc Proto> ::= inherited pure static <Fn Header Proto> */
-  Rule_CFuncProto_inherited_pure_static,
+  /* 68. <CFunc Proto> ::= <Inherited> pure static function <Fn Header Proto> */
+  Rule_CFuncProto_pure_static_function4,
 
-  /* 72. <CFunc Decl> ::= <CFunc Proto> <Func Body> */
+  /* 69. <CFunc Decl> ::= <CFunc Proto> <Func Body> */
   Rule_CFuncDecl,
 
-  /* 73. <CDefFunc Decl> ::= extern function <Fn Header Proto> */
+  /* 70. <CDefFunc Decl> ::= extern function <Fn Header Proto> */
   Rule_CDefFuncDecl_extern_function,
 
-  /* 74. <CDefFunc Decl> ::= extern pure function <Fn Header Proto> */
+  /* 71. <CDefFunc Decl> ::= extern pure function <Fn Header Proto> */
   Rule_CDefFuncDecl_extern_pure_function,
 
-  /* 75. <CDefFunc Decl> ::= extern local function <Fn Header Proto> */
+  /* 72. <CDefFunc Decl> ::= extern local function <Fn Header Proto> */
   Rule_CDefFuncDecl_extern_local_function,
 
-  /* 76. <CDefFunc Decl> ::= local extern function <Fn Header Proto> */
+  /* 73. <CDefFunc Decl> ::= local extern function <Fn Header Proto> */
   Rule_CDefFuncDecl_local_extern_function,
 
-  /* 77. <CDefFunc Decl> ::= local pure extern function <Fn Header Proto> */
+  /* 74. <CDefFunc Decl> ::= local pure extern function <Fn Header Proto> */
   Rule_CDefFuncDecl_local_pure_extern_function,
 
-  /* 78. <CDefFunc Decl> ::= local extern pure function <Fn Header Proto> */
+  /* 75. <CDefFunc Decl> ::= local extern pure function <Fn Header Proto> */
   Rule_CDefFuncDecl_local_extern_pure_function,
 
-  /* 79. <CDefFunc Decl> ::= pure extern function <Fn Header Proto> */
+  /* 76. <CDefFunc Decl> ::= pure extern function <Fn Header Proto> */
   Rule_CDefFuncDecl_pure_extern_function,
 
-  /* 80. <CDefFunc Decl> ::= pure local extern function <Fn Header Proto> */
+  /* 77. <CDefFunc Decl> ::= pure local extern function <Fn Header Proto> */
   Rule_CDefFuncDecl_pure_local_extern_function,
 
-  /* 81. <CDefFunc Decl> ::= pure extern local function <Fn Header Proto> */
+  /* 78. <CDefFunc Decl> ::= pure extern local function <Fn Header Proto> */
   Rule_CDefFuncDecl_pure_extern_local_function,
 
-  /* 82. <Visibility> ::= public */
+  /* 79. <Visibility> ::= public */
   Rule_Visibility_public,
 
-  /* 83. <Visibility> ::= private */
+  /* 80. <Visibility> ::= private */
   Rule_Visibility_private,
 
-  /* 84. <Visibility> ::= protected */
+  /* 81. <Visibility> ::= protected */
   Rule_Visibility_protected,
 
-  /* 85. <Params> ::= <Param> ',' <Params> */
+  /* 82. <Inherited> ::= inherited '(' <Pkg List> ')' */
+  Rule_Inherited_inherited_LParen_RParen,
+
+  /* 83. <Inherited> ::= inherited */
+  Rule_Inherited_inherited,
+
+  /* 84. <Params> ::= <Param> ',' <Params> */
   Rule_Params_Comma,
 
-  /* 86. <Params> ::= <Param> */
+  /* 85. <Params> ::= <Param> */
   Rule_Params,
 
-  /* 87. <Param> ::= final Id ':' <Type> */
+  /* 86. <Param> ::= final Id ':' <Type> */
   Rule_Param_final_Id_Colon,
 
-  /* 88. <Param> ::= Id ':' <Type> */
+  /* 87. <Param> ::= Id ':' <Type> */
   Rule_Param_Id_Colon,
 
-  /* 89. <Types> ::= <Type> ',' <Types> */
+  /* 88. <Types> ::= <Type> ',' <Types> */
   Rule_Types_Comma,
 
-  /* 90. <Types> ::= <Type> */
+  /* 89. <Types> ::= <Type> */
   Rule_Types,
 
-  /* 91. <Id List> ::= Id ',' <Id List> */
+  /* 90. <Id List> ::= Id ',' <Id List> */
   Rule_IdList_Id_Comma,
 
-  /* 92. <Id List> ::= Id */
+  /* 91. <Id List> ::= Id */
   Rule_IdList_Id,
 
-  /* 93. <Class Decl> ::= <Normal Class> */
+  /* 92. <Class Decl> ::= <Normal Class> */
   Rule_ClassDecl,
 
-  /* 94. <Class Decl> ::= <Abstract Class> */
+  /* 93. <Class Decl> ::= <Abstract Class> */
   Rule_ClassDecl2,
 
-  /* 95. <Class Decl> ::= local <Normal Class> */
+  /* 94. <Class Decl> ::= local <Normal Class> */
   Rule_ClassDecl_local,
 
-  /* 96. <Class Decl> ::= local <Abstract Class> */
+  /* 95. <Class Decl> ::= local <Abstract Class> */
   Rule_ClassDecl_local2,
 
-  /* 97. <Normal Class> ::= class <Class Name> '{' <CDecls> '}' */
+  /* 96. <Normal Class> ::= class <Class Name> '{' <CDecls> '}' */
   Rule_NormalClass_class_LBrace_RBrace,
 
-  /* 98. <Normal Class> ::= class <Class Name> extends <Extend Class Name List> '{' <CDecls> '}' */
+  /* 97. <Normal Class> ::= class <Class Name> extends <Extend Class Name List> '{' <CDecls> '}' */
   Rule_NormalClass_class_extends_LBrace_RBrace,
 
-  /* 99. <Abstract Class> ::= abstract class <Class Name> '{' <ACDecls> '}' */
+  /* 98. <Abstract Class> ::= abstract class <Class Name> '{' <ACDecls> '}' */
   Rule_AbstractClass_abstract_class_LBrace_RBrace,
 
-  /* 100. <Abstract Class> ::= abstract class <Class Name> extends <Extend Class Name List> '{' <ACDecls> '}' */
+  /* 99. <Abstract Class> ::= abstract class <Class Name> extends <Extend Class Name List> '{' <ACDecls> '}' */
   Rule_AbstractClass_abstract_class_extends_LBrace_RBrace,
 
-  /* 101. <Class Name> ::= Id */
+  /* 100. <Class Name> ::= Id */
   Rule_ClassName_Id,
 
-  /* 102. <Class Name> ::= Id '<' <Id List> '>' */
+  /* 101. <Class Name> ::= Id '<' <Id List> '>' */
   Rule_ClassName_Id_Lt_Gt,
 
-  /* 103. <Extend Class Name List> ::= <Extend Class Name> ',' <Extend Class Name List> */
+  /* 102. <Extend Class Name List> ::= <Extend Class Name> ',' <Extend Class Name List> */
   Rule_ExtendClassNameList_Comma,
 
-  /* 104. <Extend Class Name List> ::= <Extend Class Name> */
+  /* 103. <Extend Class Name List> ::= <Extend Class Name> */
   Rule_ExtendClassNameList,
 
-  /* 105. <Extend Class Name> ::= <Pkg> */
+  /* 104. <Extend Class Name> ::= <Pkg> */
   Rule_ExtendClassName,
 
-  /* 106. <Extend Class Name> ::= <Pkg> '<' <Extend Class Name List> '>' */
+  /* 105. <Extend Class Name> ::= <Pkg> '<' <Extend Class Name List> '>' */
   Rule_ExtendClassName_Lt_Gt,
 
-  /* 107. <CDecls> ::= <CDecl> <CDecls> */
+  /* 106. <CDecls> ::= <CDecl> <CDecls> */
   Rule_CDecls,
 
-  /* 108. <CDecls> ::=  */
+  /* 107. <CDecls> ::=  */
   Rule_CDecls2,
 
-  /* 109. <ACDecls> ::= <ACDecl> <ACDecls> */
+  /* 108. <ACDecls> ::= <ACDecl> <ACDecls> */
   Rule_ACDecls,
 
-  /* 110. <ACDecls> ::=  */
+  /* 109. <ACDecls> ::=  */
   Rule_ACDecls2,
 
-  /* 111. <CDecl> ::= <CFunc Decl> */
+  /* 110. <CDecl> ::= <CFunc Decl> */
   Rule_CDecl,
 
-  /* 112. <CDecl> ::= <CVar Decl> */
+  /* 111. <CDecl> ::= <CVar Decl> */
   Rule_CDecl2,
 
-  /* 113. <CDecl> ::= <Operator Impl> */
+  /* 112. <CDecl> ::= <Operator Impl> */
   Rule_CDecl3,
 
-  /* 114. <ACDecl> ::= <CFunc Decl> */
+  /* 113. <ACDecl> ::= <CFunc Decl> */
   Rule_ACDecl,
 
-  /* 115. <ACDecl> ::= <CFunc Proto> */
+  /* 114. <ACDecl> ::= <CFunc Proto> */
   Rule_ACDecl2,
 
-  /* 116. <ACDecl> ::= <CVar Decl> */
+  /* 115. <ACDecl> ::= <CVar Decl> */
   Rule_ACDecl3,
 
-  /* 117. <ACDecl> ::= <Operator Impl> */
+  /* 116. <ACDecl> ::= <Operator Impl> */
   Rule_ACDecl4,
 
-  /* 118. <ACDecl> ::= <Operator Proto> */
+  /* 117. <ACDecl> ::= <Operator Proto> */
   Rule_ACDecl5,
 
-  /* 119. <Operator Impl> ::= operator <Operator> <Op Header Impl> '=' <Expr> */
+  /* 118. <Operator Impl> ::= operator <Operator> <Op Header Impl> '=' <Expr> */
   Rule_OperatorImpl_operator_Eq,
 
-  /* 120. <Operator Impl> ::= operator <Operator> <Op Header Impl> <Block> */
+  /* 119. <Operator Impl> ::= operator <Operator> <Op Header Impl> <Block> */
   Rule_OperatorImpl_operator,
 
-  /* 121. <Operator Proto> ::= operator <Operator> <Op Header Proto> */
+  /* 120. <Operator Proto> ::= operator <Operator> <Op Header Proto> */
   Rule_OperatorProto_operator,
 
-  /* 122. <CDefStruct> ::= extern struct Id '{' <Params> '}' */
+  /* 121. <CDefStruct> ::= extern struct Id '{' <Params> '}' */
   Rule_CDefStruct_extern_struct_Id_LBrace_RBrace,
 
-  /* 123. <Operator> ::= '+' */
+  /* 122. <Operator> ::= '+' */
   Rule_Operator_Plus,
 
-  /* 124. <Operator> ::= '-' */
+  /* 123. <Operator> ::= '-' */
   Rule_Operator_Minus,
 
-  /* 125. <Operator> ::= '*' */
+  /* 124. <Operator> ::= '*' */
   Rule_Operator_Times,
 
-  /* 126. <Operator> ::= '/' */
+  /* 125. <Operator> ::= '/' */
   Rule_Operator_Div,
 
-  /* 127. <Operator> ::= '%' */
+  /* 126. <Operator> ::= '%' */
   Rule_Operator_Percent,
 
-  /* 128. <Operator> ::= '^' */
+  /* 127. <Operator> ::= '^' */
   Rule_Operator_Caret,
 
-  /* 129. <Operator> ::= '&' */
+  /* 128. <Operator> ::= '&' */
   Rule_Operator_Amp,
 
-  /* 130. <Operator> ::= '|' */
+  /* 129. <Operator> ::= '|' */
   Rule_Operator_Pipe,
 
-  /* 131. <Operator> ::= '~' */
+  /* 130. <Operator> ::= '~' */
   Rule_Operator_Tilde,
 
-  /* 132. <Operator> ::= '!' */
+  /* 131. <Operator> ::= '!' */
   Rule_Operator_Exclam,
 
-  /* 133. <Operator> ::= '=' */
+  /* 132. <Operator> ::= '=' */
   Rule_Operator_Eq,
 
-  /* 134. <Operator> ::= '<' */
+  /* 133. <Operator> ::= '<' */
   Rule_Operator_Lt,
 
-  /* 135. <Operator> ::= '>' */
+  /* 134. <Operator> ::= '>' */
   Rule_Operator_Gt,
 
-  /* 136. <Operator> ::= '+=' */
+  /* 135. <Operator> ::= '+=' */
   Rule_Operator_PlusEq,
 
-  /* 137. <Operator> ::= '-=' */
+  /* 136. <Operator> ::= '-=' */
   Rule_Operator_MinusEq,
 
-  /* 138. <Operator> ::= '*=' */
+  /* 137. <Operator> ::= '*=' */
   Rule_Operator_TimesEq,
 
-  /* 139. <Operator> ::= '/=' */
+  /* 138. <Operator> ::= '/=' */
   Rule_Operator_DivEq,
 
-  /* 140. <Operator> ::= '%=' */
+  /* 139. <Operator> ::= '%=' */
   Rule_Operator_PercentEq,
 
-  /* 141. <Operator> ::= '^=' */
+  /* 140. <Operator> ::= '^=' */
   Rule_Operator_CaretEq,
 
-  /* 142. <Operator> ::= '&=' */
+  /* 141. <Operator> ::= '&=' */
   Rule_Operator_AmpEq,
 
-  /* 143. <Operator> ::= '|=' */
+  /* 142. <Operator> ::= '|=' */
   Rule_Operator_PipeEq,
 
-  /* 144. <Operator> ::= '<<' */
+  /* 143. <Operator> ::= '<<' */
   Rule_Operator_LtLt,
 
-  /* 145. <Operator> ::= '>>' */
+  /* 144. <Operator> ::= '>>' */
   Rule_Operator_GtGt,
 
-  /* 146. <Operator> ::= '>>=' */
+  /* 145. <Operator> ::= '>>=' */
   Rule_Operator_GtGtEq,
 
-  /* 147. <Operator> ::= '<<=' */
+  /* 146. <Operator> ::= '<<=' */
   Rule_Operator_LtLtEq,
 
-  /* 148. <Operator> ::= '==' */
+  /* 147. <Operator> ::= '==' */
   Rule_Operator_EqEq,
 
-  /* 149. <Operator> ::= '!=' */
+  /* 148. <Operator> ::= '!=' */
   Rule_Operator_ExclamEq,
 
-  /* 150. <Operator> ::= '<=' */
+  /* 149. <Operator> ::= '<=' */
   Rule_Operator_LtEq,
 
-  /* 151. <Operator> ::= '>=' */
+  /* 150. <Operator> ::= '>=' */
   Rule_Operator_GtEq,
 
-  /* 152. <Operator> ::= '&&' */
+  /* 151. <Operator> ::= '&&' */
   Rule_Operator_AmpAmp,
 
-  /* 153. <Operator> ::= '||' */
+  /* 152. <Operator> ::= '||' */
   Rule_Operator_PipePipe,
 
-  /* 154. <Operator> ::= '++' */
+  /* 153. <Operator> ::= '++' */
   Rule_Operator_PlusPlus,
 
-  /* 155. <Operator> ::= '--' */
+  /* 154. <Operator> ::= '--' */
   Rule_Operator_MinusMinus,
 
-  /* 156. <Operator> ::= ',' */
+  /* 155. <Operator> ::= ',' */
   Rule_Operator_Comma,
 
-  /* 157. <Operator> ::= '(' ')' */
+  /* 156. <Operator> ::= '(' ')' */
   Rule_Operator_LParen_RParen,
 
-  /* 158. <Operator> ::= '[' ']' */
+  /* 157. <Operator> ::= '[' ']' */
   Rule_Operator_LBracket_RBracket,
 
-  /* 159. <Op Header Proto> ::= '(' <Params> ')' */
+  /* 158. <Op Header Proto> ::= '(' <Params> ')' */
   Rule_OpHeaderProto_LParen_RParen,
 
-  /* 160. <Op Header Proto> ::= '(' <Params> ')' '->' <Type> */
+  /* 159. <Op Header Proto> ::= '(' <Params> ')' '->' <Type> */
   Rule_OpHeaderProto_LParen_RParen_MinusGt,
 
-  /* 161. <Op Header Proto> ::= '(' <Types> ')' */
+  /* 160. <Op Header Proto> ::= '(' <Types> ')' */
   Rule_OpHeaderProto_LParen_RParen2,
 
-  /* 162. <Op Header Proto> ::= '(' <Types> ')' '->' <Type> */
+  /* 161. <Op Header Proto> ::= '(' <Types> ')' '->' <Type> */
   Rule_OpHeaderProto_LParen_RParen_MinusGt2,
 
-  /* 163. <Op Header Proto> ::= '(' ')' */
+  /* 162. <Op Header Proto> ::= '(' ')' */
   Rule_OpHeaderProto_LParen_RParen3,
 
-  /* 164. <Op Header Proto> ::= '(' ')' '->' <Type> */
+  /* 163. <Op Header Proto> ::= '(' ')' '->' <Type> */
   Rule_OpHeaderProto_LParen_RParen_MinusGt3,
 
-  /* 165. <Op Header Impl> ::= '(' <Params> ')' */
+  /* 164. <Op Header Impl> ::= '(' <Params> ')' */
   Rule_OpHeaderImpl_LParen_RParen,
 
-  /* 166. <Op Header Impl> ::= '(' <Params> ')' '->' <Type> */
+  /* 165. <Op Header Impl> ::= '(' <Params> ')' '->' <Type> */
   Rule_OpHeaderImpl_LParen_RParen_MinusGt,
 
-  /* 167. <Op Header Impl> ::= '(' ')' */
+  /* 166. <Op Header Impl> ::= '(' ')' */
   Rule_OpHeaderImpl_LParen_RParen2,
 
-  /* 168. <Op Header Impl> ::= '(' ')' '->' <Type> */
+  /* 167. <Op Header Impl> ::= '(' ')' '->' <Type> */
   Rule_OpHeaderImpl_LParen_RParen_MinusGt2,
 
-  /* 169. <Var Decl> ::= let final <Var Header> */
+  /* 168. <Var Decl> ::= let final <Var Header> */
   Rule_VarDecl_let_final,
 
-  /* 170. <Var Decl> ::= let <Var Header> */
+  /* 169. <Var Decl> ::= let <Var Header> */
   Rule_VarDecl_let,
 
-  /* 171. <Var Decl> ::= let local <Var Header> */
+  /* 170. <Var Decl> ::= let local <Var Header> */
   Rule_VarDecl_let_local,
 
-  /* 172. <Var Decl> ::= let local final <Var Header> */
+  /* 171. <Var Decl> ::= let local final <Var Header> */
   Rule_VarDecl_let_local_final,
 
-  /* 173. <Var Decl> ::= let final local <Var Header> */
+  /* 172. <Var Decl> ::= let final local <Var Header> */
   Rule_VarDecl_let_final_local,
 
-  /* 174. <Var Decl> ::= let atomic <Var Header> */
+  /* 173. <Var Decl> ::= let atomic <Var Header> */
   Rule_VarDecl_let_atomic,
 
-  /* 175. <Var Decl> ::= let local atomic <Var Header> */
+  /* 174. <Var Decl> ::= let local atomic <Var Header> */
   Rule_VarDecl_let_local_atomic,
 
-  /* 176. <Var Decl> ::= let atomic local <Var Header> */
+  /* 175. <Var Decl> ::= let atomic local <Var Header> */
   Rule_VarDecl_let_atomic_local,
 
-  /* 177. <CVar Decl> ::= let <Var Header> */
+  /* 176. <CVar Decl> ::= let <Var Header> */
   Rule_CVarDecl_let,
 
-  /* 178. <CVar Decl> ::= let final <Var Header> */
+  /* 177. <CVar Decl> ::= let final <Var Header> */
   Rule_CVarDecl_let_final,
 
-  /* 179. <CVar Decl> ::= let final static <Var Header> */
+  /* 178. <CVar Decl> ::= let final static <Var Header> */
   Rule_CVarDecl_let_final_static,
 
-  /* 180. <CVar Decl> ::= let final <Visibility> <Var Header> */
+  /* 179. <CVar Decl> ::= let final <Visibility> <Var Header> */
   Rule_CVarDecl_let_final2,
 
-  /* 181. <CVar Decl> ::= let final <Visibility> static <Var Header> */
+  /* 180. <CVar Decl> ::= let final <Visibility> static <Var Header> */
   Rule_CVarDecl_let_final_static2,
 
-  /* 182. <CVar Decl> ::= let final static <Visibility> <Var Header> */
+  /* 181. <CVar Decl> ::= let final static <Visibility> <Var Header> */
   Rule_CVarDecl_let_final_static3,
 
-  /* 183. <CVar Decl> ::= let static <Var Header> */
+  /* 182. <CVar Decl> ::= let static <Var Header> */
   Rule_CVarDecl_let_static,
 
-  /* 184. <CVar Decl> ::= let static final <Var Header> */
+  /* 183. <CVar Decl> ::= let static final <Var Header> */
   Rule_CVarDecl_let_static_final,
 
-  /* 185. <CVar Decl> ::= let static atomic <Var Header> */
+  /* 184. <CVar Decl> ::= let static atomic <Var Header> */
   Rule_CVarDecl_let_static_atomic,
 
-  /* 186. <CVar Decl> ::= let static <Visibility> <Var Header> */
+  /* 185. <CVar Decl> ::= let static <Visibility> <Var Header> */
   Rule_CVarDecl_let_static2,
 
-  /* 187. <CVar Decl> ::= let static <Visibility> atomic <Var Header> */
+  /* 186. <CVar Decl> ::= let static <Visibility> atomic <Var Header> */
   Rule_CVarDecl_let_static_atomic2,
 
-  /* 188. <CVar Decl> ::= let static <Visibility> final <Var Header> */
+  /* 187. <CVar Decl> ::= let static <Visibility> final <Var Header> */
   Rule_CVarDecl_let_static_final2,
 
-  /* 189. <CVar Decl> ::= let static atomic <Visibility> <Var Header> */
+  /* 188. <CVar Decl> ::= let static atomic <Visibility> <Var Header> */
   Rule_CVarDecl_let_static_atomic3,
 
-  /* 190. <CVar Decl> ::= let <Visibility> <Var Header> */
+  /* 189. <CVar Decl> ::= let <Visibility> <Var Header> */
   Rule_CVarDecl_let2,
 
-  /* 191. <CVar Decl> ::= let <Visibility> static <Var Header> */
+  /* 190. <CVar Decl> ::= let <Visibility> static <Var Header> */
   Rule_CVarDecl_let_static3,
 
-  /* 192. <CVar Decl> ::= let <Visibility> static atomic <Var Header> */
+  /* 191. <CVar Decl> ::= let <Visibility> static atomic <Var Header> */
   Rule_CVarDecl_let_static_atomic4,
 
-  /* 193. <CVar Decl> ::= let <Visibility> final <Var Header> */
+  /* 192. <CVar Decl> ::= let <Visibility> final <Var Header> */
   Rule_CVarDecl_let_final3,
 
-  /* 194. <CVar Decl> ::= let <Visibility> static final <Var Header> */
+  /* 193. <CVar Decl> ::= let <Visibility> static final <Var Header> */
   Rule_CVarDecl_let_static_final3,
 
-  /* 195. <CVar Decl> ::= let <Visibility> final static <Var Header> */
+  /* 194. <CVar Decl> ::= let <Visibility> final static <Var Header> */
   Rule_CVarDecl_let_final_static4,
 
-  /* 196. <CVar Decl> ::= let <Visibility> atomic static */
+  /* 195. <CVar Decl> ::= let <Visibility> atomic static */
   Rule_CVarDecl_let_atomic_static,
 
-  /* 197. <CVar Decl> ::= let atomic <Var Header> */
+  /* 196. <CVar Decl> ::= let atomic <Var Header> */
   Rule_CVarDecl_let_atomic,
 
-  /* 198. <CVar Decl> ::= let atomic <Visibility> <Var Header> */
+  /* 197. <CVar Decl> ::= let atomic <Visibility> <Var Header> */
   Rule_CVarDecl_let_atomic2,
 
-  /* 199. <CVar Decl> ::= let atomic static <Var Header> */
+  /* 198. <CVar Decl> ::= let atomic static <Var Header> */
   Rule_CVarDecl_let_atomic_static2,
 
-  /* 200. <CVar Decl> ::= let atomic <Visibility> static <Var Header> */
+  /* 199. <CVar Decl> ::= let atomic <Visibility> static <Var Header> */
   Rule_CVarDecl_let_atomic_static3,
 
-  /* 201. <CVar Decl> ::= let atomic static <Visibility> <Var Header> */
+  /* 200. <CVar Decl> ::= let atomic static <Visibility> <Var Header> */
   Rule_CVarDecl_let_atomic_static4,
 
-  /* 202. <Var Header> ::= <Id List> ':' <Type> '=' <CSE> */
+  /* 201. <Var Header> ::= <Id List> ':' <Type> '=' <CSE> */
   Rule_VarHeader_Colon_Eq,
 
-  /* 203. <Var Header> ::= <Id List> ':' <Type> */
+  /* 202. <Var Header> ::= <Id List> ':' <Type> */
   Rule_VarHeader_Colon,
 
-  /* 204. <Var Header> ::= <Id List> '=' <CSE> */
+  /* 203. <Var Header> ::= <Id List> '=' <CSE> */
   Rule_VarHeader_Eq,
 
-  /* 205. <Enum Decl> ::= enum Id '{' <Enum Def> '}' */
+  /* 204. <Enum Decl> ::= enum Id '{' <Enum Def> '}' */
   Rule_EnumDecl_enum_Id_LBrace_RBrace,
 
-  /* 206. <Enum Decl> ::= local enum Id '{' <Enum Def> '}' */
+  /* 205. <Enum Decl> ::= local enum Id '{' <Enum Def> '}' */
   Rule_EnumDecl_local_enum_Id_LBrace_RBrace,
 
-  /* 207. <Enum Def> ::= Id ',' <Enum Def> */
+  /* 206. <Enum Def> ::= Id ',' <Enum Def> */
   Rule_EnumDef_Id_Comma,
 
-  /* 208. <Enum Def> ::= Id */
+  /* 207. <Enum Def> ::= Id */
   Rule_EnumDef_Id,
 
-  /* 209. <Type> ::= <Base> */
+  /* 208. <Type> ::= <Base> */
   Rule_Type,
 
-  /* 210. <Type> ::= <Fn Type> */
+  /* 209. <Type> ::= <Fn Type> */
   Rule_Type2,
 
-  /* 211. <Type> ::= <Pkg Template> */
+  /* 210. <Type> ::= <Pkg Template> */
   Rule_Type3,
 
-  /* 212. <Type> ::= <Type> '[' ']' */
+  /* 211. <Type> ::= <Type> '[' ']' */
   Rule_Type_LBracket_RBracket,
 
-  /* 213. <Type> ::= '(' <Types> ')' */
+  /* 212. <Type> ::= '(' <Types> ')' */
   Rule_Type_LParen_RParen,
 
-  /* 214. <Fn Type> ::= fn '(' ')' */
+  /* 213. <Fn Type> ::= fn '(' ')' */
   Rule_FnType_fn_LParen_RParen,
 
-  /* 215. <Fn Type> ::= fn '(' ')' '->' <Type> */
+  /* 214. <Fn Type> ::= fn '(' ')' '->' <Type> */
   Rule_FnType_fn_LParen_RParen_MinusGt,
 
-  /* 216. <Fn Type> ::= fn '(' <Types> ')' */
+  /* 215. <Fn Type> ::= fn '(' <Types> ')' */
   Rule_FnType_fn_LParen_RParen2,
 
-  /* 217. <Fn Type> ::= fn '(' <Types> ')' '->' <Type> */
+  /* 216. <Fn Type> ::= fn '(' <Types> ')' '->' <Type> */
   Rule_FnType_fn_LParen_RParen_MinusGt2,
 
-  /* 218. <Pkg Template> ::= <Pkg> */
+  /* 217. <Pkg Template> ::= <Pkg> */
   Rule_PkgTemplate,
 
-  /* 219. <Pkg Template> ::= <Pkg> '<' <Types> '>' */
+  /* 218. <Pkg Template> ::= <Pkg> '<' <Types> '>' */
   Rule_PkgTemplate_Lt_Gt,
 
-  /* 220. <Base> ::= <Sign> <Scalar> */
+  /* 219. <Base> ::= <Sign> <Scalar> */
   Rule_Base,
 
-  /* 221. <Base> ::= 'size_t' */
+  /* 220. <Base> ::= 'size_t' */
   Rule_Base_size_t,
 
-  /* 222. <Base> ::= byte */
+  /* 221. <Base> ::= byte */
   Rule_Base_byte,
 
-  /* 223. <Base> ::= float */
+  /* 222. <Base> ::= float */
   Rule_Base_float,
 
-  /* 224. <Base> ::= double */
+  /* 223. <Base> ::= double */
   Rule_Base_double,
 
-  /* 225. <Base> ::= bool */
+  /* 224. <Base> ::= bool */
   Rule_Base_bool,
 
-  /* 226. <Base> ::= long double */
+  /* 225. <Base> ::= long double */
   Rule_Base_long_double,
 
-  /* 227. <Sign> ::= signed */
+  /* 226. <Sign> ::= signed */
   Rule_Sign_signed,
 
-  /* 228. <Sign> ::= unsigned */
+  /* 227. <Sign> ::= unsigned */
   Rule_Sign_unsigned,
 
-  /* 229. <Sign> ::=  */
+  /* 228. <Sign> ::=  */
   Rule_Sign,
 
-  /* 230. <Scalar> ::= char */
+  /* 229. <Scalar> ::= char */
   Rule_Scalar_char,
 
-  /* 231. <Scalar> ::= int */
+  /* 230. <Scalar> ::= int */
   Rule_Scalar_int,
 
-  /* 232. <Scalar> ::= short */
+  /* 231. <Scalar> ::= short */
   Rule_Scalar_short,
 
-  /* 233. <Scalar> ::= long */
+  /* 232. <Scalar> ::= long */
   Rule_Scalar_long,
 
-  /* 234. <Scalar> ::= short int */
+  /* 233. <Scalar> ::= short int */
   Rule_Scalar_short_int,
 
-  /* 235. <Scalar> ::= long int */
+  /* 234. <Scalar> ::= long int */
   Rule_Scalar_long_int,
 
-  /* 236. <Stm> ::= <Var Decl> */
+  /* 235. <Stm> ::= <Var Decl> */
   Rule_Stm,
 
-  /* 237. <Stm> ::= <If Stm> */
+  /* 236. <Stm> ::= <If Stm> */
   Rule_Stm2,
 
-  /* 238. <Stm> ::= while <Expr> <Block> */
+  /* 237. <Stm> ::= while <Expr> <Block> */
   Rule_Stm_while,
 
-  /* 239. <Stm> ::= for <Arg> ';' <Arg> ';' <Arg> <Block> */
+  /* 238. <Stm> ::= for <Arg> ';' <Arg> ';' <Arg> <Block> */
   Rule_Stm_for_Semi_Semi,
 
-  /* 240. <Stm> ::= foreach <Param> in <Expr> <Block> */
+  /* 239. <Stm> ::= foreach <Param> in <Expr> <Block> */
   Rule_Stm_foreach_in,
 
-  /* 241. <Stm> ::= <Normal Stm> */
+  /* 240. <Stm> ::= <Normal Stm> */
   Rule_Stm3,
 
-  /* 242. <Using Stm> ::= using <Pkg> */
+  /* 241. <Using Stm> ::= using <Pkg> */
   Rule_UsingStm_using,
 
-  /* 243. <Using Stms> ::= <Using Stm> <Using Stms> */
+  /* 242. <Using Stms> ::= <Using Stm> <Using Stms> */
   Rule_UsingStms,
 
-  /* 244. <Using Stms> ::=  */
+  /* 243. <Using Stms> ::=  */
   Rule_UsingStms2,
 
-  /* 245. <Pkg> ::= Id '.' <Pkg> */
+  /* 244. <Pkg> ::= Id '.' <Pkg> */
   Rule_Pkg_Id_Dot,
 
-  /* 246. <Pkg> ::= Id */
+  /* 245. <Pkg> ::= Id */
   Rule_Pkg_Id,
 
-  /* 247. <If Stm> ::= if <Expr> <Block> <else-if> */
+  /* 246. <Pkg List> ::= <Pkg> ',' <Pkg List> */
+  Rule_PkgList_Comma,
+
+  /* 247. <Pkg List> ::= <Pkg> */
+  Rule_PkgList,
+
+  /* 248. <If Stm> ::= if <Expr> <Block> <else-if> */
   Rule_IfStm_if,
 
-  /* 248. <else-if> ::= else if <Expr> <Block> <else-if> */
+  /* 249. <else-if> ::= else if <Expr> <Block> <else-if> */
   Rule_elseif_else_if,
 
-  /* 249. <else-if> ::= else <Block> */
+  /* 250. <else-if> ::= else <Block> */
   Rule_elseif_else,
 
-  /* 250. <else-if> ::=  */
+  /* 251. <else-if> ::=  */
   Rule_elseif,
 
-  /* 251. <Normal Stm> ::= do <Block> while <Expr> */
+  /* 252. <Normal Stm> ::= do <Block> while <Expr> */
   Rule_NormalStm_do_while,
 
-  /* 252. <Normal Stm> ::= match <Expr> '{' <Case Stms> '}' */
+  /* 253. <Normal Stm> ::= match <Expr> '{' <Case Stms> '}' */
   Rule_NormalStm_match_LBrace_RBrace,
 
-  /* 253. <Normal Stm> ::= <Block> */
+  /* 254. <Normal Stm> ::= <Block> */
   Rule_NormalStm,
 
-  /* 254. <Normal Stm> ::= <Expr> */
+  /* 255. <Normal Stm> ::= <Expr> */
   Rule_NormalStm2,
 
-  /* 255. <Normal Stm> ::= break */
+  /* 256. <Normal Stm> ::= break */
   Rule_NormalStm_break,
 
-  /* 256. <Normal Stm> ::= continue */
+  /* 257. <Normal Stm> ::= continue */
   Rule_NormalStm_continue,
 
-  /* 257. <Normal Stm> ::= return <Expr> */
+  /* 258. <Normal Stm> ::= return <Expr> */
   Rule_NormalStm_return,
 
-  /* 258. <Normal Stm> ::= return */
+  /* 259. <Normal Stm> ::= return */
   Rule_NormalStm_return2,
 
-  /* 259. <Normal Stm> ::= ';' */
+  /* 260. <Normal Stm> ::= ';' */
   Rule_NormalStm_Semi,
 
-  /* 260. <Arg> ::= <Expr> */
+  /* 261. <Arg> ::= <Expr> */
   Rule_Arg,
 
-  /* 261. <Arg> ::=  */
+  /* 262. <Arg> ::=  */
   Rule_Arg2,
 
-  /* 262. <Case Stms> ::= case <Expr> when <Expr> <Block> <Case Stms> */
+  /* 263. <Case Stms> ::= case <Expr> when <Expr> <Block> <Case Stms> */
   Rule_CaseStms_case_when,
 
-  /* 263. <Case Stms> ::= case <Expr> <Block> <Case Stms> */
+  /* 264. <Case Stms> ::= case <Expr> <Block> <Case Stms> */
   Rule_CaseStms_case,
 
-  /* 264. <Case Stms> ::= else <Block> */
+  /* 265. <Case Stms> ::= else <Block> */
   Rule_CaseStms_else,
 
-  /* 265. <Block> ::= '{' <Using Stms> <Stm List> '}' */
+  /* 266. <Block> ::= '{' <Using Stms> <Stm List> '}' */
   Rule_Block_LBrace_RBrace,
 
-  /* 266. <Block> ::= synchronized '{' <Using Stms> <Stm List> '}' */
+  /* 267. <Block> ::= synchronized '{' <Using Stms> <Stm List> '}' */
   Rule_Block_synchronized_LBrace_RBrace,
 
-  /* 267. <Stm List> ::= <Stm> <Stm List> */
+  /* 268. <Stm List> ::= <Stm> <Stm List> */
   Rule_StmList,
 
-  /* 268. <Stm List> ::=  */
+  /* 269. <Stm List> ::=  */
   Rule_StmList2,
 
-  /* 269. <CSE> ::= <Expr> */
+  /* 270. <CSE> ::= <Expr> */
   Rule_CSE,
 
-  /* 270. <CSE> ::= <CSE> ',' <Expr> */
+  /* 271. <CSE> ::= <CSE> ',' <Expr> */
   Rule_CSE_Comma,
 
-  /* 271. <Expr> ::= <Var Decl> in <Expr> */
+  /* 272. <Expr> ::= <Var Decl> in <Expr> */
   Rule_Expr_in,
 
-  /* 272. <Expr> ::= match <Expr> '{' <Case Exprs> '}' */
+  /* 273. <Expr> ::= match <Expr> '{' <Case Exprs> '}' */
   Rule_Expr_match_LBrace_RBrace,
 
-  /* 273. <Expr> ::= <Op Assign> */
+  /* 274. <Expr> ::= <Op Assign> */
   Rule_Expr,
 
-  /* 274. <Op Assign> ::= <Op Or> '=' <Op Assign> */
+  /* 275. <Op Assign> ::= <Op Or> '=' <Op Assign> */
   Rule_OpAssign_Eq,
 
-  /* 275. <Op Assign> ::= <Op Or> '+=' <Op Assign> */
+  /* 276. <Op Assign> ::= <Op Or> '+=' <Op Assign> */
   Rule_OpAssign_PlusEq,
 
-  /* 276. <Op Assign> ::= <Op Or> '-=' <Op Assign> */
+  /* 277. <Op Assign> ::= <Op Or> '-=' <Op Assign> */
   Rule_OpAssign_MinusEq,
 
-  /* 277. <Op Assign> ::= <Op Or> '*=' <Op Assign> */
+  /* 278. <Op Assign> ::= <Op Or> '*=' <Op Assign> */
   Rule_OpAssign_TimesEq,
 
-  /* 278. <Op Assign> ::= <Op Or> '/=' <Op Assign> */
+  /* 279. <Op Assign> ::= <Op Or> '/=' <Op Assign> */
   Rule_OpAssign_DivEq,
 
-  /* 279. <Op Assign> ::= <Op Or> '%=' <Op Assign> */
+  /* 280. <Op Assign> ::= <Op Or> '%=' <Op Assign> */
   Rule_OpAssign_PercentEq,
 
-  /* 280. <Op Assign> ::= <Op Or> '^=' <Op Assign> */
+  /* 281. <Op Assign> ::= <Op Or> '^=' <Op Assign> */
   Rule_OpAssign_CaretEq,
 
-  /* 281. <Op Assign> ::= <Op Or> '&=' <Op Assign> */
+  /* 282. <Op Assign> ::= <Op Or> '&=' <Op Assign> */
   Rule_OpAssign_AmpEq,
 
-  /* 282. <Op Assign> ::= <Op Or> '|=' <Op Assign> */
+  /* 283. <Op Assign> ::= <Op Or> '|=' <Op Assign> */
   Rule_OpAssign_PipeEq,
 
-  /* 283. <Op Assign> ::= <Op Or> '>>=' <Op Assign> */
+  /* 284. <Op Assign> ::= <Op Or> '>>=' <Op Assign> */
   Rule_OpAssign_GtGtEq,
 
-  /* 284. <Op Assign> ::= <Op Or> '<<=' <Op Assign> */
+  /* 285. <Op Assign> ::= <Op Or> '<<=' <Op Assign> */
   Rule_OpAssign_LtLtEq,
 
-  /* 285. <Op Assign> ::= <Op Or> */
+  /* 286. <Op Assign> ::= <Op Or> */
   Rule_OpAssign,
 
-  /* 286. <Op Or> ::= <Op Or> '||' <Op And> */
+  /* 287. <Op Or> ::= <Op Or> '||' <Op And> */
   Rule_OpOr_PipePipe,
 
-  /* 287. <Op Or> ::= <Op And> */
+  /* 288. <Op Or> ::= <Op And> */
   Rule_OpOr,
 
-  /* 288. <Op And> ::= <Op And> '&&' <Op BinOR> */
+  /* 289. <Op And> ::= <Op And> '&&' <Op BinOR> */
   Rule_OpAnd_AmpAmp,
 
-  /* 289. <Op And> ::= <Op BinOR> */
+  /* 290. <Op And> ::= <Op BinOR> */
   Rule_OpAnd,
 
-  /* 290. <Op BinOR> ::= <Op BinOR> '|' <Op BinXOR> */
+  /* 291. <Op BinOR> ::= <Op BinOR> '|' <Op BinXOR> */
   Rule_OpBinOR_Pipe,
 
-  /* 291. <Op BinOR> ::= <Op BinXOR> */
+  /* 292. <Op BinOR> ::= <Op BinXOR> */
   Rule_OpBinOR,
 
-  /* 292. <Op BinXOR> ::= <Op BinXOR> '^' <Op BinAND> */
+  /* 293. <Op BinXOR> ::= <Op BinXOR> '^' <Op BinAND> */
   Rule_OpBinXOR_Caret,
 
-  /* 293. <Op BinXOR> ::= <Op BinAND> */
+  /* 294. <Op BinXOR> ::= <Op BinAND> */
   Rule_OpBinXOR,
 
-  /* 294. <Op BinAND> ::= <Op BinAND> '&' <Op Equate> */
+  /* 295. <Op BinAND> ::= <Op BinAND> '&' <Op Equate> */
   Rule_OpBinAND_Amp,
 
-  /* 295. <Op BinAND> ::= <Op Equate> */
+  /* 296. <Op BinAND> ::= <Op Equate> */
   Rule_OpBinAND,
 
-  /* 296. <Op Equate> ::= <Op Equate> '==' <Op Compare> */
+  /* 297. <Op Equate> ::= <Op Equate> '==' <Op Compare> */
   Rule_OpEquate_EqEq,
 
-  /* 297. <Op Equate> ::= <Op Equate> '!=' <Op Compare> */
+  /* 298. <Op Equate> ::= <Op Equate> '!=' <Op Compare> */
   Rule_OpEquate_ExclamEq,
 
-  /* 298. <Op Equate> ::= <Op Compare> */
+  /* 299. <Op Equate> ::= <Op Compare> */
   Rule_OpEquate,
 
-  /* 299. <Op Compare> ::= <Op Compare> '<' <Op Shift> */
+  /* 300. <Op Compare> ::= <Op Compare> '<' <Op Shift> */
   Rule_OpCompare_Lt,
 
-  /* 300. <Op Compare> ::= <Op Compare> '>' <Op Shift> */
+  /* 301. <Op Compare> ::= <Op Compare> '>' <Op Shift> */
   Rule_OpCompare_Gt,
 
-  /* 301. <Op Compare> ::= <Op Compare> '<=' <Op Shift> */
+  /* 302. <Op Compare> ::= <Op Compare> '<=' <Op Shift> */
   Rule_OpCompare_LtEq,
 
-  /* 302. <Op Compare> ::= <Op Compare> '>=' <Op Shift> */
+  /* 303. <Op Compare> ::= <Op Compare> '>=' <Op Shift> */
   Rule_OpCompare_GtEq,
 
-  /* 303. <Op Compare> ::= <Op Compare> is <Type> */
+  /* 304. <Op Compare> ::= <Op Compare> is <Type> */
   Rule_OpCompare_is,
 
-  /* 304. <Op Compare> ::= <Op Shift> */
+  /* 305. <Op Compare> ::= <Op Shift> */
   Rule_OpCompare,
 
-  /* 305. <Op Shift> ::= <Op Shift> '<<' <Op Add> */
+  /* 306. <Op Shift> ::= <Op Shift> '<<' <Op Add> */
   Rule_OpShift_LtLt,
 
-  /* 306. <Op Shift> ::= <Op Shift> '>>' <Op Add> */
+  /* 307. <Op Shift> ::= <Op Shift> '>>' <Op Add> */
   Rule_OpShift_GtGt,
 
-  /* 307. <Op Shift> ::= <Op Add> */
+  /* 308. <Op Shift> ::= <Op Add> */
   Rule_OpShift,
 
-  /* 308. <Op Add> ::= <Op Add> '+' <Op Mult> */
+  /* 309. <Op Add> ::= <Op Add> '+' <Op Mult> */
   Rule_OpAdd_Plus,
 
-  /* 309. <Op Add> ::= <Op Add> '-' <Op Mult> */
+  /* 310. <Op Add> ::= <Op Add> '-' <Op Mult> */
   Rule_OpAdd_Minus,
 
-  /* 310. <Op Add> ::= <Op Mult> */
+  /* 311. <Op Add> ::= <Op Mult> */
   Rule_OpAdd,
 
-  /* 311. <Op Mult> ::= <Op Mult> '*' <Op Unary> */
+  /* 312. <Op Mult> ::= <Op Mult> '*' <Op Unary> */
   Rule_OpMult_Times,
 
-  /* 312. <Op Mult> ::= <Op Mult> '/' <Op Unary> */
+  /* 313. <Op Mult> ::= <Op Mult> '/' <Op Unary> */
   Rule_OpMult_Div,
 
-  /* 313. <Op Mult> ::= <Op Mult> '%' <Op Unary> */
+  /* 314. <Op Mult> ::= <Op Mult> '%' <Op Unary> */
   Rule_OpMult_Percent,
 
-  /* 314. <Op Mult> ::= <Op Unary> */
+  /* 315. <Op Mult> ::= <Op Unary> */
   Rule_OpMult,
 
-  /* 315. <Op Unary> ::= '!' <Op Unary> */
+  /* 316. <Op Unary> ::= '!' <Op Unary> */
   Rule_OpUnary_Exclam,
 
-  /* 316. <Op Unary> ::= '~' <Op Unary> */
+  /* 317. <Op Unary> ::= '~' <Op Unary> */
   Rule_OpUnary_Tilde,
 
-  /* 317. <Op Unary> ::= '-' <Op Unary> */
+  /* 318. <Op Unary> ::= '-' <Op Unary> */
   Rule_OpUnary_Minus,
 
-  /* 318. <Op Unary> ::= '++' <Op Unary> */
+  /* 319. <Op Unary> ::= '++' <Op Unary> */
   Rule_OpUnary_PlusPlus,
 
-  /* 319. <Op Unary> ::= '--' <Op Unary> */
+  /* 320. <Op Unary> ::= '--' <Op Unary> */
   Rule_OpUnary_MinusMinus,
 
-  /* 320. <Op Unary> ::= <Op Pointer> '++' */
+  /* 321. <Op Unary> ::= <Op Pointer> '++' */
   Rule_OpUnary_PlusPlus2,
 
-  /* 321. <Op Unary> ::= <Op Pointer> '--' */
+  /* 322. <Op Unary> ::= <Op Pointer> '--' */
   Rule_OpUnary_MinusMinus2,
 
-  /* 322. <Op Unary> ::= <Op Unary> as <Type> */
+  /* 323. <Op Unary> ::= <Op Unary> as <Type> */
   Rule_OpUnary_as,
 
-  /* 323. <Op Unary> ::= <New Expr> */
+  /* 324. <Op Unary> ::= <New Expr> */
   Rule_OpUnary,
 
-  /* 324. <Op Unary> ::= delete <Op Pointer> */
+  /* 325. <Op Unary> ::= delete <Op Pointer> */
   Rule_OpUnary_delete,
 
-  /* 325. <Op Unary> ::= sizeof '(' <Type> ')' */
+  /* 326. <Op Unary> ::= sizeof '(' <Type> ')' */
   Rule_OpUnary_sizeof_LParen_RParen,
 
-  /* 326. <Op Unary> ::= <Op Pointer> */
+  /* 327. <Op Unary> ::= <Op Pointer> */
   Rule_OpUnary2,
 
-  /* 327. <Op Pointer> ::= <Op Pointer> '.' <Value> */
+  /* 328. <Op Pointer> ::= <Op Pointer> '.' <Value> */
   Rule_OpPointer_Dot,
 
-  /* 328. <Op Pointer> ::= <Op Pointer> '[' <CSE> ']' */
+  /* 329. <Op Pointer> ::= <Op Pointer> '[' <CSE> ']' */
   Rule_OpPointer_LBracket_RBracket,
 
-  /* 329. <Op Pointer> ::= <Op Pointer> '(' <CSE> ')' */
+  /* 330. <Op Pointer> ::= <Op Pointer> '(' <CSE> ')' */
   Rule_OpPointer_LParen_RParen,
 
-  /* 330. <Op Pointer> ::= <Op Pointer> '(' ')' */
+  /* 331. <Op Pointer> ::= <Op Pointer> '(' ')' */
   Rule_OpPointer_LParen_RParen2,
 
-  /* 331. <Op Pointer> ::= <Value> */
+  /* 332. <Op Pointer> ::= <Value> */
   Rule_OpPointer,
 
-  /* 332. <Value> ::= OctLiteral */
+  /* 333. <Value> ::= OctLiteral */
   Rule_Value_OctLiteral,
 
-  /* 333. <Value> ::= HexLiteral */
+  /* 334. <Value> ::= HexLiteral */
   Rule_Value_HexLiteral,
 
-  /* 334. <Value> ::= DecLiteral */
+  /* 335. <Value> ::= DecLiteral */
   Rule_Value_DecLiteral,
 
-  /* 335. <Value> ::= BinLiteral */
+  /* 336. <Value> ::= BinLiteral */
   Rule_Value_BinLiteral,
 
-  /* 336. <Value> ::= StringLiteral */
+  /* 337. <Value> ::= StringLiteral */
   Rule_Value_StringLiteral,
 
-  /* 337. <Value> ::= CharLiteral */
+  /* 338. <Value> ::= CharLiteral */
   Rule_Value_CharLiteral,
 
-  /* 338. <Value> ::= FloatLiteral */
+  /* 339. <Value> ::= FloatLiteral */
   Rule_Value_FloatLiteral,
 
-  /* 339. <Value> ::= null */
+  /* 340. <Value> ::= null */
   Rule_Value_null,
 
-  /* 340. <Value> ::= '_' */
+  /* 341. <Value> ::= '_' */
   Rule_Value__,
 
-  /* 341. <Value> ::= true */
+  /* 342. <Value> ::= true */
   Rule_Value_true,
 
-  /* 342. <Value> ::= false */
+  /* 343. <Value> ::= false */
   Rule_Value_false,
 
-  /* 343. <Value> ::= <Pkg> */
+  /* 344. <Value> ::= <Pkg> */
   Rule_Value,
 
-  /* 344. <Value> ::= <Lambda Expr> */
+  /* 345. <Value> ::= <Lambda Expr> */
   Rule_Value2,
 
-  /* 345. <Value> ::= '(' <CSE> ')' */
+  /* 346. <Value> ::= '(' <CSE> ')' */
   Rule_Value_LParen_RParen,
 
-  /* 346. <Value> ::= '[' for Id ':' <Type> in <Expr> '=>' <Expr> ']' */
+  /* 347. <Value> ::= '[' for Id ':' <Type> in <Expr> '=>' <Expr> ']' */
   Rule_Value_LBracket_for_Id_Colon_in_EqGt_RBracket,
 
-  /* 347. <Value> ::= '[' for Id in <Expr> '=>' <Expr> ']' */
+  /* 348. <Value> ::= '[' for Id in <Expr> '=>' <Expr> ']' */
   Rule_Value_LBracket_for_Id_in_EqGt_RBracket,
 
-  /* 348. <Value> ::= '[' for Id ':' <Type> in <Expr> if <Expr> '=>' <Expr> ']' */
+  /* 349. <Value> ::= '[' for Id ':' <Type> in <Expr> if <Expr> '=>' <Expr> ']' */
   Rule_Value_LBracket_for_Id_Colon_in_if_EqGt_RBracket,
 
-  /* 349. <Value> ::= '[' for Id in <Expr> if <Expr> '=>' <Expr> ']' */
+  /* 350. <Value> ::= '[' for Id in <Expr> if <Expr> '=>' <Expr> ']' */
   Rule_Value_LBracket_for_Id_in_if_EqGt_RBracket,
 
-  /* 350. <Value> ::= '[' <CSE> ']' */
+  /* 351. <Value> ::= '[' <CSE> ']' */
   Rule_Value_LBracket_RBracket,
 
-  /* 351. <Lambda Expr> ::= lambda '(' <Params> ')' <Block> */
+  /* 352. <Lambda Expr> ::= lambda '(' <Params> ')' <Block> */
   Rule_LambdaExpr_lambda_LParen_RParen,
 
-  /* 352. <Lambda Expr> ::= lambda '(' <Params> ')' '=' <Expr> */
+  /* 353. <Lambda Expr> ::= lambda '(' <Params> ')' '=' <Expr> */
   Rule_LambdaExpr_lambda_LParen_RParen_Eq,
 
-  /* 353. <Lambda Expr> ::= lambda '(' <Params> ')' '->' <Type> <Block> */
+  /* 354. <Lambda Expr> ::= lambda '(' <Params> ')' '->' <Type> <Block> */
   Rule_LambdaExpr_lambda_LParen_RParen_MinusGt,
 
-  /* 354. <Lambda Expr> ::= lambda '(' <Params> ')' '->' <Type> '=' <Expr> */
+  /* 355. <Lambda Expr> ::= lambda '(' <Params> ')' '->' <Type> '=' <Expr> */
   Rule_LambdaExpr_lambda_LParen_RParen_MinusGt_Eq,
 
-  /* 355. <Case Exprs> ::= case <Expr> when <Expr> '=>' <Expr> <Case Exprs> */
+  /* 356. <Case Exprs> ::= case <Expr> when <Expr> '=>' <Expr> <Case Exprs> */
   Rule_CaseExprs_case_when_EqGt,
 
-  /* 356. <Case Exprs> ::= case <Expr> '=>' <Expr> <Case Exprs> */
+  /* 357. <Case Exprs> ::= case <Expr> '=>' <Expr> <Case Exprs> */
   Rule_CaseExprs_case_EqGt,
 
-  /* 357. <Case Exprs> ::= else '=>' <Expr> */
+  /* 358. <Case Exprs> ::= else '=>' <Expr> */
   Rule_CaseExprs_else_EqGt,
 
-  /* 358. <New Expr> ::= new <Pkg Template> '(' ')' */
+  /* 359. <New Expr> ::= new <Pkg Template> '(' ')' */
   Rule_NewExpr_new_LParen_RParen,
 
-  /* 359. <New Expr> ::= new <Pkg Template> '(' <Expr> ')' */
+  /* 360. <New Expr> ::= new <Pkg Template> '(' <Expr> ')' */
   Rule_NewExpr_new_LParen_RParen2,
 
-  /* 360. <New Expr> ::= new <Pkg Template> '(' ')' '{' <CDecl> '}' */
+  /* 361. <New Expr> ::= new <Pkg Template> '(' ')' '{' <CDecl> '}' */
   Rule_NewExpr_new_LParen_RParen_LBrace_RBrace,
 
-  /* 361. <New Expr> ::= new <Pkg Template> '(' <Expr> ')' '{' <CDecl> '}' */
+  /* 362. <New Expr> ::= new <Pkg Template> '(' <Expr> ')' '{' <CDecl> '}' */
   Rule_NewExpr_new_LParen_RParen_LBrace_RBrace2,
 
-  /* 362. <New Expr> ::= new <Type> */
+  /* 363. <New Expr> ::= new <Type> */
   Rule_NewExpr_new,
 
-  /* 363. <New Expr> ::= new <Type> '[' <Expr> ']' */
+  /* 364. <New Expr> ::= new <Type> '[' <Expr> ']' */
   Rule_NewExpr_new_LBracket_RBracket
   };
 
