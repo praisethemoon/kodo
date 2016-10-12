@@ -7,10 +7,11 @@
 class Expr;
 
 /* Main Entry */
-class PkgExpr;
+class EntryExpr;
 
 /* imports */
 class ImportExpr;
+class ImportNormalExpr;
 class ImportAllExpr;
 class ImportAsExpr;
 class ImportFromExpr;
@@ -176,6 +177,43 @@ class AstOpNewClass;
 
 
 /* todo: use unordered set instead of vector */
+
+class Expr
+{
+public:
+    virtual std::string toString() = 0;
+};
+
+class EntryExpr: public Expr{
+public:
+    /* @param name file name */
+    EntryExpr(std::string name);
+    virtual std::string toString();
+
+    std::string name;
+};
+
+class ImportExpr: public Expr{
+public:
+    virtual bool verify() = 0;
+};
+
+class ImportNormalExpr: public ImportExpr{
+public:
+    ImportNormalExpr(PkgExpr pkg);
+    virtual std::string toString();
+
+    PkgExpr pkg;
+};
+
+class ImportAllExpr: public ImportExpr{
+public:
+    ImportAllExpr(PkgExpr pkg);
+    virtual std::string toString();
+    bool verify();
+
+    PkgExpr pkg;
+};
 
 /* this is the top level expr. */
 class AstPackageExpr: public ContextStruct
