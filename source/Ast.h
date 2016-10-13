@@ -200,20 +200,37 @@ public:
 
 class ImportNormalExpr: public ImportExpr{
 public:
-    ImportNormalExpr(PkgExpr pkg);
+    ImportNormalExpr(FilePathExpr* pkg);
     virtual std::string toString();
 
-    PkgExpr pkg;
+    FilePathExpr* pkg;
 };
 
 class ImportAllExpr: public ImportExpr{
 public:
-    ImportAllExpr(PkgExpr pkg);
+    ImportAllExpr(FilePathExpr* pkg);
     virtual std::string toString();
-    bool verify();
+    virtual bool verify();
 
-    PkgExpr pkg;
+    FilePathExpr* pkg;
 };
+
+class ImportAsExpr: public ImportExpr{
+public:
+    ImportAsExpr(FilePathExpr* pkg, std::string as);
+    virtual std::string toString();
+    virtual bool verify();
+
+    FilePathExpr* pkg;
+    std::string as;
+}
+
+class FilePathExpr: public Expr{
+public:
+    FilePathExpr(PkgExpr pkg)
+}
+
+class ImportFromExpr
 
 /* this is the top level expr. */
 class AstPackageExpr: public ContextStruct
