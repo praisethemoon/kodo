@@ -1,6 +1,9 @@
 #ifndef AST_H
 #define AST_H
 
+#include <string>
+#include <vector>
+
 #include "Parser.h"
 
 /* Mother of all life */
@@ -223,62 +226,62 @@ public:
 
     FilePathExpr* pkg;
     std::string as;
-}
+};
+
+class ImportFromExpr: public ImportExpr{
+public:
+    ImportFromExpr(FilePathExpr* from, FilePathExpr* import);
+    virtual bool verify();
+    virtual std::string toString();
+
+    FilePathExpr *from, *import;
+};
 
 class FilePathExpr: public Expr{
 public:
-    FilePathExpr(PkgExpr pkg)
-}
+    FilePathExpr(std::vector<std::string> path);
+    virtual std::string toString();
 
-class ImportFromExpr
-
-/* this is the top level expr. */
-class AstPackageExpr: public ContextStruct
-{
-public:
-    std::vector<VarDecl*> vars;
-    std::vector<Function*> funcs;
-    std::vector<ClassDecl*> classes;
-    std::vector<UsingExpr*> usings;
-    std::vector<EnumDecl*> enums;
-    std::vector<ExternType*> externTypes;
-    std::vector<ExternFunctionProto*> externFuncs;
-    std::vector<Import> imports;
-
-    std::vector<std::string> currentPkg;
+    std::vector<std::string> path;
 };
 
-class AstImport: public ContextStruct{
+class FilePathListExpr: public Expr {
 public:
-    /* make sure pkg exist */
-    virtual bool verify() = 0;
+    FilePathListExpr(std::vector<FilePathExpr*> list);
+    virtual std::string toString();
+
+    std::vector<FilePathExpr*> list;
 };
 
-class ImportExpr: public ContextStruct{
+/* functions */
+class FnHeaderProtoExpr: public Expr{
 public:
-    std::vector<std::string> pkg;
-    virtual bool verify() {
+    std::string id;
 
-    }
-};
-
-class ImportAllExpr: public ContextStruct{
-public:
-    std::vector<std::string> pkg;
-};
-
-class ImportAsExpr: public ContextStruct{
-public:
-    std::vector<std::string> pkg;
-    std::string as;
-};
-
-class ImportFromsExpr: public ContextStruct{
-public:
-    std::vector<std::string> imports;
-    std::string from;
+    FnHeaderProtoExpr(std::string id);
 };
 
 
+class FnHeaderProtoParamsExpr: public FnHeaderProtoExpr{
+public:
+    ParamsExpr* params;
+
+    FnHeaderProtoParamsExpr(std::string id, ParamExpr* params);
+    virtual std::string toString();
+};
+
+class FnHeaderProtoTypesExpr: public FnHeaderProtoExpr{
+public:
+    TypesExpr* types;
+
+    FnHeaderProtoTypesExpr(std::string id, TypesExpr* types);
+    virtual std::string toString();
+};
+
+
+class ;
+class FnHeaderImplExpr;
+class FuncDeclExpr;
+class FuncBodyExpr;
 
 #endif // AST_H
