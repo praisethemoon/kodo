@@ -130,3 +130,9 @@ FnHeaderProtoTypesExpr::FnHeaderProtoTypesExpr(std::string id, TypesExpr* types)
 std::string FnHeaderProtoTypesExpr::toString(){
     return "FnHeaderProtoTypesExpr[id: "+id+", types: "+types->toString()+"]";
 }
+
+/* FuncDeclExpr */
+
+FuncDeclExpr::FuncDeclExpr(FnHeaderProtoParamsExpr *header,
+        FuncBodyExpr *body,
+        int fnFlags);

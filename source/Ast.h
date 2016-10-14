@@ -6,6 +6,12 @@
 
 #include "Parser.h"
 
+typedef enum FnFlags{
+    LOCAL = 1 << 0,
+    SYNC  = 1 << 1,
+    PURE  = 1 << 2,
+}FnFlags;
+
 /* Mother of all life */
 class Expr;
 
@@ -261,7 +267,7 @@ public:
     FnHeaderProtoExpr(std::string id);
 };
 
-
+/* this is the same as FnHeaderImplExpr */
 class FnHeaderProtoParamsExpr: public FnHeaderProtoExpr{
 public:
     ParamsExpr* params;
@@ -278,10 +284,21 @@ public:
     virtual std::string toString();
 };
 
+class FuncDeclExpr: public Expr{
+public:
+    FnHeaderProtoParamsExpr *header;
+    FuncBodyExpr *body;
+    // FnFlags enum bitflag
+    int fnFlags;
 
-class ;
-class FnHeaderImplExpr;
-class FuncDeclExpr;
+    
+    FnHeaderProtoParamsExpr(FnHeaderProtoParamsExpr *header,
+        FuncBodyExpr *body,
+        int fnFlags;
+    );
+ 
+    virtual std::string toString();
+};
 class FuncBodyExpr;
 
 #endif // AST_H
