@@ -36,6 +36,7 @@ THIS SOFTWARE IS PROVIDED BY THE AUTHORS "AS IS" AND ANY EXPRESS OR IMPLIED WARR
 #define COMPILER_H
 
 #include "Parser.h"
+#include "lua/lua.hpp"
 
 class Compiler
 {
@@ -43,6 +44,8 @@ public:
     ContextStruct *Context;
     Compiler(const char* filename);
     ~Compiler();
+    void registerContext(lua_State* L, TokenStruct *Token);
+
 };
 
 #endif // COMPILER_H

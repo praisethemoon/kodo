@@ -124,6 +124,7 @@ struct TokenStruct {
   wchar_t *Data;                      /* String with data from the input. */
   long Line;                          /* Line number in the input. */
   long Column;                        /* Column in the input. */
+  long Size;                          /* number of child tokens */
   };
 
 

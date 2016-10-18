@@ -379,6 +379,7 @@ int ParseToken(
   Reduction = (struct TokenStackStruct *)malloc(sizeof(struct TokenStackStruct));
   if (Reduction == NULL) return(LALRMEMORYERROR);
   Reduction->Token = (struct TokenStruct *)malloc(sizeof(struct TokenStruct));
+  Reduction->Token->Size = 0;
   if (Reduction->Token == NULL) {
     free(Reduction);
     return(LALRMEMORYERROR);
@@ -386,6 +387,7 @@ int ParseToken(
   Reduction->Token->ReductionRule = Rule;
   Reduction->Token->Tokens = (struct TokenStruct **)malloc(
     sizeof(struct TokenStruct *) * Grammar.RuleArray[Rule].SymbolsCount);
+  Reduction->Token->Size = Grammar.RuleArray[Rule].SymbolsCount;
   if (Reduction->Token->Tokens == NULL) {
     free(Reduction->Token);
     free(Reduction);
@@ -564,6 +566,7 @@ int Parse(
     Work->LalrState = LalrState;
     Work->NextToken = NULL;
     Work->Token = (struct TokenStruct *)malloc(sizeof(struct TokenStruct));
+    Work->Token->Size = 0;
     if (Work->Token == NULL) {
       free(Work);
       ParseCleanup(TokenStack,NULL,FirstToken);

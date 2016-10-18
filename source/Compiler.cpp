@@ -42,6 +42,7 @@ THIS SOFTWARE IS PROVIDED BY THE AUTHORS "AS IS" AND ANY EXPRESS OR IMPLIED WARR
 #include "Engine.h"
 #include "Parser.h"
 #include "FileUtils.h"
+#include "lua/lua.hpp"
 
 Compiler::Compiler(const char * filename)
 {
@@ -72,7 +73,10 @@ Compiler::Compiler(const char * filename)
         /* Start execution by calling the subroutine of the first Token on
            the TokenStack. It's the "Start Symbol" that is defined in the
            grammar. */
-        RuleJumpTable[Token->ReductionRule](Token, Context);
+        //RuleJumpTable[Token->ReductionRule](Token, Context);
+        lua_State *L = luaL_newstate();
+        luaL_openlibs(L);
+        registerContext(L, Token);
         }
 
     /* Cleanup. */
@@ -83,4 +87,58 @@ Compiler::Compiler(const char * filename)
 Compiler::~Compiler()
 {
     delete Context;
+}
+
+void Compiler::registerContext(lua_State* L, TokenStruct *Token)
+{
+    if (Token == NULL){
+        printf("fuck\n");
+        return;
+    }
+    static int i = 0;
+    printf("%d %d.\n", Token->Size, i++);
+    lua_newtable(L); /* creates and pushes new table on top of Lua stack */
+
+    printf("1 ");
+
+    lua_pushliteral(L, "reductionRule");  /* table["name"] = row->name. Pops key value */
+    lua_pushnumber(L, Token->ReductionRule); /* Pushes table value on top of Lua stack */
+    lua_settable(L,-3);
+
+    printf("2 ");
+    lua_pushliteral(L, "symbol");
+    lua_pushnumber(L, Token->Symbol);
+    lua_settable(L,-3);
+
+    printf("3 ");
+    lua_pushliteral(L, "data");
+    lua_pushstring(L, (char*)Token->Data);
+    lua_settable(L,-3);
+
+    printf("4 ");
+    lua_pushliteral(L, "line");
+    lua_pushnumber(L, Token->Line);
+    lua_settable(L,-3);
+
+    printf("5 ");
+    lua_pushliteral(L, "col");
+    lua_pushinteger(L, Token->Column);
+    lua_settable(L,-3);
+
+    printf("6 ");
+    lua_pushliteral(L, "tokens");
+    lua_createtable(L, Token->Size, 0);
+
+    for(int i = 0; i < Token->Size; i++){
+        printf("7 ");
+        lua_pushnumber(L, i+1);
+
+        printf("8 ");
+        registerContext(L, Token->Tokens[i]);
+
+        printf("9 ");
+        lua_settable(L,-3);
+    }
+
+    lua_settable(L,-3);
 }
