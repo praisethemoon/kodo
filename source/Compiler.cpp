@@ -77,7 +77,7 @@ Compiler::Compiler(const char * filename)
         lua_State *L = luaL_newstate();
         luaL_openlibs(L);
         registerContext(L, Token);
-        lua_setglobal(L, "tab");
+        lua_setglobal(L, "expr");
         luaL_dostring(L, "print(tab.reductionRule, tab.symbol, tab.data, tab.line, tab.col)");
         }
 
@@ -93,55 +93,39 @@ Compiler::~Compiler()
 
 void Compiler::registerContext(lua_State* L, TokenStruct *Token)
 {
+    lua_checkstack(L, INT_MAX);
     static int i = 0;
-    printf("\n%d %d.\n", Token->Size, i++);
+    //printf("\nsize: %d, i:%d reduction: %d.\n", Token->Size, i++, Token->ReductionRule);
     lua_newtable(L); /* creates and pushes new table on top of Lua stack */
 
-    printf("1 ");
 
-    lua_pushliteral(L, "reductionRule");  /* table["name"] = row->name. Pops key value */
     lua_pushinteger(L, Token->ReductionRule); /* Pushes table value on top of Lua stack */
-    lua_settable(L,-3);
+    lua_setfield(L, -2, "rule");  /* table["name"] = row->name. Pops key value */
 
-    printf("2 ");
-    lua_pushliteral(L, "symbol");
     lua_pushinteger(L, Token->Symbol);
-    lua_settable(L,-3);
+    lua_setfield(L, -2, "sym");
 
-    printf("3 ");
-    lua_pushliteral(L, "data");
     lua_pushstring(L, (char*)Token->Data);
-    lua_settable(L,-3);
+    lua_setfield(L, -2, "data");
 
-    printf("4 ");
-    lua_pushliteral(L, "line");
     lua_pushinteger(L, Token->Line);
-    lua_settable(L,-3);
+    lua_setfield(L, -2, "line");
 
-    printf("5 ");
-    lua_pushliteral(L, "col");
     lua_pushinteger(L, Token->Column);
-    lua_settable(L,-3);
+    lua_setfield(L, -2, "col");
 
 
 
     if(Token->Size > 0)
     {
-
-        printf("6 ");
-        lua_pushliteral(L, "tokens");
         lua_newtable(L);
 
-
         for(int k = 0; k < Token->Size; k++){
-            printf("\n%d\n", k);
-            lua_pushnumber(L, k);
             registerContext(L, Token->Tokens[k]);
-            lua_settable(L,-3);
+            lua_rawseti(L, -2, k+1);
         }
 
-
-        lua_settable(L,-3);
+        lua_setfield(L, -2, "tokens");
     }
 
 

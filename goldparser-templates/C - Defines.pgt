@@ -1,0 +1,15 @@
+##TEMPLATE-NAME 'C (ANSI) - Defines'
+##LANGUAGE 'ANSI C'
+##ENGINE-NAME 'None'
+##AUTHOR 'Justin Holmes' 
+##FILE-EXTENSION 'h'
+##NOTES
+This template creates a set of ANSI C defines for the grammar's symbols and rules.
+##END-NOTES
+##ID-CASE UPPERCASE
+##ID-SEPARATOR '_'
+##ID-SYMBOL-PREFIX 'PS'
+##ID-RULE-PREFIX 'PS'
+##SYMBOLS
+#define %ID% %Value% // %Description%
+##END-SYMBOLS
