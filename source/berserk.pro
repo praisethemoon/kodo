@@ -140,9 +140,4 @@ HEADERS += \
 DISTFILES += \
     lua/README
 
-LIBS += -LC:/Users/Mega-PC/Desktop/libs/llvm-3.9.0.src/build/Debug/lib -lLLVMCore -lLLVMSupport
 
-INCLUDEPATH += C:\Users\Mega-PC\Desktop\libs\llvm-3.9.0.src\build\examples\Kaleidoscope\Chapter6 \
-C:\Users\Mega-PC\Desktop\libs\llvm-3.9.0.src\examples\Kaleidoscope\Chapter6 \
-C:\Users\Mega-PC\Desktop\libs\llvm-3.9.0.src\build\include \
-C:\Users\Mega-PC\Desktop\libs\llvm-3.9.0.src\include \

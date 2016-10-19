@@ -32,117 +32,67 @@ THIS SOFTWARE IS PROVIDED BY THE AUTHORS "AS IS" AND ANY EXPRESS OR IMPLIED WARR
 
 */
 
-
-#include <cwchar>
+#include <iostream>
 #include <cstdio>
-#include <cstdlib>
+#include <cstring>
 
-#include "Compiler.h"
+#include "Berserk.h"
 #include "Defines.h"
 #include "Engine.h"
 #include "Parser.h"
 #include "FileUtils.h"
-#include "lua/lua.hpp"
+#include "CompilationHandler.h"
+#include "Compiler.h"
 
-Compiler::Compiler(const char * filename)
+void parseCmd(int argc, char* argv[])
 {
-    wchar_t *InputBuf;
-    TokenStruct *Token;
-    Context = new ContextStruct();
-    int Result;
-    int TrimReductions = 0;
-    int Debug = 0;
-    /* Load the inputfile into memory. */
-    InputBuf = LoadInputFile(filename);
-    if (InputBuf == NULL)
-        return;
-
-    /* Run the Parser. */
-    Result = Parse(InputBuf,wcslen(InputBuf),TrimReductions,Debug,&Token);
-
-    /* Interpret the results. */
-    if (Result != PARSEACCEPT) {
-        ShowErrorMessage(Token,Result);
-      } else {
-        printf("Accepted.\n");
-        /* Initialize the Context. */
-        Context->Debug = Debug;
-        Context->Indent = 0;
-        Context->ReturnValue = NULL;
-
-        /* Start execution by calling the subroutine of the first Token on
-           the TokenStack. It's the "Start Symbol" that is defined in the
-           grammar. */
-        //RuleJumpTable[Token->ReductionRule](Token, Context);
-        lua_State *L = luaL_newstate();
-        luaL_openlibs(L);
-        registerContext(L, Token);
-        lua_setglobal(L, "tab");
-        luaL_dostring(L, "print(tab.reductionRule, tab.symbol, tab.data, tab.line, tab.col)");
-        }
-
-    /* Cleanup. */
-    DeleteTokens(Token);
-    free(InputBuf);
-}
-
-Compiler::~Compiler()
-{
-    delete Context;
-}
-
-void Compiler::registerContext(lua_State* L, TokenStruct *Token)
-{
-    static int i = 0;
-    printf("\n%d %d.\n", Token->Size, i++);
-    lua_newtable(L); /* creates and pushes new table on top of Lua stack */
-
-    printf("1 ");
-
-    lua_pushliteral(L, "reductionRule");  /* table["name"] = row->name. Pops key value */
-    lua_pushinteger(L, Token->ReductionRule); /* Pushes table value on top of Lua stack */
-    lua_settable(L,-3);
-
-    printf("2 ");
-    lua_pushliteral(L, "symbol");
-    lua_pushinteger(L, Token->Symbol);
-    lua_settable(L,-3);
-
-    printf("3 ");
-    lua_pushliteral(L, "data");
-    lua_pushstring(L, (char*)Token->Data);
-    lua_settable(L,-3);
-
-    printf("4 ");
-    lua_pushliteral(L, "line");
-    lua_pushinteger(L, Token->Line);
-    lua_settable(L,-3);
-
-    printf("5 ");
-    lua_pushliteral(L, "col");
-    lua_pushinteger(L, Token->Column);
-    lua_settable(L,-3);
-
-
-
-    if(Token->Size > 0)
+    if (argc == 1)
     {
-
-        printf("6 ");
-        lua_pushliteral(L, "tokens");
-        lua_newtable(L);
-
-
-        for(int k = 0; k < Token->Size; k++){
-            printf("\n%d\n", k);
-            lua_pushnumber(L, k);
-            registerContext(L, Token->Tokens[k]);
-            lua_settable(L,-3);
+        fprintf(stderr, "Invalid argument count\n");
+    }
+    else if (argc == 2)
+    {
+        if (strcmp(argv[1], "-x") == 0)
+        {
+            printf("%s", BERSERK_LOGO);
+        }
+        else
+        {
+            fprintf(stderr, "Invalid argument '%s'\n", argv[1]);
         }
 
-
-        lua_settable(L,-3);
     }
+    else if (argc == 3)
+    {
+        if (strcmp(argv[1], "-c") == 0)
+        {
+            CompilationHandler *compilationHandler = new CompilationHandler();
+            CompilationService* service = compilationHandler->createFromSource(argv[2]);
+            service ->run();
+            delete service;
+            delete compilationHandler;
+        }
+        else if(strcmp(argv[1], "-lua") == 0)
+        {
+            CompilationHandler *compilationHandler = new CompilationHandler();
+            CompilationService* service = compilationHandler->createFromMakefile(argv[2]);
+            service->run();
+            delete service;
+            delete compilationHandler;
+        }
+    }
+}
 
+int main(int argc, char *argv[]){
+    printf("%s", BERSERK_LOGO);
+    parseCmd(argc, argv);
 
+    CompilationHandler *compilationHandler = new CompilationHandler();
+    CompilationService* service = compilationHandler->createFromSource("C:/Users/SCH/Desktop/dev/berserk/test/input.bsk");
+    service ->run();
+    
+    delete service;
+    delete compilationHandler;
+
+    return 0;
 }
