@@ -79,7 +79,7 @@ Compiler::Compiler(const char * filename)
         registerContext(L, Token);
         lua_setglobal(L, "expr");
         int ret = 0;
-        if ((ret = luaL_dofile(L, "C:/Users/SCH/Desktop/dev/berserk/source/parser.lua")) != 0)
+        if ((ret = luaL_dofile(L, "C:/Users/Mega-PC/Desktop/berserk/source/parser.lua")) != 0)
         {
 
             printf("Error occurs when calling luaL_dofile() Hint Machine 0x%x\n",ret);
@@ -114,7 +114,15 @@ void Compiler::registerContext(lua_State* L, TokenStruct *Token)
     lua_settable(L, -3);
 
     lua_pushliteral(L, "data");
-    lua_pushstring(L, (char*)Token->Data);
+    if(Token->Data != NULL)
+    {
+        int n = wcslen(Token->Data);
+        char *data = (char*)malloc((n+1)*sizeof(char));
+        wcstombs(data, Token->Data, n+1);
+        data[n] = '\0';
+        lua_pushstring(L, data);
+    }
+    else lua_pushnil(L);
     lua_settable(L, -3);
 
     lua_pushliteral(L, "line");

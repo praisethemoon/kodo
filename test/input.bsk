@@ -1,4 +1,12 @@
 
+
+import system.io as xioSimply
+
+import std.io.out.*
+
+from std.io import Ssytem.println, system.joke
+import trash.team.poseidon
+
 using std
 
 let x: int = 3
