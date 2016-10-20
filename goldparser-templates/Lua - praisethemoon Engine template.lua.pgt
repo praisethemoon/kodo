@@ -34,7 +34,7 @@ local ruleJumpTable = {
 ##RULES
 
   -- %Index%. %Description% 
-  %ID%%Delimiter%
+  [%Index%] = %ID%%Delimiter%
 ##END-RULES
 }
 ##END-RULE-TABLE

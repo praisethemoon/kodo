@@ -88,7 +88,7 @@ int main(int argc, char *argv[]){
     parseCmd(argc, argv);
 
     CompilationHandler *compilationHandler = new CompilationHandler();
-    CompilationService* service = compilationHandler->createFromSource("C:/Users/Mega-PC/Desktop/berserk/test/input.bsk");
+    CompilationService* service = compilationHandler->createFromSource("C:/Users/SCH/Desktop/dev/berserk/test/input.bsk");
     service ->run();
     delete service;
     delete compilationHandler;
