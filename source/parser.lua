@@ -96,7 +96,7 @@ end
 function Rule_Import_import_as_Id(token, parent)
   local pkg = {}
   parseExpr(2, token, pkg)
-  table.insert(parent.imports, { type = "import_as", pkg = pkg, as = token.tokens[4].data })
+  table.insert(parent.imports, { type = "importAs", pkg = pkg, as = token.tokens[4].data })
   dumpImport(pkg)
 end
 
@@ -174,301 +174,670 @@ end
 function Rule_FilePathList(token, parent)
   local pkg = {}
   parseExpr(1, token, pkg)
+  
   table.insert(parent, pkg)
 end
 
 
 -- <Fn Header Proto> ::= Id '(' <Params> ')' 
 function Rule_FnHeaderProto_Id_LParen_RParen(token, parent)
-  -- TODO: Rule_FnHeaderProto_Id_LParen_RParen
+  assert(parent.type == "FnHeaderProto")
+
+  local params = {}
+  parseExpr(3, token, params)
+
+  parent.name = token.tokens[1].data
+  parent.params = params
 end
 
 
 -- <Fn Header Proto> ::= Id '(' <Params> ')' '->' <Type> 
 function Rule_FnHeaderProto_Id_LParen_RParen_MinusGt(token, parent)
-  -- TODO: Rule_FnHeaderProto_Id_LParen_RParen_MinusGt
+  assert(parent.type == "FnHeaderProto")
+
+  local params = {}
+  parseExpr(3, token, params)
+  
+  local type = {}
+  parseExpr(6, token, type)
+
+  parent.name = token.tokens[1].data
+  parent.params = params
+  parent.returnType = type
 end
 
 
 -- <Fn Header Proto> ::= Id '(' <Types> ')' 
 function Rule_FnHeaderProto_Id_LParen_RParen2(token, parent)
-  -- TODO: Rule_FnHeaderProto_Id_LParen_RParen2
+  assert(parent.type == "FnHeaderProto")
+
+  local types = {}
+  parseExpr(3, token, types)
+
+  parent.name = token.tokens[1].data
+  parent.types = params
 end
 
 
 -- <Fn Header Proto> ::= Id '(' <Types> ')' '->' <Type> 
 function Rule_FnHeaderProto_Id_LParen_RParen_MinusGt2(token, parent)
-  -- TODO: Rule_FnHeaderProto_Id_LParen_RParen_MinusGt2
+  assert(parent.type == "FnHeaderProto")
+
+  local types = {}
+  parseExpr(3, token, types)
+  
+  local type = {}
+  parseExpr(6, token, type)
+
+  parent.name = token.tokens[1].data
+  parent.types = types
+  parent.returnType = type
 end
 
 
 -- <Fn Header Proto> ::= Id '(' ')' 
 function Rule_FnHeaderProto_Id_LParen_RParen3(token, parent)
-  -- TODO: Rule_FnHeaderProto_Id_LParen_RParen3
+  assert(parent.type == "FnHeaderProto")
+  
+  parent.name = token.tokens[1].data
 end
 
 
 -- <Fn Header Proto> ::= Id '(' ')' '->' <Type> 
 function Rule_FnHeaderProto_Id_LParen_RParen_MinusGt3(token, parent)
-  -- TODO: Rule_FnHeaderProto_Id_LParen_RParen_MinusGt3
+  assert(parent.type == "FnHeaderProto")
+
+  local type = {}
+  parseExpr(5, token, type)
+
+  parent.name = token.tokens[1].data
+  parent.returnType = type
 end
 
 
 -- <Fn Header Impl> ::= Id '(' <Params> ')' 
 function Rule_FnHeaderImpl_Id_LParen_RParen(token, parent)
-  -- TODO: Rule_FnHeaderImpl_Id_LParen_RParen
+  assert(parent.type == "FnHeaderImpl")
+
+  local params = {}
+  parseExpr(3, token, params)
+  
+
+  parent.name = token.tokens[1].data
+  parent.params = params
 end
 
 
 -- <Fn Header Impl> ::= Id '(' <Params> ')' '->' <Type> 
 function Rule_FnHeaderImpl_Id_LParen_RParen_MinusGt(token, parent)
-  -- TODO: Rule_FnHeaderImpl_Id_LParen_RParen_MinusGt
+  assert(parent.type == "FnHeaderImpl")
+
+  local params = {}
+  parseExpr(3, token, params)
+  
+  local type = {}
+  parseExpr(6, token, type)
+
+  parent.name = token.tokens[1].data
+  parent.params = params
+  parent.returnType = type
 end
 
 
 -- <Fn Header Impl> ::= Id '(' ')' 
 function Rule_FnHeaderImpl_Id_LParen_RParen2(token, parent)
-  -- TODO: Rule_FnHeaderImpl_Id_LParen_RParen2
+  assert(parent.type == "FnHeaderImpl")
+  parent.name = token.tokens[1].data
 end
 
 
 -- <Fn Header Impl> ::= Id '(' ')' '->' <Type> 
 function Rule_FnHeaderImpl_Id_LParen_RParen_MinusGt2(token, parent)
-  -- TODO: Rule_FnHeaderImpl_Id_LParen_RParen_MinusGt2
+  assert(parent.type == "FnHeaderImpl")
+
+  local type = {}
+  parseExpr(5, token, type)
+
+  parent.name = token.tokens[1].data
+  parent.returnType = type
 end
 
 
 -- <Func Decl> ::= function <Fn Header Impl> <Func Body> 
 function Rule_FuncDecl_function(token, parent)
-  -- TODO: Rule_FuncDecl_function
+  assert(parent.type == "FuncDecl")
+
+  local fnHeader = {type="FnHeaderImpl"}
+  parseExpr(2, token, fnHeader)
+
+  local fnBody = {type="FuncBody", parent=parent}
+  parseExpr(3, token, fnBody)
+
+  parent.header = fnHeader
+  parent.body = fnBody
 end
 
 
 -- <Func Decl> ::= local function <Fn Header Impl> <Func Body> 
 function Rule_FuncDecl_local_function(token, parent)
-  -- TODO: Rule_FuncDecl_local_function
+  assert(parent.type == "FuncDecl")
+
+  local fnHeader = {type="FnHeaderImpl"}
+  parseExpr(3, token, fnHeader)
+
+  local fnBody = {type="FuncBody", parent=parent}
+  parseExpr(4, token, fnBody)
+
+  parent.header = fnHeader
+  parent.body = fnBody
+  parent.isLocal = true
 end
 
 
 -- <Func Decl> ::= synchronized function <Fn Header Impl> <Func Body> 
 function Rule_FuncDecl_synchronized_function(token, parent)
-  -- TODO: Rule_FuncDecl_synchronized_function
+  assert(parent.type == "FuncDecl")
+
+  local fnHeader = {type="FnHeaderImpl"}
+  parseExpr(3, token, fnHeader)
+
+  local fnBody = {type="FuncBody", parent=parent}
+  parseExpr(4, token, fnBody)
+
+  parent.header = fnHeader
+  parent.body = fnBody
+  parent.isSync = true
 end
 
 
 -- <Func Decl> ::= synchronized local function <Fn Header Impl> <Func Body> 
 function Rule_FuncDecl_synchronized_local_function(token, parent)
-  -- TODO: Rule_FuncDecl_synchronized_local_function
+  assert(parent.type == "FuncDecl")
+
+  local fnHeader = {type="FnHeaderImpl"}
+  parseExpr(4, token, fnHeader)
+
+  local fnBody = {type="FuncBody", parent=parent}
+  parseExpr(5, token, fnBody)
+
+  parent.header = fnHeader
+  parent.body = fnBody
+  parent.isLocal = true
+  parent.isSync = true
 end
 
 
 -- <Func Decl> ::= local synchronized function <Fn Header Impl> <Func Body> 
 function Rule_FuncDecl_local_synchronized_function(token, parent)
-  -- TODO: Rule_FuncDecl_local_synchronized_function
+  -- same as
+  Rule_FuncDecl_synchronized_local_function(token, parent)
 end
 
 
 -- <Func Decl> ::= pure function <Fn Header Impl> <Func Body> 
 function Rule_FuncDecl_pure_function(token, parent)
-  -- TODO: Rule_FuncDecl_pure_function
+  assert(parent.type == "FuncDecl")
+
+  local fnHeader = {type="FnHeaderImpl"}
+  parseExpr(3, token, fnHeader)
+
+  local fnBody = {type="FuncBody", parent=parent}
+  parseExpr(4, token, fnBody)
+
+  parent.header = fnHeader
+  parent.body = fnBody
+  parent.isPure = true
 end
 
 
 -- <Func Decl> ::= local pure function <Fn Header Impl> <Func Body> 
 function Rule_FuncDecl_local_pure_function(token, parent)
-  -- TODO: Rule_FuncDecl_local_pure_function
+  assert(parent.type == "FuncDecl")
+
+  local fnHeader = {type="FnHeaderImpl"}
+  parseExpr(4, token, fnHeader)
+
+  local fnBody = {type="FuncBody", parent=parent}
+  parseExpr(5, token, fnBody)
+
+  parent.header = fnHeader
+  parent.body = fnBody
+  parent.isLocal = true
+  parent.isPure = true
 end
 
 
 -- <Func Decl> ::= pure local function <Fn Header Impl> <Func Body> 
 function Rule_FuncDecl_pure_local_function(token, parent)
-  -- TODO: Rule_FuncDecl_pure_local_function
+  -- same as 
+  Rule_FuncDecl_local_pure_function(token, parent)
 end
 
 
 -- <Func Body> ::= '=' <Expr> 
 function Rule_FuncBody_Eq(token, parent)
-  -- TODO: Rule_FuncBody_Eq
+  assert(parent.type == "FuncBody")
+
+  local expr = {type="expr"}
+  parseExpr(2, token, expr)
+
+  parent.expr = expr
 end
 
 
 -- <Func Body> ::= <Block> 
 function Rule_FuncBody(token, parent)
-  -- TODO: Rule_FuncBody
+  assert(parent.type == "FuncBody")
+
+  local block = {type="block"}
+  parseExpr(2, token, block)
+
+  parent.block = block
 end
 
 
 -- <CFunc Proto> ::= function <Fn Header Proto> 
 function Rule_CFuncProto_function(token, parent)
-  -- TODO: Rule_CFuncProto_function
+  assert(parent.type == "CFuncProto")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(2, token, fnHeader)
+
+  parent.header = fnHeader
 end
 
 
 -- <CFunc Proto> ::= pure function <Fn Header Proto> 
 function Rule_CFuncProto_pure_function(token, parent)
-  -- TODO: Rule_CFuncProto_pure_function
+  assert(parent.type == "CFuncProto")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(3, token, fnHeader)
+
+  parent.header = fnHeader
+  parent.isPure = true
 end
 
 
 -- <CFunc Proto> ::= static function <Fn Header Proto> 
 function Rule_CFuncProto_static_function(token, parent)
-  -- TODO: Rule_CFuncProto_static_function
+  assert(parent.type == "CFuncProto")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(3, token, fnHeader)
+
+  parent.header = fnHeader
+  parent.isStatic = true
 end
 
 
 -- <CFunc Proto> ::= <Visibility> function <Fn Header Proto> 
-function Rule_CFuncProto_function2(token, parent)
-  -- TODO: Rule_CFuncProto_function2
+function Rule_CFuncProto_function2(token, parent)  
+  assert(parent.type == "CFuncProto")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(3, token, fnHeader)
+
+  parseExpr(1, token, parent)
+
+  parent.header = fnHeader
 end
 
 
 -- <CFunc Proto> ::= <Inherited> function <Fn Header Proto> 
 function Rule_CFuncProto_function3(token, parent)
-  -- TODO: Rule_CFuncProto_function3
+  assert(parent.type == "CFuncProto")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(3, token, fnHeader)
+
+  parseExpr(1, token, parent)
+  
+  parent.header = fnHeader
 end
 
 
 -- <CFunc Proto> ::= pure static function <Fn Header Proto> 
 function Rule_CFuncProto_pure_static_function(token, parent)
-  -- TODO: Rule_CFuncProto_pure_static_function
+  assert(parent.type == "CFuncProto")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(4, token, fnHeader)
+
+  parent.header = fnHeader
+  parent.isStatic = true
+  parent.isPure = true
 end
 
 
 -- <CFunc Proto> ::= pure <Visibility> function <Fn Header Proto> 
 function Rule_CFuncProto_pure_function2(token, parent)
-  -- TODO: Rule_CFuncProto_pure_function2
+  
+  assert(parent.type == "CFuncProto")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(4, token, fnHeader)
+
+  local cfuncProto = {type="CFuncProto", header=fnHeader, isPure=true}
+  parseExpr(2, token, cfuncProto)
+
+  parent.header = fnHeader
+  parent.isPure = true
 end
 
-
+--FIX This
 -- <CFunc Proto> ::= pure <Inherited> function <Fn Header Proto> 
 function Rule_CFuncProto_pure_function3(token, parent)
-  -- TODO: Rule_CFuncProto_pure_function3
+  
+  assert(parent.type == "CFuncProto")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(4, token, fnHeader)
+
+  local cfuncProto = {type="CFuncProto", header=fnHeader, isStatic=true}
+  parseExpr(2, token, cfuncProto)
+
+  table.insert(parent.prototypes, cfuncProto)
 end
 
 
 -- <CFunc Proto> ::= static pure function <Fn Header Proto> 
 function Rule_CFuncProto_static_pure_function(token, parent)
-  -- TODO: Rule_CFuncProto_static_pure_function
+  -- same as 
+  Rule_CFuncProto_pure_static_function(token, parent)
 end
 
 
 -- <CFunc Proto> ::= static <Visibility> function <Fn Header Proto> 
 function Rule_CFuncProto_static_function2(token, parent)
-  -- TODO: Rule_CFuncProto_static_function2
+  
+  assert(parent.type == "CFuncProto")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(4, token, fnHeader)
+
+  local cfuncProto = {type="CFuncProto", header=fnHeader, isStatic=true}
+  parseExpr(2, token, cfuncProto)
+
+  table.insert(parent.prototypes, cfuncProto)
 end
 
 
 -- <CFunc Proto> ::= static <Inherited> function <Fn Header Proto> 
 function Rule_CFuncProto_static_function3(token, parent)
-  -- TODO: Rule_CFuncProto_static_function3
+  
+  assert(parent.type == "CFuncProto")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(4, token, fnHeader)
+
+  local cfuncProto = {type="CFuncProto", header=fnHeader, isStatic=true}
+  parseExpr(2, token, cfuncProto)
+
+  table.insert(parent.prototypes, cfuncProto)
 end
 
 
 -- <CFunc Proto> ::= <Visibility> pure function <Fn Header Proto> 
 function Rule_CFuncProto_pure_function4(token, parent)
-  -- TODO: Rule_CFuncProto_pure_function4
+  
+  assert(parent.type == "CFuncProto")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(4, token, fnHeader)
+
+  local cfuncProto = {type="CFuncProto", header=fnHeader, isPure=true}
+  parseExpr(1, token, cfuncProto)
+
+  table.insert(parent.prototypes, cfuncProto)
 end
 
 
 -- <CFunc Proto> ::= <Visibility> static function <Fn Header Proto> 
 function Rule_CFuncProto_static_function4(token, parent)
-  -- TODO: Rule_CFuncProto_static_function4
+  
+  assert(parent.type == "CFuncProto")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(4, token, fnHeader)
+
+  local cfuncProto = {type="CFuncProto", header=fnHeader, isStatic=true}
+  parseExpr(1, token, cfuncProto)
+
+  table.insert(parent.prototypes, cfuncProto)
 end
 
 
 -- <CFunc Proto> ::= <Visibility> <Inherited> function <Fn Header Proto> 
 function Rule_CFuncProto_function4(token, parent)
-  -- TODO: Rule_CFuncProto_function4
+  assert(parent.type == "CFuncProto")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(4, token, fnHeader)
+
+  local cfuncProto = {type="CFuncProto", header=fnHeader, isPure=true}
+  parseExpr(1, token, cfuncProto)
+  parseExpr(2, token, cfuncProto)
+
+  table.insert(parent.prototypes, cfuncProto)
 end
 
 
 -- <CFunc Proto> ::= <Inherited> pure function <Fn Header Proto> 
 function Rule_CFuncProto_pure_function5(token, parent)
-  -- TODO: Rule_CFuncProto_pure_function5
+  
+  assert(parent.type == "CFuncProto")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(4, token, fnHeader)
+
+  local cfuncProto = {type="CFuncProto", header=fnHeader, isPure=true}
+  parseExpr(1, token, cfuncProto)
+
+  table.insert(parent.prototypes, cfuncProto)
 end
 
 
 -- <CFunc Proto> ::= <Inherited> <Visibility> function <Fn Header Proto> 
 function Rule_CFuncProto_function5(token, parent)
-  -- TODO: Rule_CFuncProto_function5
+  assert(parent.type == "CFuncProto")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(4, token, fnHeader)
+
+  local cfuncProto = {type="CFuncProto", header=fnHeader, isPure=true}
+  parseExpr(1, token, cfuncProto)
+  parseExpr(2, token, cfuncProto)
+
+  table.insert(parent.prototypes, cfuncProto)
 end
 
 
 -- <CFunc Proto> ::= <Inherited> static function <Fn Header Proto> 
 function Rule_CFuncProto_static_function5(token, parent)
-  -- TODO: Rule_CFuncProto_static_function5
+  
+  assert(parent.type == "CFuncProto")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(4, token, fnHeader)
+
+  local cfuncProto = {type="CFuncProto", header=fnHeader, isStatic=true}
+  parseExpr(1, token, cfuncProto)
+
+  table.insert(parent.prototypes, cfuncProto)
 end
 
 
 -- <CFunc Proto> ::= pure static <Visibility> function <Fn Header Proto> 
 function Rule_CFuncProto_pure_static_function2(token, parent)
-  -- TODO: Rule_CFuncProto_pure_static_function2
+  
+  assert(parent.type == "CFuncProto")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(5, token, fnHeader)
+
+  local cfuncProto = {type="CFuncProto", header=fnHeader, isPure=true, isStatic=true}
+  parseExpr(3, token, cfuncProto)
+
+  table.insert(parent.prototypes, cfuncProto)
 end
 
 
 -- <CFunc Proto> ::= pure <Visibility> static function <Fn Header Proto> 
 function Rule_CFuncProto_pure_static_function3(token, parent)
-  -- TODO: Rule_CFuncProto_pure_static_function3
+  
+  assert(parent.type == "CFuncProto")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(5, token, fnHeader)
+
+  local cfuncProto = {type="CFuncProto", header=fnHeader, isPure=true, isStatic=true}
+  parseExpr(2, token, cfuncProto)
+
+  table.insert(parent.prototypes, cfuncProto)
 end
 
 
 -- <CFunc Proto> ::= pure <Visibility> <Inherited> function <Fn Header Proto> 
 function Rule_CFuncProto_pure_function6(token, parent)
-  -- TODO: Rule_CFuncProto_pure_function6
+  
+  assert(parent.type == "class")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(5, token, fnHeader)
+
+  local cfuncProto = {type="CFuncProto", header=fnHeader, isPure=true}
+  parseExpr(2, token, cfuncProto)
+  parseExpr(3, token, cfuncProto)
+
+  table.insert(parent.prototypes, cfuncProto)
 end
 
 
 -- <CFunc Proto> ::= pure <Inherited> <Visibility> function <Fn Header Proto> 
-function Rule_CFuncProto_pure_function7(token, parent)
-  -- TODO: Rule_CFuncProto_pure_function7
+function Rule_CFuncProto_pure_function6(token, parent)
+  --same as
+  Rule_CFuncProto_pure_function7
 end
 
 
 -- <CFunc Proto> ::= static pure <Visibility> function <Fn Header Proto> 
 function Rule_CFuncProto_static_pure_function2(token, parent)
-  -- TODO: Rule_CFuncProto_static_pure_function2
+  
+  assert(parent.type == "class")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(5, token, fnHeader)
+
+  local cfuncProto = {type="CFuncProto", header=fnHeader, isPure=true, isStatic=true}
+  parseExpr(3, token, cfuncProto)
+
+  table.insert(parent.prototypes, cfuncProto)
 end
 
 
 -- <CFunc Proto> ::= static <Visibility> pure function <Fn Header Proto> 
 function Rule_CFuncProto_static_pure_function3(token, parent)
-  -- TODO: Rule_CFuncProto_static_pure_function3
+  
+  assert(parent.type == "class")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(5, token, fnHeader)
+
+  local cfuncProto = {type="CFuncProto", header=fnHeader, isPure=true, isStatic=true}
+  parseExpr(2, token, cfuncProto)
+
+  table.insert(parent.prototypes, cfuncProto)
 end
 
 
 -- <CFunc Proto> ::= static <Visibility> <Inherited> function <Fn Header Proto> 
 function Rule_CFuncProto_static_function6(token, parent)
-  -- TODO: Rule_CFuncProto_static_function6
+  
+  assert(parent.type == "class")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(5, token, fnHeader)
+
+  local cfuncProto = {type="CFuncProto", header=fnHeader, isStatic=true}
+  parseExpr(2, token, cfuncProto)
+  parseExpr(3, token, cfuncProto)
+
+  table.insert(parent.prototypes, cfuncProto)
 end
 
 
 -- <CFunc Proto> ::= static <Inherited> <Visibility> function <Fn Header Proto> 
 function Rule_CFuncProto_static_function7(token, parent)
-  -- TODO: Rule_CFuncProto_static_function7
+  
+  assert(parent.type == "class")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(5, token, fnHeader)
+
+  local cfuncProto = {type="CFuncProto", header=fnHeader, isStatic=true}
+  parseExpr(2, token, cfuncProto)
+  parseExpr(3, token, cfuncProto)
+
+  table.insert(parent.prototypes, cfuncProto)
 end
 
 
 -- <CFunc Proto> ::= <Inherited> <Visibility> pure function <Fn Header Proto> 
 function Rule_CFuncProto_pure_function8(token, parent)
-  -- TODO: Rule_CFuncProto_pure_function8
+  
+  assert(parent.type == "class")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(5, token, fnHeader)
+
+  local cfuncProto = {type="CFuncProto", header=fnHeader, isPure=true}
+  parseExpr(1, token, cfuncProto)
+  parseExpr(2, token, cfuncProto)
+
+  table.insert(parent.prototypes, cfuncProto)
 end
 
 
 -- <CFunc Proto> ::= <Inherited> pure <Visibility> function <Fn Header Proto> 
 function Rule_CFuncProto_pure_function9(token, parent)
-  -- TODO: Rule_CFuncProto_pure_function9
+  
+  assert(parent.type == "class")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(5, token, fnHeader)
+
+  local cfuncProto = {type="CFuncProto", header=fnHeader, isPure=true}
+  parseExpr(1, token, cfuncProto)
+  parseExpr(3, token, cfuncProto)
+
+  table.insert(parent.prototypes, cfuncProto)
 end
 
 
 -- <CFunc Proto> ::= <Inherited> pure static function <Fn Header Proto> 
 function Rule_CFuncProto_pure_static_function4(token, parent)
-  -- TODO: Rule_CFuncProto_pure_static_function4
+  
+  assert(parent.type == "class")
+
+  local fnHeader = {type="FnHeaderProto"}
+  parseExpr(5, token, fnHeader)
+
+  local cfuncProto = {type="CFuncProto", header=fnHeader, isStatic=true, isPure=true}
+  parseExpr(1, token, cfuncProto)
+
+  table.insert(parent.prototypes, cfuncProto)
 end
 
 
 -- <CFunc Decl> ::= <CFunc Proto> <Func Body> 
 function Rule_CFuncDecl(token, parent)
-  -- TODO: Rule_CFuncDecl
+    parseExpr(1, token, parent)
+    
+    local proto = 
+
+    local expr = {type="FuncBody", parent=}
+    parseExpr(2, token, parent)
 end
 
 
@@ -3351,7 +3720,7 @@ end
 local token = expr
 
 local parent = {
-  type = "_pkg",
+  type = "package",
   name = "_G",
 
   -- first things first
