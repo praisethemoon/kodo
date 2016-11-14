@@ -1,11 +1,11 @@
 ! -----------------------------------------------------------------------
-! berserk programming language
+! kodo programming language
 !
 ! A general purpose multiparadigms programming language
 ! -----------------------------------------------------------------------
 
 
-"Name"    = 'berserk' 
+"Name"    = 'kodo' 
 "Version" = '2016'
 "Author"  = 'Soulaymen Chouri' 
 "About"   = 'High level programming language'
@@ -45,7 +45,7 @@ Comment End   = '*/'
 Comment Line  = '//'
 
 
-! Typically, berserk comments cannot be nested. As a result, the 
+! Typically, kodo comments cannot be nested. As a result, the 
 ! Comment Start and Comment End terminals cannot be used.
 !
 ! To implement non-nested comments, the whitespace terminal is
@@ -417,7 +417,7 @@ Comment Line  = '//'
 
 
 ! ===================================================================
-! Here begins the berserk 15 levels of operator precedence.
+! Here begins the kodo 15 levels of operator precedence.
 ! ===================================================================
 
 ! commar seperated expressions
