@@ -18,8 +18,8 @@
  **                                                      
 ```
 
-# berserk
-berserk is a new general purpose programming language aiming to reduce development time and increase productivity.
+# kodo
+kodo is a new general purpose programming language aiming to reduce development time and increase productivity.
 
 ```
 import std.io
@@ -42,7 +42,7 @@ the language is multi-paradigm supporting the following features
 
 # Compiler
 Berserk compiler is work in progress. It currently supports only one file as input and perform lexical analysis and partial parsing. No type checking, no AST created, no code generated.
-Instead of creating some makefile with wierd syntax and macros, berserk compiler comes with lua embedded and extended to easily create simple cross-platform build scripts.
+Instead of creating some makefile with wierd syntax and macros, kodo compiler comes with lua embedded and extended to easily create simple cross-platform build scripts.
 
 # Contributing
 The language is still in its early development stages. The compiler is being written in C/C++ and LLVM is being used as backend. You can either contribute straight to the source code or request feature or file a bug. For more information feel free to contact me.

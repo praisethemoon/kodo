@@ -38,7 +38,7 @@ THIS SOFTWARE IS PROVIDED BY THE AUTHORS "AS IS" AND ANY EXPRESS OR IMPLIED WARR
 
 #define HELP "Berserk programming language v. %s.\n\
 Usage:\n\
-\t berserk [-c]   [source.bsk] Compiles a single file\n\
+\t kodo [-c]   [source.bsk] Compiles a single file\n\
 \t         [-lua] [source.lua] Runs lua a makefile   \n\
 \t         [-x]                Just do it\n\
 "

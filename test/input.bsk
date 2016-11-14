@@ -78,7 +78,7 @@ class Duck extends Bird, Flyable
 let w = new int[][13]
 let w = new int[][13]
 
-let x = ["hello", "world", "awesome", "berserk", "yeah!"]
+let x = ["hello", "world", "awesome", "kodo", "yeah!"]
 let y = map(x, lambda(e: String) -> String = e.length())
 /* now y = [5, 5, 7, 7, 5] */
 
